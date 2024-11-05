@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javafxapplication10;
+package escritoriofastpacket;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author lizet
  */
-public class JavaFXApplication10 extends Application {
+public class EscritorioFastPacket extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
