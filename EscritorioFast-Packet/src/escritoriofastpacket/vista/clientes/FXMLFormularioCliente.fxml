@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="728.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.clientes.FXMLFormularioClienteController">
+   <children>
+      <Pane layoutY="81.0" prefHeight="647.0" prefWidth="600.0" style="-fx-background-color: #3498DB;">
+         <children>
+            <Label layoutX="226.0" layoutY="25.0" text="Datos personales">
+               <font>
+                  <Font name="Ebrima Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="226.0" layoutY="302.0" text="Dirección">
+               <font>
+                  <Font name="Ebrima Bold" size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfNombre" layoutX="77.0" layoutY="107.0" prefHeight="31.0" prefWidth="164.0" promptText="Nombre(s)" style="-fx-border-color: BLACK; -fx-background-radius: 10; -fx-border-radius: 10;" />
+            <TextField fx:id="tfApellidoPat" layoutX="245.0" layoutY="107.0" prefHeight="31.0" prefWidth="136.0" promptText="Apellido Paterno" />
+            <TextField fx:id="tfCorreo" layoutX="77.0" layoutY="180.0" prefHeight="31.0" prefWidth="237.0" promptText="Correo electrónico" />
+            <TextField fx:id="tfApellidoMat" layoutX="384.0" layoutY="107.0" prefHeight="31.0" prefWidth="150.0" promptText="Apellido Materno" />
+            <TextField fx:id="tfTelefono" layoutX="320.0" layoutY="180.0" prefHeight="31.0" prefWidth="164.0" promptText="Telefono" />
+            <TextField fx:id="tfCalle" layoutX="77.0" layoutY="343.0" prefHeight="25.0" prefWidth="175.0" promptText="Calle" />
+            <TextField fx:id="tfNumero" layoutX="268.0" layoutY="343.0" prefHeight="31.0" prefWidth="83.0" promptText="Número" />
+            <TextField fx:id="tfColonia" layoutX="367.0" layoutY="343.0" prefHeight="25.0" prefWidth="175.0" promptText="Colonia" />
+            <TextField fx:id="tfCiudad" layoutX="77.0" layoutY="408.0" prefHeight="25.0" prefWidth="175.0" promptText="Ciudad" />
+            <TextField fx:id="tfEstado" layoutX="275.0" layoutY="408.0" prefHeight="25.0" prefWidth="175.0" promptText="Estado" />
+            <Button layoutX="180.0" layoutY="514.0" mnemonicParsing="false" onAction="#btnGuardar" text="Guardar" />
+            <Button layoutX="394.0" layoutY="514.0" mnemonicParsing="false" onAction="#btnCancelar" text="Cancelar" />
+         </children>
+      </Pane>
+      <Text layoutX="168.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Formulario de Cliente">
+         <font>
+            <Font name="Ebrima Bold" size="26.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

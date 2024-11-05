@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="497.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.FXMLInicioSesionController">
+   <children>
+      <Text layoutX="118.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iniciar Sesión" textAlignment="CENTER" wrappingWidth="394.330078125">
+         <font>
+            <Font name="Ebrima" size="37.0" />
+         </font>
+      </Text>
+      <TextField fx:id="lbNumPersonal" layoutX="158.0" layoutY="207.0" style="-fx-border-color: BLUE; -fx-border-radius: 10; -fx-background-color: TRANSPARENT;">
+         <font>
+            <Font name="Ebrima" size="24.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="lbPassword" layoutX="152.0" layoutY="331.0" style="-fx-border-radius: 10; -fx-border-color: BLUE; -fx-background-color: TRANSPARENT;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </PasswordField>
+      <Button layoutX="251.0" layoutY="423.0" mnemonicParsing="false" onAction="#btnIngresar" prefHeight="51.0" prefWidth="113.0" text="Ingresar">
+         <font>
+            <Font name="Ebrima Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="208.0" layoutY="162.0" text="Numero de personal">
+         <font>
+            <Font name="Ebrima" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="249.0" layoutY="295.0" prefHeight="28.0" prefWidth="119.0" text="Contraseña" textAlignment="CENTER">
+         <font>
+            <Font name="Ebrima" size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

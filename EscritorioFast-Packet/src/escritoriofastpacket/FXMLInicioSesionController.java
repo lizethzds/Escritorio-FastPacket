@@ -3,20 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package escritoriofastpacket.vista.unidades;
+package escritoriofastpacket;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author lizet
  */
-public class FXMLAdminUnidadesController implements Initializable {
+public class FXMLInicioSesionController implements Initializable {
+
+    @FXML
+    private TextField lbNumPersonal;
+    @FXML
+    private PasswordField lbPassword;
 
     /**
      * Initializes the controller class.
@@ -27,23 +34,7 @@ public class FXMLAdminUnidadesController implements Initializable {
     }    
 
     @FXML
-    private void btnAgregarUnidad(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnEliminarUnidad(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnQuitarConductor(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnEditarUnidad(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnAsignarConductor(ActionEvent event) {
+    private void btnIngresar(ActionEvent event) {
     }
     
 }
