@@ -19,11 +19,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -91,6 +93,14 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
 
     @FXML
     private void btnEditarCliente(ActionEvent event) {
+        Cliente cliente = tvClientes.getSelectionModel().getSelectedItem();
+        if(cliente!=null){
+            irPantallaFormulario(this, cliente);
+            
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione un cliente", "Para poder editar, "
+                    + "debe seleccionar a un cliente", Alert.AlertType.WARNING);
+        }
     }
 
     private void irPantallaFormulario(INotificarOperacion observador, Cliente cliente) {
@@ -99,9 +109,17 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLFormularioCliente.fxml"));
             Parent vista = loader.load();
             FXMLFormularioClienteController controller = loader.getController();
+            controller.inicializarValores(observador, cliente);
+            
+            Scene escena = new Scene(vista);
+            escenario.setScene(escena);
+            escenario.setTitle("Formulario de Clientes");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+            escenario.setResizable(false);
             
         }catch(Exception e){
-            
+            Utilidades.mostrarAlertaSimple("Error al cargar", "No se pudo cargar el formulario", Alert.AlertType.INFORMATION);
         }
     }
 
