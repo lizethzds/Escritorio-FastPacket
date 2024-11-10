@@ -89,6 +89,19 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
 
     @FXML
     private void btnEliminarCliente(ActionEvent event) {
+        Cliente cliente = tvClientes.getSelectionModel().getSelectedItem();
+        if(cliente != null){
+            boolean seElimina = Utilidades.mostrarAlertaConfirmacion("Eliminar cliente", "¿Está seguro de elimninar la información "
+                    + "del cliente" + cliente.getNombre()+" del sistema? Esta acción es irreversible.");
+            
+            if(seElimina){
+                ClienteDAO.eliminarCliente(cliente.getIdCliente());
+                notificarOperacionExitosa("Eliminado", cliente.getNombre());
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione un cliente", "Para borrar un cliente, debe seleccionarlo primero", Alert.AlertType.INFORMATION);
+        }
+        
     }
 
     @FXML

@@ -90,4 +90,54 @@ public class ClienteDAO {
     
     }
     
+    
+    public static Mensaje editarCliente(DatosRegistroCliente cliente){
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_WS+"cliente/editar";
+        Gson gson = new Gson();
+        
+        try{
+            String parametros = gson.toJson(cliente);
+            RespuestaHTTP respuesta = ConexionWS.peticionPUTJson(url, parametros);
+            System.out.println("JSON enviado: " + parametros);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }else{
+                msj.setError(true);
+                msj.setContenido(respuesta.getContenido());
+            }
+        
+        }catch(Exception e ){
+           msj.setError(true);
+           msj.setContenido(e.getMessage());
+        }
+        
+        return msj;
+    }
+    
+    public static Mensaje eliminarCliente(Integer idCliente){
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_WS+"cliente/eliminar/" + idCliente;
+        Gson gson = new Gson();
+        
+        try{
+            
+            RespuestaHTTP respuesta = ConexionWS.peticionDELETEUrl(url);
+            
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }else{
+                msj.setError(true);
+                msj.setContenido(respuesta.getContenido());
+            }
+        
+        }catch(Exception e ){
+           msj.setError(true);
+           msj.setContenido(e.getMessage());
+        }
+        
+        return msj;
+    
+    }
+    
 }

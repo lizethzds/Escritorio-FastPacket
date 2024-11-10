@@ -123,7 +123,9 @@ public class FXMLFormularioClienteController implements Initializable {
         if(modoEdicion == false){
         guardarDatosCliente(datosRegistroCliente);
         }else{
-            editarRegistroCliente();
+            datosRegistroCliente.getCliente().setIdCliente(clienteEdicion.getIdCliente());
+            
+            editarRegistroCliente(datosRegistroCliente);
         }
         
 
@@ -135,6 +137,7 @@ public class FXMLFormularioClienteController implements Initializable {
 
     @FXML
     private void btnCancelar(ActionEvent event) {
+        cerrarPantalla();
     }
 
     private void cargarDatosCliente(Integer idCliente) {
@@ -245,7 +248,15 @@ public class FXMLFormularioClienteController implements Initializable {
         
     }
     
-     private void editarRegistroCliente(){
+     private void editarRegistroCliente(DatosRegistroCliente datosEdicionCliente){
+         Mensaje msj = ClienteDAO.editarCliente(datosEdicionCliente);
+         cerrarPantalla();
+         observador.notificarOperacionExitosa("Edicion", datosEdicionCliente.getCliente().getNombre());
+         if(msj.isError()){
+               Utilidades.mostrarAlertaSimple("Hubo un error al intentar actualizar el cliente", msj.getContenido(), Alert.AlertType.ERROR);
+           }else{
+           Utilidades.mostrarAlertaSimple("Actualización realizada.", msj.getContenido(), Alert.AlertType.INFORMATION);
+           }
         
     }
 
