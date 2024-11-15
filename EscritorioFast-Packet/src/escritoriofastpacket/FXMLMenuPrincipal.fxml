@@ -1,11 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.FXMLMenuPrincipalController">
-    
+<AnchorPane id="AnchorPane" prefHeight="696.0" prefWidth="1165.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.FXMLMenuPrincipalController">
+   <children>
+      <Pane prefHeight="696.0" prefWidth="220.0" style="-fx-background-color: #2C3E50;">
+         <children>
+            <Button layoutY="271.0" mnemonicParsing="false" onAction="#btnIrColaboradores" prefHeight="73.0" prefWidth="220.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="Colaboradores" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="24.0" />
+               </font></Button>
+            <Button layoutY="344.0" mnemonicParsing="false" onAction="#btnIrEnvios" prefHeight="73.0" prefWidth="220.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="Envíos y paquetes" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="22.0" />
+               </font></Button>
+            <Button layoutX="-2.0" layoutY="490.0" mnemonicParsing="false" onAction="#btnIrClientes" prefHeight="73.0" prefWidth="220.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="Clientes" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="24.0" />
+               </font></Button>
+            <Button layoutY="417.0" mnemonicParsing="false" onAction="#btnIrUnidades" prefHeight="73.0" prefWidth="220.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="Unidades" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="24.0" />
+               </font></Button>
+            <Button layoutX="36.0" layoutY="634.0" mnemonicParsing="false" onAction="#btnCerrarSesion" prefHeight="44.0" prefWidth="144.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: RED;" text="Cerrar sesión" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font></Button>
+            <Label layoutX="66.0" layoutY="74.0" text="Colaborador:" textFill="WHITE">
+               <font>
+                  <Font name="Ebrima Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="57.0" layoutY="140.0" text="No. de personal" textFill="WHITE">
+               <font>
+                  <Font name="Ebrima Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNombreColaborador" layoutX="91.0" layoutY="103.0" textFill="WHITE">
+               <font>
+                  <Font name="Ebrima" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNumPColaborador" layoutX="92.0" layoutY="181.0" textFill="WHITE">
+               <font>
+                  <Font name="Ebrima" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <StackPane fx:id="stackPane" layoutX="219.0" prefHeight="696.0" prefWidth="969.0" style="-fx-background-color: #3498DB;" />
+   </children>
 </AnchorPane>

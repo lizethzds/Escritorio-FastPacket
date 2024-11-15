@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +38,7 @@ import javafx.stage.Stage;
 public class FXMLAdminClientesController implements Initializable , INotificarOperacion{
     
     private ObservableList<Cliente> clientes;
+    private FilteredList<Cliente> listaClientes;
 
     @FXML
     private TableView<Cliente> tvClientes;
@@ -59,6 +62,7 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         cargarInformacionTabla();
+        configurarFiltroBusqueda();
     }    
     
     
@@ -143,5 +147,38 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
         cargarInformacionTabla(); 
     
     }
+
+   private void configurarFiltroBusqueda() {
+    listaClientes = new FilteredList<>(clientes, b -> true);
+    
+    tfBusqueda.textProperty().addListener((observable, oldValue, newValue) -> {
+        listaClientes.setPredicate(cliente -> {
+            if (newValue == null || newValue.trim().isEmpty()) {
+                return true; // Mostrar todos los clientes si no hay filtro
+            }
+            
+            String lowerCaseFilter = newValue.toLowerCase();
+
+            if (cliente.getCorreo() != null && cliente.getCorreo().toLowerCase().contains(lowerCaseFilter)) {
+                return true; // Coincide con el correo
+            }
+            
+            if (cliente.getNombre() != null && cliente.getNombre().toLowerCase().contains(lowerCaseFilter)) {
+                return true; // Coincide con el nombre
+            }
+            
+            if (cliente.getTelefono() != null && cliente.getTelefono().toLowerCase().contains(lowerCaseFilter)) {
+                return true; // Coincide con el teléfono
+            }
+
+            return false; // No coincide con ningún criterio
+        });
+    });
+
+    SortedList<Cliente> sortedData = new SortedList<>(listaClientes);
+    sortedData.comparatorProperty().bind(tvClientes.comparatorProperty());
+    tvClientes.setItems(sortedData);
+}
+
     
 }

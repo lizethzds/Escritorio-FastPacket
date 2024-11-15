@@ -22,18 +22,18 @@
                </font>
             </Label>
             <TextField fx:id="tfNombre" layoutX="77.0" layoutY="107.0" prefHeight="31.0" prefWidth="164.0" promptText="Nombre(s)" style="-fx-border-color: BLACK; -fx-background-radius: 10; -fx-border-radius: 10;" />
-            <TextField fx:id="tfApellidoPat" layoutX="245.0" layoutY="107.0" prefHeight="31.0" prefWidth="136.0" promptText="Apellido Paterno" />
-            <TextField fx:id="tfCorreo" layoutX="77.0" layoutY="180.0" prefHeight="31.0" prefWidth="237.0" promptText="Correo electrónico" />
-            <TextField fx:id="tfApellidoMat" layoutX="384.0" layoutY="107.0" prefHeight="31.0" prefWidth="150.0" promptText="Apellido Materno" />
-            <TextField fx:id="tfTelefono" layoutX="320.0" layoutY="180.0" prefHeight="31.0" prefWidth="164.0" promptText="Telefono" />
-            <TextField fx:id="tfCalle" layoutX="77.0" layoutY="343.0" prefHeight="25.0" prefWidth="175.0" promptText="Calle" />
-            <TextField fx:id="tfNumero" layoutX="260.0" layoutY="343.0" prefHeight="25.0" prefWidth="83.0" promptText="Número" />
-            <TextField fx:id="tfColonia" layoutX="353.0" layoutY="343.0" prefHeight="25.0" prefWidth="175.0" promptText="Colonia" />
+            <TextField fx:id="tfApellidoPat" layoutX="245.0" layoutY="107.0" prefHeight="31.0" prefWidth="136.0" promptText="Apellido Paterno" style="-fx-border-color: BLACK; -fx-background-radius: 10; -fx-border-radius: 10;" />
+            <TextField fx:id="tfCorreo" layoutX="77.0" layoutY="180.0" prefHeight="31.0" prefWidth="237.0" promptText="Correo electrónico" style="-fx-border-color: BLACK; -fx-background-radius: 10; -fx-border-radius: 10;" />
+            <TextField fx:id="tfApellidoMat" layoutX="384.0" layoutY="107.0" prefHeight="31.0" prefWidth="150.0" promptText="Apellido Materno" style="-fx-border-color: BLACK; -fx-background-radius: 10; -fx-border-radius: 10;" />
+            <TextField fx:id="tfTelefono" layoutX="320.0" layoutY="180.0" prefHeight="31.0" prefWidth="164.0" promptText="Telefono" style="-fx-border-color: BLACK; -fx-background-radius: 10; -fx-border-radius: 10;"/>
+            <TextField fx:id="tfCalle" layoutX="77.0" layoutY="343.0" prefHeight="25.0" prefWidth="175.0" promptText="Calle" style="-fx-border-color: BLACK; -fx-background-radius: 10; -fx-border-radius: 10;"/>
+            <TextField fx:id="tfNumero" layoutX="260.0" layoutY="343.0" prefHeight="25.0" prefWidth="83.0" promptText="Número" style="-fx-border-color: BLACK; -fx-background-radius: 10; -fx-border-radius: 10;"/>
+            <TextField fx:id="tfColonia" layoutX="353.0" layoutY="343.0" prefHeight="25.0" prefWidth="175.0" promptText="Colonia" style="-fx-border-color: BLACK; -fx-background-radius: 10; -fx-border-radius: 10;"/>
             <Button layoutX="159.0" layoutY="516.0" mnemonicParsing="false" onAction="#btnGuardar" prefHeight="47.0" prefWidth="114.0" text="Guardar" />
             <Button layoutX="340.0" layoutY="516.0" mnemonicParsing="false" onAction="#btnCancelar" prefHeight="47.0" prefWidth="89.0" text="Cancelar" />
             <ComboBox fx:id="cbMunicipio" layoutX="191.0" layoutY="410.0" prefHeight="31.0" prefWidth="157.0" />
             <ComboBox fx:id="cbEstado" layoutX="364.0" layoutY="410.0" prefHeight="31.0" prefWidth="164.0" />
-            <TextField fx:id="tfCodigoPostal" layoutX="77.0" layoutY="410.0" prefHeight="31.0" prefWidth="100.0" />
+            <TextField fx:id="tfCodigoPostal" layoutX="77.0" layoutY="410.0" prefHeight="31.0" prefWidth="100.0" promptText="Codigo Postal" style="-fx-border-color: BLACK; -fx-background-radius: 10; -fx-border-radius: 10;"/>
          </children>
       </Pane>
       <Text layoutX="168.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Formulario de Cliente">
