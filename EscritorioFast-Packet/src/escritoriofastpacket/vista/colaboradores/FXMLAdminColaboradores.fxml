@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="536.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.colaboradores.FXMLAdminColaboradoresController">
+   <children>
+      <Pane layoutY="91.0" prefHeight="460.0" prefWidth="755.0" style="-fx-background-color: grey;">
+         <children>
+            <TableView fx:id="tvColaboradores" layoutX="49.0" layoutY="74.0" prefHeight="297.0" prefWidth="651.0">
+              <columns>
+                <TableColumn fx:id="tcNumPersonal" prefWidth="88.0" text="NP" />
+                <TableColumn fx:id="tcNombre" prefWidth="120.0" text="Nombre" />
+                  <TableColumn prefWidth="110.0" text="Apellido Paterno" />
+                  <TableColumn prefWidth="133.0" text="Apellido Materno" />
+                  <TableColumn prefWidth="91.0" text="Rol" />
+              </columns>
+            </TableView>
+            <Button layoutX="625.0" layoutY="27.0" mnemonicParsing="false" onAction="#btnAgregarColaborador" prefHeight="25.0" prefWidth="75.0" text="Agregar" />
+            <Button layoutX="161.0" layoutY="392.0" mnemonicParsing="false" onAction="#btnEditarColaborador" prefHeight="25.0" prefWidth="75.0" text="Editar" />
+            <Button layoutX="261.0" layoutY="392.0" mnemonicParsing="false" onAction="#btnEliminarColaborador" prefHeight="25.0" prefWidth="87.0" text="Eliminar" />
+            <TextField fx:id="tfBuscar" layoutX="49.0" layoutY="27.0" prefHeight="25.0" prefWidth="165.0" promptText="Buscar" />
+            <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="186.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../recursos/busqueda.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Text layoutX="56.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Colaboradores">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

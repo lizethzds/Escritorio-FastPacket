@@ -19,17 +19,17 @@
                   <Font name="Ebrima Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="lbNumPersonal" layoutX="724.0" layoutY="247.0" prefHeight="51.0" prefWidth="253.0">
+            <TextField fx:id="tfNumPersonal" layoutX="724.0" layoutY="247.0" prefHeight="51.0" prefWidth="253.0" promptText="Numero de personal">
                <font>
                   <Font name="Ebrima" size="24.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="lbPassword" layoutX="725.0" layoutY="351.0" prefHeight="51.0" prefWidth="253.0">
+            <PasswordField fx:id="tfPassword" layoutX="725.0" layoutY="365.0" prefHeight="51.0" prefWidth="253.0" promptText="Contraseña">
                <font>
                   <Font size="25.0" />
                </font>
             </PasswordField>
-            <Label layoutX="725.0" layoutY="320.0" prefHeight="28.0" prefWidth="119.0" text="Contraseña" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="725.0" layoutY="334.0" prefHeight="28.0" prefWidth="119.0" text="Contraseña" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="18.0" />
                </font>
@@ -39,9 +39,9 @@
                   <Font name="Ebrima Bold" size="18.0" />
                </font>
             </Button>
-            <Label layoutX="725.0" layoutY="126.0" text="Bienvenido al sistema de FastPacket" textFill="WHITE">
+            <Label layoutX="713.0" layoutY="129.0" text="Bienvenido al sistema de FastPacket" textFill="WHITE">
                <font>
-                  <Font name="Ebrima" size="16.0" />
+                  <Font name="Lato Regular" size="17.0" />
                </font>
             </Label>
             <ImageView fitHeight="667.0" fitWidth="597.0" pickOnBounds="true">
@@ -49,12 +49,22 @@
                   <Image url="@recursos/login_fondo.png" />
                </image>
             </ImageView>
-            <Circle fill="WHITE" layoutX="299.0" layoutY="286.0" radius="135.0" stroke="WHITE" strokeType="INSIDE" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="199.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+            <Circle fill="WHITE" layoutX="299.0" layoutY="334.0" radius="205.0" stroke="WHITE" strokeType="INSIDE" />
+            <ImageView fitHeight="300.0" fitWidth="304.0" layoutX="138.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@recursos/logo.png" />
                </image>
             </ImageView>
+            <Label fx:id="lbErrorNoPersonal" layoutX="725.0" layoutY="298.0" prefHeight="17.0" prefWidth="253.0" textFill="#eb0e0e">
+               <font>
+                  <Font name="Ebrima Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErrorPassword" layoutX="725.0" layoutY="419.0" prefHeight="17.0" prefWidth="253.0" textFill="#eb0e0e">
+               <font>
+                  <Font name="Ebrima Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

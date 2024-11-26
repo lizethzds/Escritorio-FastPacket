@@ -8,21 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="989.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.unidades.FXMLAdminUnidadesController">
+<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="778.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.unidades.FXMLAdminUnidadesController">
    <children>
-      <Pane prefHeight="595.0" prefWidth="206.0" style="-fx-background-color: #2C3E50;" />
-      <TextField layoutX="274.0" layoutY="140.0" prefHeight="34.0" prefWidth="230.0" promptText="Buscar..." />
-      <Button layoutX="835.0" layoutY="140.0" mnemonicParsing="false" onAction="#btnAgregarUnidad" prefHeight="34.0" prefWidth="100.0" text="Agregar" />
-      <Pane layoutX="206.0" prefHeight="121.0" prefWidth="785.0" style="-fx-background-color: gray;">
-         <children>
-            <Text fill="WHITE" layoutX="39.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unidades" wrappingWidth="176.0">
-               <font>
-                  <Font name="Ebrima Bold" size="26.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
-      <TableView layoutX="266.0" layoutY="223.0" prefHeight="200.0" prefWidth="669.0">
+      <TextField layoutX="94.0" layoutY="137.0" prefHeight="34.0" prefWidth="230.0" promptText="Buscar..." />
+      <Button layoutX="655.0" layoutY="137.0" mnemonicParsing="false" onAction="#btnAgregarUnidad" prefHeight="34.0" prefWidth="100.0" text="Agregar" />
+      <TableView layoutX="86.0" layoutY="220.0" prefHeight="200.0" prefWidth="669.0">
         <columns>
           <TableColumn prefWidth="109.0" text="VIN" />
           <TableColumn prefWidth="133.0" text="Marca" />
@@ -31,9 +21,14 @@
             <TableColumn prefWidth="105.0" text="Año" />
         </columns>
       </TableView>
-      <Button layoutX="274.0" layoutY="465.0" mnemonicParsing="false" onAction="#btnEliminarUnidad" prefHeight="34.0" prefWidth="100.0" text="Eliminar" />
-      <Button layoutX="396.0" layoutY="465.0" mnemonicParsing="false" onAction="#btnQuitarConductor" prefHeight="34.0" prefWidth="152.0" text="Quitar conductor" />
-      <Button layoutX="694.0" layoutY="465.0" mnemonicParsing="false" onAction="#btnEditarUnidad" prefHeight="34.0" prefWidth="100.0" text="Editar" />
-      <Button layoutX="804.0" layoutY="465.0" mnemonicParsing="false" onAction="#btnAsignarConductor" prefHeight="34.0" prefWidth="136.0" text="Asignar unidad" />
+      <Button layoutX="94.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnEliminarUnidad" prefHeight="34.0" prefWidth="100.0" text="Eliminar" />
+      <Button layoutX="216.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnQuitarConductor" prefHeight="34.0" prefWidth="152.0" text="Quitar conductor" />
+      <Button layoutX="514.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnEditarUnidad" prefHeight="34.0" prefWidth="100.0" text="Editar" />
+      <Button layoutX="624.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnAsignarConductor" prefHeight="34.0" prefWidth="136.0" text="Asignar unidad" />
+      <Text layoutX="78.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unidades" wrappingWidth="176.0">
+         <font>
+            <Font name="Ebrima Bold" size="26.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

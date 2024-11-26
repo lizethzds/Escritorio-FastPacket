@@ -71,6 +71,7 @@ public class FXMLFormularioClienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cargarEstados();
         configuracionSeleccionEstado();
+        configurarDatosEntrada();
         
     }    
     
@@ -90,10 +91,9 @@ public class FXMLFormularioClienteController implements Initializable {
     private void btnGuardar(ActionEvent event) {
         // Verificar que los campos no estén vacíos
     if (camposLlenos()) {
-        // Crear el objeto DatosRegistroCliente
+    
         DatosRegistroCliente datosRegistroCliente = new DatosRegistroCliente();
         
-        // Crear el objeto Cliente y asignar los valores de los campos
         Cliente cliente = new Cliente();
         cliente.setNombre(tfNombre.getText());
         cliente.setApellidoPaterno(tfApellidoPat.getText());
@@ -101,25 +101,22 @@ public class FXMLFormularioClienteController implements Initializable {
         cliente.setCorreo(tfCorreo.getText());
         cliente.setTelefono(tfTelefono.getText());
         
-        // Crear el objeto Direccion y asignar los valores de los campos
         Direccion direccion = new Direccion();
         direccion.setCalle(tfCalle.getText());
         direccion.setNumero(tfNumero.getText()); 
         direccion.setColonia(tfColonia.getText());
         direccion.setCodigoPostal(tfCodigoPostal.getText());
 
-        // Obtener el municipio seleccionado y asignarlo a la dirección
+       
         Integer idMunicipio = (cbMunicipio.getSelectionModel().getSelectedItem() != null) 
                     ? cbMunicipio.getSelectionModel().getSelectedItem().getIdMunicipio() 
                     : 0;
         direccion.setIdMunicipio(idMunicipio);
 
-        // Asignar la dirección y cliente  al objeto DatosRegistroCliente
+      
         datosRegistroCliente.setCliente(cliente);
         datosRegistroCliente.setDireccion(direccion);
-
-        // Guardar el cliente y la dirección en la base de datos
-        
+  
         if(modoEdicion == false){
         guardarDatosCliente(datosRegistroCliente);
         }else{
@@ -130,7 +127,7 @@ public class FXMLFormularioClienteController implements Initializable {
         
 
     } else {
-        Utilidades.mostrarAlertaSimple("Campos incompletos", "Por favor, complete todos los campos.", Alert.AlertType.WARNING);
+        Utilidades.mostrarAlertaSimple("Campos incompletos", "Por favor, complete los datos requeridos.", Alert.AlertType.WARNING);
     }
        
     }
@@ -263,6 +260,26 @@ public class FXMLFormularioClienteController implements Initializable {
 
     private void cerrarPantalla() {
        ((Stage) tfNombre.getScene().getWindow()).close();
+    }
+
+    
+    
+    private void configurarDatosEntrada() {
+        tfTelefono.textProperty().addListener((observable, oldValue, newValue) -> {
+    if (!newValue.matches("\\d*") || newValue.length() > 10) {
+        tfTelefono.setText(oldValue);
+    }
+        });
+        
+        tfTelefono.setPromptText("Ingrese un número de 10 digitos");
+        
+        tfCodigoPostal.textProperty().addListener((observable, oldValue, newValue) -> {
+    // Permitir solo números y un máximo de 5 caracteres
+    if (!newValue.matches("\\d*") || newValue.length() > 5) {
+        tfCodigoPostal.setText(oldValue);
+    }   
+        });
+
     }
     
     

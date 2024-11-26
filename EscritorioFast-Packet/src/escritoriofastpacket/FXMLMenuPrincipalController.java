@@ -1,6 +1,7 @@
 
 package escritoriofastpacket;
 
+import escritoriofastpacket.modelo.pojo.Colaborador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +19,8 @@ import javafx.scene.layout.StackPane;
  * @author lizet
  */
 public class FXMLMenuPrincipalController implements Initializable {
+    
+    Colaborador colaboradorSesion;
 
     @FXML
     private Label lbNombreColaborador;
@@ -36,23 +39,29 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnIrColaboradores(ActionEvent event) throws IOException {
+        URL fxml = getClass().getResource("/escritoriofastpacket/vista/colaboradores/FXMLAdminColaboradores.fxml");
+
+    Parent loadMain = FXMLLoader.load(fxml);
+    stackPane.getChildren().clear();
+    stackPane.getChildren().add(loadMain);
        
     }
 
     @FXML
-    private void btnIrEnvios(ActionEvent event) {
+    private void btnIrEnvios(ActionEvent event) throws IOException {
+    URL fxml = getClass().getResource("/escritoriofastpacket/vista/envios/FXMLAdminEnvios.fxml");
+
+    Parent loadMain = FXMLLoader.load(fxml);
+    stackPane.getChildren().clear();
+    stackPane.getChildren().add(loadMain);
+        
     }
 
    @FXML
     private void btnIrClientes(ActionEvent event) throws IOException {
-    URL resource = getClass().getResource("/escritoriofastpacket/vista/clientes/FXMLAdminClientes.fxml");
-    System.out.println("Resource URL: " + resource); // Depuración
+    URL fxml = getClass().getResource("/escritoriofastpacket/vista/clientes/FXMLAdminClientes.fxml");
 
-    if (resource == null) {
-        throw new IOException("FXML file not found at /escritoriofastpacket/vista/clientes/FXMLAdminClientes.fxml");
-    }
-
-    Parent loadMain = FXMLLoader.load(resource);
+    Parent loadMain = FXMLLoader.load(fxml);
     stackPane.getChildren().clear();
     stackPane.getChildren().add(loadMain);
 }
@@ -60,11 +69,22 @@ public class FXMLMenuPrincipalController implements Initializable {
 
 
     @FXML
-    private void btnIrUnidades(ActionEvent event) {
+    private void btnIrUnidades(ActionEvent event) throws IOException {
+    URL fxml = getClass().getResource("/escritoriofastpacket/vista/unidades/FXMLAdminUnidades.fxml");
+
+    Parent loadMain = FXMLLoader.load(fxml);
+    stackPane.getChildren().clear();
+    stackPane.getChildren().add(loadMain);
     }
 
     @FXML
     private void btnCerrarSesion(ActionEvent event) {
+    }
+
+    void inicializarMenuGeneral(Colaborador colaboradorSesion) {
+        this.colaboradorSesion = colaboradorSesion;
+        lbNombreColaborador.setText(colaboradorSesion.getNombre() +" "+ colaboradorSesion.getApellidoPaterno() + " "+colaboradorSesion.getApellidoMaterno());
+        lbNumPColaborador.setText(colaboradorSesion.getNoPersonal());
     }
     
 }

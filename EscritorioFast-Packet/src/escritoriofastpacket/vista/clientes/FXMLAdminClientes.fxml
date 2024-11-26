@@ -7,12 +7,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="614.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.clientes.FXMLAdminClientesController">
+<AnchorPane id="AnchorPane" prefHeight="495.0" prefWidth="783.0" style="-fx-background-color: TRANPARENT;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.clientes.FXMLAdminClientesController">
    <children>
-      <Pane prefHeight="614.0" prefWidth="181.0" style="-fx-background-color: #2C3E50;" />
-      <Pane layoutX="181.0" layoutY="113.0" prefHeight="501.0" prefWidth="786.0" style="-fx-background-color: #3498DB;">
+      <Pane prefHeight="495.0" prefWidth="786.0" style="-fx-background-color: #3498DB;">
          <children>
-            <TableView fx:id="tvClientes" layoutX="77.0" layoutY="109.0" prefHeight="283.0" prefWidth="633.0">
+            <TableView fx:id="tvClientes" layoutX="77.0" layoutY="132.0" prefHeight="283.0" prefWidth="633.0">
               <columns>
                 <TableColumn fx:id="tcNombre" prefWidth="100.0" text="Nombre" />
                 <TableColumn fx:id="tcApellidoPat" prefWidth="133.0" text="Apellido Paterno" />
@@ -21,32 +20,27 @@
                   <TableColumn fx:id="tcTelefono" prefWidth="136.0" text="Telefono" />
               </columns>
             </TableView>
-            <Button layoutX="442.0" layoutY="23.0" mnemonicParsing="false" onAction="#btnAgregarCliente" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: #E39E21;" text="Agregar " textFill="WHITE">
+            <Button layoutX="450.0" layoutY="91.0" mnemonicParsing="false" onAction="#btnAgregarCliente" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: #E39E21;" text="Agregar " textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Button>
-            <TextField fx:id="tfBusqueda" layoutX="111.0" layoutY="22.0" prefHeight="31.0" prefWidth="208.0" promptText="Buscar..." style="-fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10;">
+            <TextField fx:id="tfBusqueda" layoutX="76.0" layoutY="50.0" prefHeight="33.0" prefWidth="231.0" promptText="Buscar..." style="-fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10;">
                <font>
                   <Font name="Ebrima" size="15.0" />
                </font>
             </TextField>
-            <Button layoutX="624.0" layoutY="23.0" mnemonicParsing="false" onAction="#btnEliminarCliente" prefHeight="31.0" prefWidth="78.0" style="-fx-background-color: RED;" text="Eliminar" textFill="WHITE">
+            <Button layoutX="632.0" layoutY="91.0" mnemonicParsing="false" onAction="#btnEliminarCliente" prefHeight="31.0" prefWidth="78.0" style="-fx-background-color: RED;" text="Eliminar" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="13.0" />
                </font>
             </Button>
-            <Button layoutX="545.0" layoutY="23.0" mnemonicParsing="false" onAction="#btnEditarCliente" prefHeight="31.0" prefWidth="68.0" style="-fx-background-color: #2C3E50;" text="Editar" textFill="WHITE">
+            <Button layoutX="553.0" layoutY="91.0" mnemonicParsing="false" onAction="#btnEditarCliente" prefHeight="31.0" prefWidth="68.0" style="-fx-background-color: #2C3E50;" text="Editar" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="14.0" />
                </font>
             </Button>
          </children>
       </Pane>
-      <Text layoutX="206.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clientes" textAlignment="CENTER">
-         <font>
-            <Font name="Ebrima" size="39.0" />
-         </font>
-      </Text>
    </children>
 </AnchorPane>
