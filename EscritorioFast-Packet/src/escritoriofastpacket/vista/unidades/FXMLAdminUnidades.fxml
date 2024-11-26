@@ -8,27 +8,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="778.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.unidades.FXMLAdminUnidadesController">
+<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="778.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.unidades.FXMLAdminUnidadesController">
    <children>
-      <TextField layoutX="94.0" layoutY="137.0" prefHeight="34.0" prefWidth="230.0" promptText="Buscar..." />
-      <Button layoutX="655.0" layoutY="137.0" mnemonicParsing="false" onAction="#btnAgregarUnidad" prefHeight="34.0" prefWidth="100.0" text="Agregar" />
-      <TableView layoutX="86.0" layoutY="220.0" prefHeight="200.0" prefWidth="669.0">
+      <HBox alignment="CENTER_LEFT" layoutY="2.0" prefHeight="70.0" prefWidth="780.0" style="-fx-background-color: #D9D9D9;">
+         <children>
+            <Text fill="#2c3e50" strokeType="OUTSIDE" strokeWidth="0.0" text="Unidades" textAlignment="CENTER" wrappingWidth="176.0">
+               <font>
+                  <Font name="Ebrima Bold" size="26.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <TextField layoutX="18.0" layoutY="137.0" prefHeight="34.0" prefWidth="330.0" promptText="Buscar..." />
+      <Button layoutX="655.0" layoutY="137.0" mnemonicParsing="false" onAction="#btnAgregarUnidad" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #FF6500;" text="Agregar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <TableView layoutX="18.0" layoutY="198.0" prefHeight="330.0" prefWidth="744.0">
         <columns>
-          <TableColumn prefWidth="109.0" text="VIN" />
-          <TableColumn prefWidth="133.0" text="Marca" />
-            <TableColumn prefWidth="161.0" text="Modelo" />
-            <TableColumn prefWidth="160.0" text="Tipo " />
-            <TableColumn prefWidth="105.0" text="Año" />
+          <TableColumn fx:id="col_vin" prefWidth="242.0" text="VIN" />
+          <TableColumn fx:id="col_marca" prefWidth="143.0" text="Marca" />
+            <TableColumn fx:id="col_modelo" prefWidth="150.0" text="Modelo" />
+            <TableColumn fx:id="col_tipo" prefWidth="104.0" text="Tipo " />
+            <TableColumn fx:id="col_anio" prefWidth="104.0" text="Año" />
         </columns>
       </TableView>
-      <Button layoutX="94.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnEliminarUnidad" prefHeight="34.0" prefWidth="100.0" text="Eliminar" />
-      <Button layoutX="216.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnQuitarConductor" prefHeight="34.0" prefWidth="152.0" text="Quitar conductor" />
-      <Button layoutX="514.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnEditarUnidad" prefHeight="34.0" prefWidth="100.0" text="Editar" />
-      <Button layoutX="624.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnAsignarConductor" prefHeight="34.0" prefWidth="136.0" text="Asignar unidad" />
-      <Text layoutX="78.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unidades" wrappingWidth="176.0">
+      <Button layoutX="22.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnEliminarUnidad" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: E32121;" text="Eliminar" textFill="WHITE">
          <font>
-            <Font name="Ebrima Bold" size="26.0" />
-         </font>
-      </Text>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button layoutX="417.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnQuitarConductor" prefHeight="34.0" prefWidth="152.0" style="-fx-border-color: #FF6500; -fx-background-color: white; -fx-border-width: 2px; -fx-border-radius: 3px; -fx-background-radius: 3px;" text="Quitar conductor" textFill="#ff6500">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button layoutX="136.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnEditarUnidad" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #4163C9;" text="Editar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button layoutX="583.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnAsignarConductor" prefHeight="35.0" prefWidth="176.0" style="-fx-background-color: white; -fx-border-color: #FF6500; -fx-border-width: 2px; -fx-border-radius: 3px; -fx-background-radius: 3px;" text="Asignar conductor" textFill="#ff6500">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
    </children>
 </AnchorPane>

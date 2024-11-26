@@ -10,25 +10,26 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
- * @author lizet
+ * @author uriel
  */
-public class FXMLAdminUnidadesController implements Initializable {
+public class FXMLAgregarUnidadController implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> col_vin;
+    private TextField tf_vin;
     @FXML
-    private TableColumn<?, ?> col_marca;
+    private TextField tf_marca;
     @FXML
-    private TableColumn<?, ?> col_modelo;
+    private TextField tf_modelo;
     @FXML
-    private TableColumn<?, ?> col_tipo;
+    private TextField tf_anio;
     @FXML
-    private TableColumn<?, ?> col_anio;
+    private ComboBox<?> cb_tipo;
 
     /**
      * Initializes the controller class.
@@ -39,23 +40,11 @@ public class FXMLAdminUnidadesController implements Initializable {
     }    
 
     @FXML
-    private void btnAgregarUnidad(ActionEvent event) {
+    private void btnGuardarUnidad(ActionEvent event) {
     }
 
     @FXML
-    private void btnEliminarUnidad(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnQuitarConductor(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnEditarUnidad(ActionEvent event) {
-    }
-
-    @FXML
-    private void btnAsignarConductor(ActionEvent event) {
+    private void btnCancelar(ActionEvent event) {
     }
     
 }
