@@ -1,11 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.colaboradores.FXMLFormularioColaboradorController">
-    
+<AnchorPane id="AnchorPane" prefHeight="798.0" prefWidth="468.0" style="-fx-background-color: #9fa8be;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.colaboradores.FXMLFormularioColaboradorController">
+   <children>
+      <Pane layoutX="36.0" layoutY="77.0" prefHeight="578.0" prefWidth="397.0">
+         <children>
+            <TextField fx:id="tfNombre" layoutX="14.0" layoutY="33.0" prefHeight="31.0" prefWidth="370.0" style="-fx-background-color: #d7d7d7;" />
+            <TextField fx:id="tfApellidoPaterno" layoutX="14.0" layoutY="121.0" prefHeight="31.0" prefWidth="169.0" style="-fx-background-color: #d7d7d7;" />
+            <TextField fx:id="tfApellidoMaterno" layoutX="214.0" layoutY="121.0" prefHeight="31.0" prefWidth="169.0" style="-fx-background-color: #d7d7d7;" />
+            <TextField fx:id="tfCorreo" layoutX="14.0" layoutY="205.0" prefHeight="31.0" prefWidth="370.0" style="-fx-background-color: #d7d7d7;" />
+            <TextField fx:id="tfCURP" layoutX="14.0" layoutY="281.0" prefHeight="31.0" prefWidth="370.0" style="-fx-background-color: #d7d7d7;" />
+            <TextField fx:id="tfPassword" layoutX="14.0" layoutY="361.0" prefHeight="31.0" prefWidth="370.0" style="-fx-background-color: #d7d7d7;" />
+            <TextField fx:id="tfNoPersonal" layoutX="14.0" layoutY="441.0" prefHeight="31.0" prefWidth="370.0" style="-fx-background-color: #d7d7d7;" />
+            <ComboBox fx:id="cbTipoColaborador" layoutX="14.0" layoutY="518.0" onAction="#accionBomprobarConductor" prefHeight="31.0" prefWidth="169.0" />
+            <Label layoutX="14.0" layoutY="12.0" text="Nombre" />
+            <Label layoutX="14.0" layoutY="95.0" text="Apellido paterno" />
+            <Label layoutX="214.0" layoutY="95.0" text="Apellido materno" />
+            <Label layoutX="14.0" layoutY="184.0" text="Correo eléctronico" />
+            <Label layoutX="14.0" layoutY="260.0" text="CURP" />
+            <Label layoutX="14.0" layoutY="340.0" text="Contraseña" />
+            <Label layoutX="14.0" layoutY="420.0" text="Número de personal" />
+            <Label layoutX="14.0" layoutY="497.0" text="Rol" />
+            <TextField fx:id="tfLicencia" layoutX="214.0" layoutY="518.0" prefHeight="31.0" prefWidth="169.0" style="-fx-background-color: d7d7d7;" visible="false" />
+            <Label fx:id="lbLicencia" layoutX="214.0" layoutY="497.0" text="Licencia" visible="false" />
+            <Label fx:id="lblErrorNombre" layoutX="14.0" layoutY="64.0" prefHeight="21.0" prefWidth="251.0" text="*El nombre es un campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lblErrorApellidoPaterno" layoutX="11.0" layoutY="152.0" prefHeight="21.0" prefWidth="177.0" text="*Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lblErrorApellidoMaterno" layoutX="214.0" layoutY="152.0" prefHeight="21.0" prefWidth="177.0" text="*Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lblErrorCorreoElectronico" layoutX="14.0" layoutY="236.0" prefHeight="21.0" prefWidth="177.0" text="*Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lblErrorCURP" layoutX="14.0" layoutY="312.0" prefHeight="21.0" prefWidth="177.0" text="*Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lblErrorPassword" layoutX="14.0" layoutY="392.0" prefHeight="21.0" prefWidth="177.0" text="*Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lblErrorNoPersonal" layoutX="14.0" layoutY="472.0" prefHeight="21.0" prefWidth="177.0" text="*Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lblErrorRol" layoutX="14.0" layoutY="549.0" prefHeight="21.0" prefWidth="177.0" text="*Campo obligatorio" textFill="RED" visible="false" />
+            <Label fx:id="lblErrorlicencia" layoutX="214.0" layoutY="549.0" prefHeight="21.0" prefWidth="177.0" text="*Campo obligatorio" textFill="RED" visible="false" />
+         </children>
+      </Pane>
+      <Pane prefHeight="74.0" prefWidth="468.0" style="-fx-background-color: #d7d7d7;">
+         <children>
+            <Label layoutX="38.0" layoutY="18.0" text="Formulario Colaborador">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="36.0" layoutY="656.0" prefHeight="121.0" prefWidth="397.0">
+         <children>
+            <Button layoutX="39.0" layoutY="77.0" mnemonicParsing="false" onAction="#accionCancelar" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: #c3505b;" text="Cancelar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="238.0" layoutY="77.0" mnemonicParsing="false" onAction="#accionAceptar" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: #dda600;" text="Aceptar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnImagen" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#agregarFoto" prefHeight="31.0" prefWidth="370.0" text="Agregar foto de perfil" />
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>

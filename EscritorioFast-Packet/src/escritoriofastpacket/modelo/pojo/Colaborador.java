@@ -1,13 +1,7 @@
 
 package escritoriofastpacket.modelo.pojo;
 
-/**
- *
- * @author lizet
- */
 public class Colaborador {
-    
-    
     private Integer idColaborador;
     private String nombre;
     private String apellidoPaterno;
@@ -19,10 +13,40 @@ public class Colaborador {
     private Integer idRol;
     private String rol;
     private String fotografia;
-
+    private String noLicencia;
+    
+    
     public Colaborador() {
     }
 
+    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String noPersonal, String correo, String curp, String password, Integer idRol, String rol, String fotografia, String noLicencia) {
+        this.idColaborador = idColaborador;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.noPersonal = noPersonal;
+        this.correo = correo;
+        this.curp = curp;
+        this.password = password;
+        this.idRol = idRol;
+        this.rol = rol;
+        this.fotografia = fotografia;
+        this.noLicencia = noLicencia;
+    }
+    
+    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String noPersonal, String correo, String curp, String password, Integer idRol, String rol) {
+        this.idColaborador = idColaborador;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.noPersonal = noPersonal;
+        this.correo = correo;
+        this.curp = curp;
+        this.password = password;
+        this.idRol = idRol;
+        this.rol = rol;
+    }
+    
     public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String noPersonal, String correo, String curp, String password, Integer idRol, String rol, String fotografia) {
         this.idColaborador = idColaborador;
         this.nombre = nombre;
@@ -37,6 +61,15 @@ public class Colaborador {
         this.fotografia = fotografia;
     }
 
+    public String getNoLicencia() {
+        return noLicencia;
+    }
+
+    public void setNoLicencia(String noLicencia) {
+        this.noLicencia = noLicencia;
+    }
+    
+    
     public Integer getIdColaborador() {
         return idColaborador;
     }
@@ -124,7 +157,11 @@ public class Colaborador {
     public void setFotografia(String fotografia) {
         this.fotografia = fotografia;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "nombre "+nombre+"\napellido paterno "+apellidoPaterno+"\napellido materno "+apellidoMaterno+"\ncurp "+curp+
+                "\nnoPersonal "+noPersonal+"\nacorreo "+correo+"\npasseord "+password+"\naidRol "+idRol+"\nnoLicencia "+noLicencia;
+    }
     
 }
