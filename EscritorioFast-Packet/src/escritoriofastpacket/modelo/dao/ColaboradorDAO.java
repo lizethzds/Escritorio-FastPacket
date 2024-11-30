@@ -106,4 +106,22 @@ public class ColaboradorDAO {
         }
         return respuesta;
     }
+    
+    public static Mensaje obtenerImagen(Integer IdColaborador){
+        Mensaje respuesta = new Mensaje();
+        respuesta.setError(true);
+        String url = Constantes.URL_WS+"/colaboradores/obtenerFotografia/"+IdColaborador;
+        try {
+            Gson gson = new Gson();
+            RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+            if(respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            }else{
+                respuesta.setContenido(respuestaWS.getContenido());
+            }
+        } catch (Exception e) {
+            respuesta.setContenido(e.getMessage());
+        }
+        return respuesta;
+    }
 }
