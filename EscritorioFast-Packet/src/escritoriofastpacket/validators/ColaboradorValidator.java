@@ -31,6 +31,9 @@ public class ColaboradorValidator {
             }
             error = true;
         }
+        
+        
+        //TODO AGREGAR LOS WS DE COMPROBAR CORREO, CURP, NOPERSONAL Y NUMERO DE LICENCIA
 
         if (!validarCampo(colaborador.getNombre(), "nombre", hashlblErrores)) error =  true;
         if (!validarCampo(colaborador.getApellidoPaterno(), "apellidoPaterno", hashlblErrores)) error = true;
@@ -39,8 +42,8 @@ public class ColaboradorValidator {
         if (!validarCorreo(colaborador.getCorreo(), hashlblErrores)) error = true;
         if (!validarCurp(colaborador.getCurp(), hashlblErrores)) error = true;
         if (!validarPassword(colaborador.getPassword(), hashlblErrores)) error = true;
-        if (!validarCampo(colaborador.getRol(), "rol", hashlblErrores)) error = true;
-        if (!validarNoLicencia(colaborador.getNoLicencia(), hashlblErrores)) error = true;
+        if (!validarIdRol(colaborador.getIdRol(), hashlblErrores)) error = true;
+        if (!validarNoLicencia(colaborador.getNoLicencia(), hashlblErrores) && colaborador.getRol().equals("Conductor")) error = true;
 
         return error;
     }
@@ -49,7 +52,7 @@ public class ColaboradorValidator {
         if (valor == null || valor.trim().isEmpty()) {
             Label label = hashlblErrores.get(campo);
             if (label != null) {
-                label.setText("El campo " + campo + " no puede estar vacío.");
+                label.setText("*Campo obligatorio.");
                 label.setVisible(true);
             }
             return false;
@@ -57,7 +60,7 @@ public class ColaboradorValidator {
         if (valor.length() > 50) {
             Label label = hashlblErrores.get(campo);
             if (label != null) {
-                label.setText("El campo " + campo + " no puede exceder 50 caracteres.");
+                label.setText("*El campo " + campo + " no puede exceder 50 caracteres.");
                 label.setVisible(true);
             }
             return false;
@@ -70,7 +73,7 @@ public class ColaboradorValidator {
         if (correo == null || !correo.matches(correoRegex)) {
             Label label = hashlblErrores.get("correo");
             if (label != null) {
-                label.setText("El correo no tiene un formato válido.");
+                label.setText("*El correo no tiene un formato válido.");
                 label.setVisible(true);
             }
             return false;
@@ -83,7 +86,7 @@ public class ColaboradorValidator {
         if (curp == null || !curp.matches(curpRegex)) {
             Label label = hashlblErrores.get("curp");
             if (label != null) {
-                label.setText("El CURP no tiene un formato válido.");
+                label.setText("*El CURP no tiene un formato válido.");
                 label.setVisible(true);
             }
             return false;
@@ -95,7 +98,7 @@ public class ColaboradorValidator {
         if (password == null || password.length() < 8 || password.length() > 20) {
             Label label = hashlblErrores.get("password");
             if (label != null) {
-                label.setText("La contraseña debe tener entre 8 y 20 caracteres.");
+                label.setText("*La contraseña debe tener entre 8 y 20 caracteres.");
                 label.setVisible(true);
             }
             return false;
@@ -107,7 +110,18 @@ public class ColaboradorValidator {
         if (noLicencia != null && !noLicencia.matches("\\w{5,20}")) {
             Label label = hashlblErrores.get("licencia");
             if (label != null) {
-                label.setText("El número de licencia debe tener entre 5 y 20 caracteres alfanuméricos.");
+                label.setText("*El número de licencia debe tener entre 5 y 20 caracteres alfanuméricos.");
+                label.setVisible(true);
+            }
+            return false;
+        }
+        return true;
+    }
+    private static boolean validarIdRol(Integer idRol, HashMap<String,Label> hashlblErrores){
+        if(idRol == null || idRol == 0){
+            Label label = hashlblErrores.get("rol");
+            if (label != null){
+                label.setText("*Campo obligatorio.");
                 label.setVisible(true);
             }
             return false;

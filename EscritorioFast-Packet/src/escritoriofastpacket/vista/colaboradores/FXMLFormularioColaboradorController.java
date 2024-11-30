@@ -29,11 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author lizet
- */
+
 public class FXMLFormularioColaboradorController implements Initializable {
     
     private boolean modoEdicion = false;
@@ -113,10 +109,13 @@ public class FXMLFormularioColaboradorController implements Initializable {
         int pocisionRol = obtenerPosicionRol(colaboradorEdicion.getIdRol());
         cbTipoColaborador.getSelectionModel().select(pocisionRol);
         cbTipoColaborador.setDisable(true);
-        if(pocisionRol != 3){
+        if(cbTipoColaborador.getSelectionModel().getSelectedItem().getRol().equals("Conductor")){
+            tfLicencia.setVisible(true);
+            lbLicencia.setVisible(true);
             tfLicencia.setText(colaboradorEdicion.getNoLicencia());
         }
     }
+
     private void cargarRoles(){
         roles = FXCollections.observableArrayList();
         List<Rol> listaWS = ColaboradorDAO.obtentenerRolesColaborador();
@@ -124,6 +123,14 @@ public class FXMLFormularioColaboradorController implements Initializable {
             roles.addAll(listaWS);
             cbTipoColaborador.setItems(roles);
         }
+    }
+    private int obtenerPosicionRol(int idRol){
+        for (int i = 0; i < roles.size(); i++) {
+            if(idRol == roles.get(i).getIdRol()){
+                return i;
+            }
+        }
+        return 0;
     }
 
     @Override
@@ -170,7 +177,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
                 editarDatosColaborador(colaborador);
             }
         }else{
-            Utilidades.mostrarAlertaSimple("Error uno o varios de los campos no son valídos", correo, Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error", "Uno o varios de los campos no son valídos", Alert.AlertType.ERROR);
         }
     }
     
@@ -202,14 +209,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
     private void agregarFoto(ActionEvent event) {
     }
     
-    private int obtenerPosicionRol(int idRol){
-        for (int i = 0; i < roles.size(); i++) {
-            if(idRol == roles.get(i).getIdRol()){
-                return i;
-            }
-        }
-        return 0;
-    }
+    
     
     private void cerrarVentana(){
         ((Stage) tfApellidoMaterno.getScene().getWindow()).close();
