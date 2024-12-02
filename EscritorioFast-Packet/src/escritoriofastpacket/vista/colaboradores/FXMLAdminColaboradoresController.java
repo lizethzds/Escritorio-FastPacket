@@ -28,9 +28,12 @@ import escritoriofastpacket.modelo.pojo.Mensaje;
 import escritoriofastpacket.observer.INotificacionOperacion;
 import escritoriofastpacket.utils.Utilidades;
 import escritoriofastpacket.modelo.dao.ColaboradorDAO;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 public class FXMLAdminColaboradoresController implements Initializable, INotificacionOperacion {
-private ObservableList<Colaborador> colaboradores;
+    private ObservableList<Colaborador> colaboradores;
+    FilteredList<Colaborador> listaColaboradores;
     @FXML
     private TableView<Colaborador> tvColaboradores;
     @FXML
@@ -61,7 +64,7 @@ private ObservableList<Colaborador> colaboradores;
     }
     
      private void cargarInformacionTabla(){
-        colaboradores = FXCollections.observableArrayList();
+        colaboradores.clear();
         List<Colaborador> listaWs = ColaboradorDAO.obtenerColaboradores();
         if(listaWs != null){
             if(!listaWs.isEmpty()){
@@ -77,12 +80,14 @@ private ObservableList<Colaborador> colaboradores;
                     "Por el momento no se puede cargar la informacion de los colaboradores",
                     Alert.AlertType.ERROR);
         }
+        configurarFiltroBusqueda();
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        colaboradores = FXCollections.observableArrayList();
         configurarTabla();
-        cargarInformacionTabla();
+        cargarInformacionTabla(); 
     }    
 
 
@@ -119,21 +124,21 @@ private ObservableList<Colaborador> colaboradores;
     
     @FXML
     private void formularioRegistrarColaborador(ActionEvent event) {
-        irPantallaFormulario(this,null);
+        irPantallaFormulario(this,null,"Agregar colaborador");
     }
 
     @FXML
     private void formularioEditarColaborador(ActionEvent event) {
         Colaborador colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
         if(colaborador != null){
-            irPantallaFormulario(this, colaborador);
+            irPantallaFormulario(this, colaborador,"Editar colaborador");
         }else{
             Utilidades.mostrarAlertaSimple("seleccione un colaborador", 
                     "Tiene que seleccionar un colaborador para poder abrir el menu de editar",
                     Alert.AlertType.ERROR);
         }
     }
-    private void irPantallaFormulario(INotificacionOperacion observador, Colaborador colaborador){
+    private void irPantallaFormulario(INotificacionOperacion observador, Colaborador colaborador, String tituloPantalla){
         Stage nuevoEcenario = new Stage();
         try {
 
@@ -143,7 +148,7 @@ private ObservableList<Colaborador> colaboradores;
             controlador.inicializarValores(observador, colaborador);
             Scene ecenaAdmin = new Scene(nuevoParent);
             nuevoEcenario.setScene(ecenaAdmin);
-            nuevoEcenario.setTitle("Agregar colaborador");
+            nuevoEcenario.setTitle(tituloPantalla);
             nuevoEcenario.initModality(Modality.APPLICATION_MODAL);
             nuevoEcenario.showAndWait();
         } catch (Exception e) {
@@ -156,5 +161,34 @@ private ObservableList<Colaborador> colaboradores;
     public void notificarOperacionExitosa(String tipo, String nombre) {
         cargarInformacionTabla();
     }
-    
+    private void configurarFiltroBusqueda() {
+        listaColaboradores = new FilteredList<>(colaboradores, b -> true);
+
+        tfBuscarColaborador.textProperty().addListener((observable, oldValue, newValue) -> {
+            listaColaboradores.setPredicate(colaborador -> {
+                if (newValue == null || newValue.trim().isEmpty()) {
+                    return true; 
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (colaborador.getNombre() != null && colaborador.getNombre().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; 
+                }
+                if (colaborador.getNoPersonal() != null && colaborador.getNoPersonal().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; 
+                }
+                if (colaborador.getRol() != null && colaborador.getRol().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; 
+                }
+
+                return false; 
+            });
+        });
+
+        SortedList<Colaborador> sortedData = new SortedList<>(listaColaboradores);
+        sortedData.comparatorProperty().bind(tvColaboradores.comparatorProperty());
+        tvColaboradores.setItems(sortedData);
+    }
+
 }
