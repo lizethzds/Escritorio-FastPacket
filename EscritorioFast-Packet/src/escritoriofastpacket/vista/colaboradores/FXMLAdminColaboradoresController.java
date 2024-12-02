@@ -29,11 +29,6 @@ import escritoriofastpacket.observer.INotificacionOperacion;
 import escritoriofastpacket.utils.Utilidades;
 import escritoriofastpacket.modelo.dao.ColaboradorDAO;
 
-/**
- * FXML Controller class
- *
- * @author lizet
- */
 public class FXMLAdminColaboradoresController implements Initializable, INotificacionOperacion {
 private ObservableList<Colaborador> colaboradores;
     @FXML
@@ -93,7 +88,6 @@ private ObservableList<Colaborador> colaboradores;
 
     
     private void eliminarColaboradorConfirmacion(int idColaborador){
-        System.out.println(idColaborador);
         Mensaje respuesta = ColaboradorDAO.eliminar(idColaborador);
         if(!respuesta.isError()){
             cargarInformacionTabla();
@@ -142,13 +136,11 @@ private ObservableList<Colaborador> colaboradores;
     private void irPantallaFormulario(INotificacionOperacion observador, Colaborador colaborador){
         Stage nuevoEcenario = new Stage();
         try {
-            //
+
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioColaborador.fxml"));
             Parent nuevoParent = cargador.load();
-            //
-             FXMLFormularioColaboradorController controlador = cargador.getController();
-             controlador.inicializarValores(observador, colaborador);
-            //
+            FXMLFormularioColaboradorController controlador = cargador.getController();
+            controlador.inicializarValores(observador, colaborador);
             Scene ecenaAdmin = new Scene(nuevoParent);
             nuevoEcenario.setScene(ecenaAdmin);
             nuevoEcenario.setTitle("Agregar colaborador");

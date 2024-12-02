@@ -21,13 +21,11 @@ public class ColaboradorDAO {
         List<Colaborador> lista = null;
         String url = Constantes.URL_WS+"/colaboradores/obtenerColaboradores";
         RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
-        System.out.println("json: "+respuestaWS.getContenido());
         try {
              if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) { 
                 Gson gson = new Gson();
                 Type tipoLista = new TypeToken<List<Colaborador>>(){}.getType();
                 lista = gson.fromJson(respuestaWS.getContenido(), tipoLista);
-                 System.out.println("lista: "+lista.toString());
              }
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,7 +36,6 @@ public class ColaboradorDAO {
         List<Rol> roles = null;
         String url = Constantes.URL_WS+"/catalogo/obtenerRoles";
         RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
-        System.out.println("json: "+respuestaWS.getContenido());
         try {
              if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) { 
                 Gson gson = new Gson();
@@ -114,6 +111,25 @@ public class ColaboradorDAO {
         try {
             Gson gson = new Gson();
             RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+            if(respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            }else{
+                respuesta.setContenido(respuestaWS.getContenido());
+            }
+        } catch (Exception e) {
+            respuesta.setContenido(e.getMessage());
+        }
+        return respuesta;
+    }
+    
+    public static Mensaje comprobarValoresRepetidos(Colaborador colaborador){
+        Mensaje respuesta = new Mensaje();
+            respuesta.setError(true);
+        String url = Constantes.URL_WS+"/colaboradores/comprobarValoresRepetidos";
+        try {
+            Gson gson = new Gson();
+            String parametros = gson.toJson(colaborador);
+            RespuestaHTTP respuestaWS = ConexionWS.peticionPOSTJson(url,parametros);
             if(respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
                 respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
             }else{

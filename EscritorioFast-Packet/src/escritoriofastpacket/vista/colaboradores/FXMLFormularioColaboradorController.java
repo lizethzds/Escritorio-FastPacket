@@ -48,7 +48,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
     private Image imagenSeleccionada = null;
     private ObservableList<Rol> roles;
     INotificacionOperacion observador;
-    Colaborador colaboradorEdicion;
+    Colaborador colaboradorEdicion = null;
     HashMap<String, Label> hashlbl = new LinkedHashMap<>();
     @FXML
     private TextField tfNombre;
@@ -158,7 +158,9 @@ public class FXMLFormularioColaboradorController implements Initializable {
         inicializarHashErrores();
         cargarRoles();
         Platform.runLater(() -> {
-            if(modoEdicion) obtenerImagenColaboradorEdicion(colaboradorEdicion.getIdColaborador());
+            if (modoEdicion) {
+                obtenerImagenColaboradorEdicion(colaboradorEdicion.getIdColaborador());
+            }
         });
     }
 
@@ -179,6 +181,9 @@ public class FXMLFormularioColaboradorController implements Initializable {
 
         int idRol = (cbTipoColaborador.getSelectionModel().getSelectedItem() != null)
                 ? cbTipoColaborador.getSelectionModel().getSelectedItem().getIdRol() : 0;
+       
+        String rol = (cbTipoColaborador.getSelectionModel().getSelectedItem() != null)
+                ? cbTipoColaborador.getSelectionModel().getSelectedItem().getRol() : "";
 
         Colaborador colaborador = new Colaborador();
         colaborador.setNoPersonal(noPersonal);
@@ -189,21 +194,26 @@ public class FXMLFormularioColaboradorController implements Initializable {
         colaborador.setPassword(contraseña);
         colaborador.setCurp(CURP);
         colaborador.setIdRol(idRol);
+        colaborador.setRol(rol);
         if (idRol == 3) {
             colaborador.setNoLicencia(tfLicencia.getText());
         }
-        if (sonCamposValidos(colaborador)) {
-            colaborador.setFotografia(imagenSeleccionada != null ? imageToBase64(imagenSeleccionada) : null);
-            if (!modoEdicion) {
+        Mensaje mensaje = sonCamposValidos(colaborador);
+        System.out.println("respuesta"+mensaje.getContenido()+"\nerror"+mensaje.isError());
+        if (!mensaje.isError()) {
+            if (!modoEdicion) { 
+                colaborador.setFotografia(imagenSeleccionada != null ? imageToBase64(imagenSeleccionada) : null);
                 enviarDatosColaborador(colaborador);
             } else {
+                colaborador.setFotografia(imagenSeleccionada != null ? imageToBase64(imagenSeleccionada) : colaboradorEdicion.getFotografia());
                 colaborador.setIdColaborador(colaboradorEdicion.getIdColaborador());
                 editarDatosColaborador(colaborador);
             }
         } else {
-            Utilidades.mostrarAlertaSimple("Error", "Uno o varios de los campos no son valídos", Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error", mensaje.getContenido(), Alert.AlertType.ERROR);
         }
     }
+
 
     private void enviarDatosColaborador(Colaborador colaborador) {
         Mensaje respuesta = ColaboradorDAO.registrarColaborador(colaborador);
@@ -272,6 +282,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
     private void obtenerImagenColaboradorEdicion(Integer idColaborador) {
         Mensaje respuesta = ColaboradorDAO.obtenerImagen(idColaborador);
         if (!respuesta.isError()) {
+            colaboradorEdicion.setFotografia(respuesta.getContenido());
             imgPerfil.setImage(base64ToImage(respuesta.getContenido()));
             ajustarTamañoVboxImagen();
         }
@@ -305,8 +316,8 @@ public class FXMLFormularioColaboradorController implements Initializable {
         ((Stage) tfApellidoMaterno.getScene().getWindow()).close();
     }
 
-    private boolean sonCamposValidos(Colaborador colaborador) {
-        return !ColaboradorValidator.validarColaborador(colaborador, hashlbl);
+    private Mensaje sonCamposValidos(Colaborador colaborador) {
+        return ColaboradorValidator.validarColaborador(colaborador, colaboradorEdicion , hashlbl);
     }
 
     @FXML
