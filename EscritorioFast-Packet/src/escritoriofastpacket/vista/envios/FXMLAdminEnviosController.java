@@ -7,7 +7,10 @@ package escritoriofastpacket.vista.envios;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
@@ -16,6 +19,9 @@ import javafx.fxml.Initializable;
  */
 public class FXMLAdminEnviosController implements Initializable {
 
+    @FXML
+    private TableView<?> tvEnvios;
+
     /**
      * Initializes the controller class.
      */
@@ -23,5 +29,21 @@ public class FXMLAdminEnviosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void btnAgregarEnvio(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnEditarEnvio(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnEliminar(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnVerPaquetes(ActionEvent event) {
+    }
     
 }
