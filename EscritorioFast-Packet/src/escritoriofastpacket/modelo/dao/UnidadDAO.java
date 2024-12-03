@@ -24,16 +24,17 @@ import javafx.scene.control.Alert;
  * @author uriel
  */
 public class UnidadDAO {
-    
-    public static List<Unidad> obtenerUnidades (){
+
+    public static List<Unidad> obtenerUnidades() {
         List<Unidad> unidades = null;
-        String url = Constantes.URL_WS+"unidad/listaUnidades";
+        String url = Constantes.URL_WS + "unidad/listaUnidades";
         RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
-        
+
         try {
             if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 Gson gson = new Gson();
-                Type tipoLista = new TypeToken<List<Unidad>>(){}.getType();
+                Type tipoLista = new TypeToken<List<Unidad>>() {
+                }.getType();
                 unidades = gson.fromJson(respuesta.getContenido(), tipoLista);
             }
         } catch (Exception e) {
@@ -41,16 +42,17 @@ public class UnidadDAO {
         }
         return unidades;
     }
-    
-    public static List<TipoUnidad> obtenerTipoUnidad () {
+
+    public static List<TipoUnidad> obtenerTipoUnidad() {
         List<TipoUnidad> tipoUnidad = null;
-        String url = Constantes.URL_WS+"unidad/listaTipoUnidad";
+        String url = Constantes.URL_WS + "unidad/listaTipoUnidad";
         RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
-        
+
         try {
             if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 Gson gson = new Gson();
-                Type tipoLista = new TypeToken<List<TipoUnidad>>(){}.getType();
+                Type tipoLista = new TypeToken<List<TipoUnidad>>() {
+                }.getType();
                 tipoUnidad = gson.fromJson(respuesta.getContenido(), tipoLista);
             }
         } catch (Exception e) {
@@ -58,19 +60,18 @@ public class UnidadDAO {
         }
         return tipoUnidad;
     }
-    
-    public static Mensaje registrarUnidad (Unidad unidad){
+
+    public static Mensaje registrarUnidad(Unidad unidad) {
         Mensaje respuesta = new Mensaje();
-        String url = Constantes.URL_WS+"unidad/registrar";
+        String url = Constantes.URL_WS + "unidad/registrar";
         Gson gson = new Gson();
-        
+
         try {
             String data = gson.toJson(unidad);
-            System.err.println(data);
             RespuestaHTTP respuestaWS = ConexionWS.peticionPOSTJson(url, data);
             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
-            }else{
+            } else {
                 respuesta.setError(true);
                 respuesta.setContenido(respuestaWS.getContenido());
             }
@@ -80,5 +81,48 @@ public class UnidadDAO {
         }
         return respuesta;
     }
-    
+
+    public static Mensaje editarUnidad(Unidad unidad) {
+        Mensaje respuesta = new Mensaje();
+        String url = Constantes.URL_WS + "unidad/editar";
+        Gson gson = new Gson();
+
+        try {
+            String data = gson.toJson(unidad);
+            System.out.println(data);
+            RespuestaHTTP respuestaWS = ConexionWS.peticionPUTJson(url, data);
+            if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                respuesta.setContenido(respuestaWS.getContenido());
+            } else {
+                respuesta.setError(true);
+                respuesta.setContenido(respuestaWS.getContenido());
+            }
+        } catch (Exception e) {
+            respuesta.setError(true);
+            respuesta.setContenido(e.getMessage());
+        }
+
+        return respuesta;
+    }
+
+    public static Mensaje eliminarUnidad(Integer idUnidad) {
+        Mensaje respuesta = new Mensaje();
+        String url = Constantes.URL_WS + "unidad/eliminar/" + idUnidad;
+
+        try {
+            RespuestaHTTP respuestaWS = ConexionWS.peticionDELETEUrl(url);
+            if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                respuesta.setContenido(respuestaWS.getContenido());
+            } else {
+                respuesta.setError(true);
+                respuesta.setContenido(respuestaWS.getContenido());
+            }
+        } catch (Exception e) {
+            respuesta.setError(true);
+            respuesta.setContenido(e.getMessage());
+        }
+        
+        return respuesta;
+    }
+
 }

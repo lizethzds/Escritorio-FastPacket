@@ -18,7 +18,7 @@
             </Text>
          </children>
       </HBox>
-      <Text layoutX="27.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese el motivo para dar de baja la unidad con VIN: 123456ES" wrappingWidth="395.6708984375">
+      <Text fx:id="lb_vin" layoutX="27.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese el motivo para dar de baja la unidad con VIN: " wrappingWidth="395.6708984375">
          <font>
             <Font size="18.0" />
          </font>

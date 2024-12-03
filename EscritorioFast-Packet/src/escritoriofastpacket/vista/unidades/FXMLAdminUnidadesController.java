@@ -34,8 +34,6 @@ import javafx.stage.Stage;
  * @author lizet
  */
 public class FXMLAdminUnidadesController implements Initializable, INotificarOperacion {
-    
-    
 
     private ObservableList<Unidad> unidades;
 
@@ -90,6 +88,12 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
 
     @FXML
     private void btnEliminarUnidad(ActionEvent event) {
+        Unidad unidad = tv_unidades.getSelectionModel().getSelectedItem();
+        if (unidad != null) {
+            irFormularioEliminarUnidad(unidad, this);
+        } else {
+            Utilidades.mostrarAlertaSimple("Advertencia", "Seleccione una Unidad para eliminarla.", Alert.AlertType.INFORMATION);
+        }
     }
 
     @FXML
@@ -98,6 +102,12 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
 
     @FXML
     private void btnEditarUnidad(ActionEvent event) {
+        Unidad unidad = tv_unidades.getSelectionModel().getSelectedItem();
+        if (unidad != null) {
+            irFormularioAgregarUnidad(this, unidad);
+        } else {
+            Utilidades.mostrarAlertaSimple("Advertencia", "Seleccione una Unidad para editarla.", Alert.AlertType.INFORMATION);
+        }
     }
 
     @FXML
@@ -111,10 +121,30 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
             Parent vista = loader.load();
             FXMLAgregarUnidadController controller = loader.getController();
             controller.inicializarValores(observador, unidad);
+
+            Scene escena = new Scene(vista);
+            escenario.setScene(escena);
+            escenario.setTitle("Formulario de Unidad");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+            escenario.setResizable(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error inesperado", "Ocurrio un error al mostrar el formulario, intentelo de nuevo.", Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void irFormularioEliminarUnidad(Unidad unidad , INotificarOperacion obsevador){
+        try {
+            Stage escenario = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLBajaUnidad.fxml"));
+            Parent vista = loader.load();
+            FXMLBajaUnidadController controller = loader.getController();
+            controller.cargarDatos(unidad,obsevador);
             
             Scene escena = new Scene(vista);
             escenario.setScene(escena);
-            escenario.setTitle("Foprmulario de Unidad");
+            escenario.setTitle("Baja de unidad");
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
             escenario.setResizable(false);
@@ -126,7 +156,7 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
 
     @Override
     public void notificarOperacionExitosa(String tipo, String nombre) {
-         cargarInformacionTabla();
+        cargarInformacionTabla();
     }
 
 }
