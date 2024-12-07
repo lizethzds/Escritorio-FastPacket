@@ -180,6 +180,7 @@ public class FXMLFormularioClienteController implements Initializable {
       }
     }
     
+    
      private void cargarMunicipios(Integer idEstado) {
         municipios = FXCollections.observableArrayList();
         List<Municipio> inf = CatalogoDAO.obtenerMunicipios(idEstado);

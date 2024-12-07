@@ -154,24 +154,24 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
     tfBusqueda.textProperty().addListener((observable, oldValue, newValue) -> {
         listaClientes.setPredicate(cliente -> {
             if (newValue == null || newValue.trim().isEmpty()) {
-                return true; // Mostrar todos los clientes si no hay filtro
+                return true; 
             }
             
             String lowerCaseFilter = newValue.toLowerCase();
 
             if (cliente.getCorreo() != null && cliente.getCorreo().toLowerCase().contains(lowerCaseFilter)) {
-                return true; // Coincide con el correo
+                return true;
             }
             
             if (cliente.getNombre() != null && cliente.getNombre().toLowerCase().contains(lowerCaseFilter)) {
-                return true; // Coincide con el nombre
+                return true;
             }
             
             if (cliente.getTelefono() != null && cliente.getTelefono().toLowerCase().contains(lowerCaseFilter)) {
-                return true; // Coincide con el teléfono
+                return true; 
             }
 
-            return false; // No coincide con ningún criterio
+            return false; 
         });
     });
 

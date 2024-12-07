@@ -54,7 +54,6 @@ public class ClienteDAO {
         String url = Constantes.URL_WS+"cliente/obtenerClientePorId/"+idCliente;
         RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
         
-      
             if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
                 Gson gson = new Gson();
                 datosCliente = gson.fromJson(respuesta.getContenido(), DatosRegistroCliente.class);

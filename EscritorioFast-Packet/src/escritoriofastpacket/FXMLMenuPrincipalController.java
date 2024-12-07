@@ -10,8 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -79,6 +81,20 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void btnCerrarSesion(ActionEvent event) {
+        
+        try{
+            Stage escenario = (Stage)lbNombreColaborador.getScene().getWindow();
+            FXMLLoader loadVista = new FXMLLoader(getClass().getResource("FXMLInicioSesion.fxml"));
+            Parent vista = loadVista.load();
+            FXMLInicioSesionController controlador = loadVista.getController();
+            
+            Scene escena = new Scene(vista);
+            escenario.setScene(escena);
+            escenario.show();
+            
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
     }
 
     void inicializarMenuGeneral(Colaborador colaboradorSesion) {

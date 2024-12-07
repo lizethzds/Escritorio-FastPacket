@@ -8,36 +8,35 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="478.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.paquetes.FXMLAdminPaquetesController">
+<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="537.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.paquetes.FXMLAdminPaquetesController">
    <children>
-      <Pane prefHeight="478.0" prefWidth="155.0" style="-fx-background-color: #2C3E50;" styleClass="b" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#babfc3" height="102.0" layoutX="155.0" stroke="BLACK" strokeType="INSIDE" width="568.0" />
-      <Text fill="#fcfcfc" fontSmoothingType="LCD" layoutX="191.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paquetes de Envio : ">
-         <font>
-            <Font name="Arial Bold" size="25.0" />
-         </font>
-      </Text>
-      <TableView fx:id="tvPaquetes" layoutX="191.0" layoutY="200.0" prefHeight="228.0" prefWidth="484.0">
+      <TableView fx:id="tvPaquetes" layoutX="46.0" layoutY="171.0" prefHeight="199.0" prefWidth="456.0">
         <columns>
-          <TableColumn fx:id="tcAltura" prefWidth="118.0" text="Altura" />
-          <TableColumn fx:id="tcAnchura" prefWidth="111.0" text="Anchura" />
-            <TableColumn fx:id="tcProfundidad" prefWidth="114.0" text="Profundidad" />
-            <TableColumn fx:id="tcPeso" prefWidth="140.0" text="Peso" />
+          <TableColumn fx:id="tcAltura" prefWidth="95.0" text="Altura" />
+          <TableColumn fx:id="tcAnchura" prefWidth="101.0" text="Anchura" />
+            <TableColumn fx:id="tcProfundidad" prefWidth="108.0" text="Profundidad" />
+            <TableColumn fx:id="tcPeso" prefWidth="148.0" text="Peso" />
         </columns>
       </TableView>
-      <Button layoutX="324.0" layoutY="159.0" mnemonicParsing="false" onAction="#btnAgregarPaquete" style="-fx-background-color: YELLOW;" text="Agregar nuevo">
+      <Button layoutX="74.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnAgregarPaquete" style="-fx-background-color: #E39E21;" text="Agregar nuevo">
          <font>
             <Font name="Ebrima Bold" size="13.0" />
          </font></Button>
-      <Button layoutX="446.0" layoutY="159.0" mnemonicParsing="false" onAction="#btnEditarPaquete" prefHeight="27.0" prefWidth="91.0" style="-fx-background-color: YELLOW;" text="Editar">
+      <Button layoutX="209.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnEditarPaquete" prefHeight="27.0" prefWidth="91.0" style="-fx-background-color: #4163C9;" text="Editar" textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="547.0" layoutY="159.0" mnemonicParsing="false" onAction="#btnEliminarPaquete" prefHeight="27.0" prefWidth="91.0" style="-fx-background-color: YELLOW;" text="Eliminar">
+      <Button layoutX="334.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnEliminarPaquete" prefHeight="27.0" prefWidth="91.0" style="-fx-background-color: #E32121;" text="Eliminar" textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="13.0" />
          </font>
       </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d9d9d9" height="62.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="537.0" />
+      <Label layoutX="133.0" layoutY="20.0" text="Paquetes asignados a envio: ">
+         <font>
+            <Font name="Ebrima Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
