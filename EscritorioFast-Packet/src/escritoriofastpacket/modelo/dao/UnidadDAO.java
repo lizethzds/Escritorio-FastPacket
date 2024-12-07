@@ -42,6 +42,24 @@ public class UnidadDAO {
         }
         return unidades;
     }
+    
+    public static List<Unidad> historialUnidades() {
+        List<Unidad> unidades = null;
+        String url = Constantes.URL_WS + "unidad/historialUnidades";
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+
+        try {
+            if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                Gson gson = new Gson();
+                Type tipoLista = new TypeToken<List<Unidad>>() {
+                }.getType();
+                unidades = gson.fromJson(respuesta.getContenido(), tipoLista);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return unidades;
+    }
 
     public static List<TipoUnidad> obtenerTipoUnidad() {
         List<TipoUnidad> tipoUnidad = null;
@@ -105,12 +123,14 @@ public class UnidadDAO {
         return respuesta;
     }
 
-    public static Mensaje eliminarUnidad(Integer idUnidad) {
+    public static Mensaje eliminarUnidad(Unidad unidad) {
         Mensaje respuesta = new Mensaje();
-        String url = Constantes.URL_WS + "unidad/eliminar/" + idUnidad;
+        String url = Constantes.URL_WS + "unidad/eliminar";
+        Gson gson = new Gson();
 
         try {
-            RespuestaHTTP respuestaWS = ConexionWS.peticionDELETEUrl(url);
+            String data = gson.toJson(unidad);
+            RespuestaHTTP respuestaWS = ConexionWS.peticionDELETEJson(url,data);
             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 respuesta.setContenido(respuestaWS.getContenido());
             } else {

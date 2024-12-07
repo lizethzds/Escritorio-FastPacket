@@ -7,14 +7,16 @@ package escritoriofastpacket.vista.unidades;
 
 import escritoriofastpacket.interfaz.INotificarOperacion;
 import escritoriofastpacket.modelo.dao.UnidadDAO;
+import escritoriofastpacket.modelo.pojo.Cliente;
 import escritoriofastpacket.modelo.pojo.Unidad;
 import escritoriofastpacket.utils.Utilidades;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -36,6 +39,7 @@ import javafx.stage.Stage;
 public class FXMLAdminUnidadesController implements Initializable, INotificarOperacion {
 
     private ObservableList<Unidad> unidades;
+    private FilteredList<Unidad> busquedaUnidades;
 
     @FXML
     private TableColumn col_vin;
@@ -51,6 +55,8 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
     private TableColumn col_identificador;
     @FXML
     private TableView<Unidad> tv_unidades;
+    @FXML
+    private TextField tf_buscar;
 
     /**
      * Initializes the controller class.
@@ -59,6 +65,7 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         cargarInformacionTabla();
+        configurarFiltroBusqueda();
     }
 
     private void configurarTabla() {
@@ -97,10 +104,6 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
     }
 
     @FXML
-    private void btnQuitarConductor(ActionEvent event) {
-    }
-
-    @FXML
     private void btnEditarUnidad(ActionEvent event) {
         Unidad unidad = tv_unidades.getSelectionModel().getSelectedItem();
         if (unidad != null) {
@@ -108,10 +111,6 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
         } else {
             Utilidades.mostrarAlertaSimple("Advertencia", "Seleccione una Unidad para editarla.", Alert.AlertType.INFORMATION);
         }
-    }
-
-    @FXML
-    private void btnAsignarConductor(ActionEvent event) {
     }
 
     private void irFormularioAgregarUnidad(INotificarOperacion observador, Unidad unidad) {
@@ -133,15 +132,15 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
             Utilidades.mostrarAlertaSimple("Error inesperado", "Ocurrio un error al mostrar el formulario, intentelo de nuevo.", Alert.AlertType.ERROR);
         }
     }
-    
-    private void irFormularioEliminarUnidad(Unidad unidad , INotificarOperacion obsevador){
+
+    private void irFormularioEliminarUnidad(Unidad unidad, INotificarOperacion obsevador) {
         try {
             Stage escenario = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLBajaUnidad.fxml"));
             Parent vista = loader.load();
             FXMLBajaUnidadController controller = loader.getController();
-            controller.cargarDatos(unidad,obsevador);
-            
+            controller.cargarDatos(unidad, obsevador);
+
             Scene escena = new Scene(vista);
             escenario.setScene(escena);
             escenario.setTitle("Baja de unidad");
@@ -157,6 +156,61 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
     @Override
     public void notificarOperacionExitosa(String tipo, String nombre) {
         cargarInformacionTabla();
+    }
+
+    @FXML
+    private void btnHistorial(ActionEvent event) {
+        irHistorialBajas();
+    }
+
+    private void irHistorialBajas() {
+        try {
+            Stage escenario = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLHistorialUnidades.fxml"));
+            Parent vista = loader.load();
+
+            Scene escena = new Scene(vista);
+            escenario.setScene(escena);
+            escenario.setTitle("Historial de Unidades");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+            escenario.setResizable(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error inesperado", "Ocurrio un error al mostrar el historial, intentelo de nuevo.", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void configurarFiltroBusqueda() {
+        busquedaUnidades = new FilteredList<>(unidades, b -> true);
+
+        tf_buscar.textProperty().addListener((observable, oldValue, newValue) -> {
+            busquedaUnidades.setPredicate(unidad -> {
+                if (newValue == null || newValue.trim().isEmpty()) {
+                    return true; // Mostrar todos los clientes si no hay filtro
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (unidad.getVin() != null && unidad.getVin().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Coincide con el correo
+                }
+
+                if (unidad.getNoIdentificacion()!= null && unidad.getNoIdentificacion().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Coincide con el nombre
+                }
+
+                if (unidad.getAnio() != null && unidad.getAnio().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Coincide con el teléfono
+                }
+
+                return false; // No coincide con ningún criterio
+            });
+        });
+
+        SortedList<Unidad> sortedData = new SortedList<>(busquedaUnidades);
+        sortedData.comparatorProperty().bind(tv_unidades.comparatorProperty());
+        tv_unidades.setItems(sortedData);
     }
 
 }

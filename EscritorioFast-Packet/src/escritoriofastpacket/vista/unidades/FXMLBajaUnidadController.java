@@ -54,9 +54,10 @@ public class FXMLBajaUnidadController implements Initializable {
     @FXML
     private void btnBajaUnidad(ActionEvent event) {
         String motivo = tf_motivo.getText();
+        
         if (validarMotivo(motivo)) {
-
-            Mensaje respuesta = UnidadDAO.eliminarUnidad(unidad.getIdUnidad());
+            unidad.setMotivo(motivo);
+            Mensaje respuesta = UnidadDAO.eliminarUnidad(unidad);
             if (!respuesta.isError()) {
                 Utilidades.mostrarAlertaSimple("Eliminar", "Se ha eliminado la Unidad correctamente.", Alert.AlertType.INFORMATION);
                 cerrarVenatana();

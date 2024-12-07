@@ -19,11 +19,12 @@ public class Unidad {
     private String noIdentificacion;
     private Integer idTipoUnidad;
     private String tipoUnidad;
+    private String motivo;
 
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, String marca, String modelo, String anio, String vin, String noIdentificacion, Integer idTipoUnidad, String tipoUnidad) {
+    public Unidad(Integer idUnidad, String marca, String modelo, String anio, String vin, String noIdentificacion, Integer idTipoUnidad, String tipoUnidad, String motivo) {
         this.idUnidad = idUnidad;
         this.marca = marca;
         this.modelo = modelo;
@@ -32,6 +33,7 @@ public class Unidad {
         this.noIdentificacion = noIdentificacion;
         this.idTipoUnidad = idTipoUnidad;
         this.tipoUnidad = tipoUnidad;
+        this.motivo = motivo;
     }
 
     public Integer getIdUnidad() {
@@ -97,6 +99,15 @@ public class Unidad {
     public void setTipoUnidad(String tipoUnidad) {
         this.tipoUnidad = tipoUnidad;
     }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
     
     
 }
