@@ -160,8 +160,7 @@ public class Colaborador {
 
     @Override
     public String toString() {
-        return "nombre "+nombre+"\napellido paterno "+apellidoPaterno+"\napellido materno "+apellidoMaterno+"\ncurp "+curp+
-                "\nnoPersonal "+noPersonal+"\nacorreo "+correo+"\npasseord "+password+"\naidRol "+idRol+"\nnoLicencia "+noLicencia;
+        return " - "+noPersonal +" "+ nombre + " " + apellidoPaterno + " " + apellidoMaterno;
     }
     
 }

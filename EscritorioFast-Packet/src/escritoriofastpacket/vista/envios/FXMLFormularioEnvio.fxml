@@ -43,7 +43,7 @@
          <font>
             <Font name="Ebrima Bold" size="15.0" />
          </font></Button>
-      <Button layoutX="368.0" layoutY="567.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="111.0" style="-fx-background-color: E32121;" text="Cancelar" textFill="WHITE">
+      <Button layoutX="368.0" layoutY="567.0" mnemonicParsing="false" onAction="#btnCancelar" prefHeight="44.0" prefWidth="111.0" style="-fx-background-color: E32121;" text="Cancelar" textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="15.0" />
          </font></Button>

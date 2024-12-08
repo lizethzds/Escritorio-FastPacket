@@ -145,6 +145,7 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
         System.out.println("Operacion:" + tipo);
         System.out.print("Nombre:" + nombre);
         cargarInformacionTabla(); 
+        configurarFiltroBusqueda();
     
     }
 

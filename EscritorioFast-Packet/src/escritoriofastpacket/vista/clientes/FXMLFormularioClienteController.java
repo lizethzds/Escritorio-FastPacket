@@ -150,7 +150,7 @@ public class FXMLFormularioClienteController implements Initializable {
        tfColonia.setText(clienteDatos.getDireccion().getColonia());
        tfCodigoPostal.setText(clienteDatos.getDireccion().getCodigoPostal());
        
-            // Obtener idEstado a partir del idMunicipio
+        // Obtener idEstado a partir del idMunicipio
         Integer idMunicipio = clienteDatos.getDireccion().getIdMunicipio();
         Estado estadoDireccion;
         estadoDireccion = CatalogoDAO.obtenerEstadoMunicipio(idMunicipio);
@@ -164,8 +164,7 @@ public class FXMLFormularioClienteController implements Initializable {
         cargarMunicipios(idEstado);
         int posicionMunicipio = buscarIdMunicipio(idMunicipio);
         cbMunicipio.getSelectionModel().select(posicionMunicipio);
-
-
+        
         tfCorreo.setEditable(false);
 
     }
