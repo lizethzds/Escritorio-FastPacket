@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,7 +65,7 @@ public class FXMLAdminEnviosController implements Initializable , INotificarOper
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
         cargarInformacionTabla();
-       // configurarFiltroBusqueda();
+        configurarFiltroBusqueda();
     }    
 
     @FXML
@@ -85,6 +86,18 @@ public class FXMLAdminEnviosController implements Initializable , INotificarOper
 
     @FXML
     private void btnEliminar(ActionEvent event) {
+        Envio envio = tvEnvios.getSelectionModel().getSelectedItem();
+        if(envio != null){
+             boolean seElimina = Utilidades.mostrarAlertaConfirmacion("Eliminar envio", "¿Está seguro de elimninar la información "
+                    + " del envio del sistema? Esta acción es irreversible.");
+             
+             if(seElimina){
+                 EnvioDAO.eliminarEnvio(envio.getIdEnvio());
+                 notificarOperacionExitosa("Eliminado: ", envio.getNoGuia());
+             }
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione un envío", "Para borrar un envio, debe seleccionarlo primero", Alert.AlertType.INFORMATION);
+        }
     }
 
     @FXML
@@ -132,9 +145,31 @@ public class FXMLAdminEnviosController implements Initializable , INotificarOper
         
     }
 
-    private void configurarFiltroBusqueda() {
-        //TODO
-    }
+  private void configurarFiltroBusqueda() {
+    listaEnvios = new FilteredList<>(envios, b -> true);
+    
+    tfBusquedaNumGuia.textProperty().addListener((observable, oldValue, newValue) -> {
+        listaEnvios.setPredicate(envio -> {
+            if (newValue == null || newValue.trim().isEmpty()) {
+                return true; 
+            }
+            
+            String lowerCaseFilter = newValue.toLowerCase();
+
+            if (envio.getNoGuia() != null && envio.getNoGuia().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            }
+            
+
+            return false; 
+        });
+    });
+    
+    SortedList<Envio> sortedData = new SortedList<>(listaEnvios);
+    sortedData.comparatorProperty().bind(tvEnvios.comparatorProperty());
+    tvEnvios.setItems(sortedData);
+    
+  }
     
     
     private void irPantallaFormulario(INotificarOperacion observador, Envio envio) {
@@ -206,6 +241,7 @@ public class FXMLAdminEnviosController implements Initializable , INotificarOper
         System.out.println("Operacion:" + tipo);
         System.out.print("Nombre:" + nombre);
         cargarInformacionTabla(); 
+        configurarFiltroBusqueda();
     }
 
     

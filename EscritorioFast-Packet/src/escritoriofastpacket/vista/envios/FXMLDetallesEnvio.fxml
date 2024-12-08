@@ -32,7 +32,7 @@
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Text>
-      <Button layoutX="274.0" layoutY="570.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="111.0" style="-fx-background-color: E32121;" text="Cerrar " textFill="WHITE">
+      <Button layoutX="274.0" layoutY="570.0" mnemonicParsing="false" onAction="#btnCerrarVentana" prefHeight="44.0" prefWidth="111.0" style="-fx-background-color: E32121;" text="Cerrar " textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="15.0" />
          </font></Button>
@@ -47,7 +47,7 @@
             <Font name="Ebrima Bold" size="29.0" />
          </font>
       </Text>
-      <Label layoutX="69.0" layoutY="110.0" prefHeight="20.0" prefWidth="131.0" text="Nombre de cliente:">
+      <Label layoutX="64.0" layoutY="110.0" prefHeight="20.0" prefWidth="131.0" text="Nombre de cliente:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -57,15 +57,15 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="69.0" layoutY="138.0" prefHeight="20.0" prefWidth="90.0" text="Dirección ">
+      <Label layoutX="65.0" layoutY="139.0" prefHeight="20.0" prefWidth="90.0" text="Dirección ">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lbCalle" layoutX="69.0" layoutY="168.0" text="Calle Hidalgo" />
-      <Label fx:id="lbColonia" layoutX="159.0" layoutY="168.0" prefHeight="17.0" prefWidth="90.0" text="Colonia Azueta" />
-      <Label fx:id="lbNumero" layoutX="264.0" layoutY="168.0" prefHeight="17.0" prefWidth="59.0" text="12" />
-      <Label fx:id="lbConductor" layoutX="64.0" layoutY="245.0" prefHeight="20.0" prefWidth="249.0" text="Lizeth Adriana Zurutuza del Solar">
+      <Label fx:id="lbCalle" layoutX="69.0" layoutY="168.0" prefHeight="17.0" prefWidth="131.0" />
+      <Label fx:id="lbColonia" layoutX="226.0" layoutY="168.0" prefHeight="17.0" prefWidth="100.0" />
+      <Label fx:id="lbNumero" layoutX="358.0" layoutY="168.0" prefHeight="17.0" prefWidth="41.0" />
+      <Label fx:id="lbConductor" layoutX="64.0" layoutY="245.0" prefHeight="20.0" prefWidth="249.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -77,8 +77,8 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lbLugarOrigen" layoutX="342.0" layoutY="168.0" prefHeight="17.0" prefWidth="190.0" text="Coatzacoalcos, Veracruz" />
-      <Label fx:id="lbEstatus" layoutX="329.0" layoutY="245.0" prefHeight="20.0" prefWidth="249.0" text="Pendiente">
+      <Label fx:id="lbLugarOrigen" layoutX="439.0" layoutY="168.0" prefHeight="17.0" prefWidth="190.0" />
+      <Label fx:id="lbEstatus" layoutX="329.0" layoutY="245.0" prefHeight="20.0" prefWidth="249.0">
          <font>
             <Font size="14.0" />
          </font>

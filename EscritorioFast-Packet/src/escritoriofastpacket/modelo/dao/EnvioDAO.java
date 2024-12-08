@@ -48,7 +48,7 @@ public class EnvioDAO {
     
     public static DatosRegistroEnvio obtenerDetallesEnvio(Integer idEnvio){
         DatosRegistroEnvio datosEnvio = null;
-        String url = Constantes.URL_WS+"envio//obtenerEnvioPorId/"+idEnvio;
+        String url = Constantes.URL_WS+"envio/obtenerEnvioPorId/"+idEnvio;
         RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
         if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
                 Gson gson = new Gson();
@@ -58,6 +58,52 @@ public class EnvioDAO {
         return datosEnvio;
         
     }
+    
+    
+    public static Mensaje registrarEnvio(DatosRegistroEnvio envio){
+        Mensaje msj = new Mensaje();
+        String url =  Constantes.URL_WS+"envio/registrar";
+        Gson gson = new Gson();
+        try{
+            String parametros = gson.toJson(envio);
+            RespuestaHTTP respuesta = ConexionWS.peticionPOSTJson(url, parametros);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }else{
+                msj.setError(true);
+                msj.setContenido(respuesta.getContenido());
+            }
+        }catch(Exception e){
+        msj.setError(true);
+        msj.setContenido("Hubo un problema al registrar el envio");
+        e.printStackTrace();
+        }
+        
+        return msj;
+    }
+    
+     public static Mensaje editarEnvio(DatosRegistroEnvio envio){
+        Mensaje msj = new Mensaje();
+        String url =  Constantes.URL_WS+"envio/editar";
+        Gson gson = new Gson();
+        try{
+            String parametros = gson.toJson(envio);
+            RespuestaHTTP respuesta = ConexionWS.peticionPUTJson(url, parametros);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }else{
+                msj.setError(true);
+                msj.setContenido(respuesta.getContenido());
+            }
+        }catch(Exception e){
+        msj.setError(true);
+        msj.setContenido("Hubo un problema al editar el envio");
+        e.printStackTrace();
+        }
+        
+        return msj;
+    }
+    
     
     
     

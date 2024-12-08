@@ -82,7 +82,8 @@ public class ClienteDAO {
         
         }catch(Exception e ){
            msj.setError(true);
-           msj.setContenido(e.getMessage());
+           msj.setContenido("Hubo un problema al registrar el cliente");
+           e.printStackTrace();
         }
         
         return msj;

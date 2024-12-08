@@ -9,9 +9,11 @@ import escritoriofastpacket.modelo.dao.EnvioDAO;
 import escritoriofastpacket.modelo.pojo.Cliente;
 import escritoriofastpacket.modelo.pojo.Colaborador;
 import escritoriofastpacket.modelo.pojo.DatosRegistroEnvio;
+import escritoriofastpacket.modelo.pojo.Direccion;
 import escritoriofastpacket.modelo.pojo.Envio;
 import escritoriofastpacket.modelo.pojo.Estado;
 import escritoriofastpacket.modelo.pojo.EstadoEnvio;
+import escritoriofastpacket.modelo.pojo.Mensaje;
 import escritoriofastpacket.modelo.pojo.Municipio;
 import escritoriofastpacket.utils.Utilidades;
 import java.net.URL;
@@ -81,11 +83,61 @@ public class FXMLFormularioEnvioController implements Initializable {
         cargarConductores();
         cargarEstatusEnvio();
         configuracionSeleccionEstado();
+        configurarDatosEntrada();
     }    
 
     @FXML
     private void btnGuardarEnvio(ActionEvent event) {
+       
+        if( validarCamposLlenos()){
+            DatosRegistroEnvio datosRegistroEnvio = new DatosRegistroEnvio();
+            
+            Envio envio = new Envio();
+            float costoEnvio = Float.parseFloat(tfCostoEnvio.getText());
+            envio.setCostoEnvio(costoEnvio);
+            Integer idColaborador = (cbConductores.getSelectionModel().getSelectedItem() != null) 
+                    ? cbConductores.getSelectionModel().getSelectedItem().getIdColaborador()
+                    : 0;
+            envio.setIdColaborador(idColaborador);
+            
+            Integer idCliente = (cbClientes.getSelectionModel().getSelectedItem() != null) 
+                    ? cbClientes.getSelectionModel().getSelectedItem().getIdCliente()
+                    :0;
+            envio.setIdCliente(idCliente);
+  
+            envio.setIdEstadoEnvio(1);
+            
+            Direccion direccion = new Direccion();
+            direccion.setCalle(tfCalleDestino.getText());
+            direccion.setCodigoPostal(tfCodigoPostal.getText());
+            direccion.setColonia(tfColoniaDestino.getText());
+            direccion.setNumero(tfNumeroDestino.getText());
+            Integer idMunicipio = (cbMunicipio.getSelectionModel().getSelectedItem() != null) 
+            ? cbMunicipio.getSelectionModel().getSelectedItem().getIdMunicipio() 
+            : 0;
+            direccion.setIdMunicipio(idMunicipio);
+            
+            
+            datosRegistroEnvio.setEnvio(envio);
+            datosRegistroEnvio.setDireccion(direccion);
+            
+            
+            if(modoEdicion == false){
+                guardarDatosEnvio(datosRegistroEnvio);
+        }else{
+          datosRegistroEnvio.getEnvio().setIdEnvio(envioEdicion.getIdEnvio());
+          Integer idEstadoEnvio = (cbEstatus.getSelectionModel().getSelectedItem() != null)
+                    ? cbEstatus.getSelectionModel().getSelectedItem().getIdEstadoEnvio()
+                    :0;
+         datosRegistroEnvio.getEnvio().setIdEstadoEnvio(idEstadoEnvio);
+          editarRegistroEnvio(datosRegistroEnvio);
+            
+         
+        }
+        }
     }
+    
+ 
     
     @FXML
     private void btnCancelar(ActionEvent event) {
@@ -109,7 +161,7 @@ public class FXMLFormularioEnvioController implements Initializable {
       tfCodigoPostal.setText(datosEnvio.getDireccion().getCodigoPostal());
       tfCostoEnvio.setText(String.valueOf(datosEnvio.getEnvio().getCostoEnvio()));
       tfColoniaDestino.setText(datosEnvio.getDireccion().getColonia());
-      tfNumeroDestino.setText(datosEnvio.getDireccion().getColonia());
+      tfNumeroDestino.setText(datosEnvio.getDireccion().getNumero());
       Integer idCliente = datosEnvio.getEnvio().getIdCliente();
       Integer idColaborador = datosEnvio.getEnvio().getIdColaborador();
       Integer idEstadoEnvio = datosEnvio.getEnvio().getIdEstadoEnvio();
@@ -133,13 +185,10 @@ public class FXMLFormularioEnvioController implements Initializable {
         
       int posicionEstatus = buscarIdEstadoEnvio(idEstadoEnvio);
       cbEstatus.getSelectionModel().select(posicionEstatus);
-    
-      
+   
       
     }
-    
-    
-    
+
 
    //Carga de comboBox
     
@@ -295,6 +344,54 @@ public class FXMLFormularioEnvioController implements Initializable {
 
     return true;
 }
+
+    private void guardarDatosEnvio(DatosRegistroEnvio datosRegistroEnvio) {
+        Mensaje msj = EnvioDAO.registrarEnvio(datosRegistroEnvio);
+        cerrarPantalla();
+        observador.notificarOperacionExitosa("Registro", datosRegistroEnvio.getEnvio().getNoGuia());
+        
+        if(msj.isError()){
+           Utilidades.mostrarAlertaSimple("Hubo un error al intenetar registrar el envio",
+            msj.getContenido(), Alert.AlertType.ERROR);
+        }else{
+           Utilidades.mostrarAlertaSimple("Registro realizado.", msj.getContenido(), Alert.AlertType.INFORMATION);
+           }
+    }
+    
+
+    private void editarRegistroEnvio(DatosRegistroEnvio datosRegistroEnvio) {
+        Mensaje msj = EnvioDAO.editarEnvio(datosRegistroEnvio);
+        cerrarPantalla();
+        observador.notificarOperacionExitosa("Edicion", datosRegistroEnvio.getEnvio().getNoGuia());
+        if(msj.isError()){
+           Utilidades.mostrarAlertaSimple("Hubo un error al intenetar registrar el envio",
+            msj.getContenido(), Alert.AlertType.ERROR);
+        }else{
+           Utilidades.mostrarAlertaSimple("Registro realizado.", msj.getContenido(), Alert.AlertType.INFORMATION);
+           }
+    }
+    
+    
+    
+    private void configurarDatosEntrada() {
+   
+    // Validar tfCodigoPostal: Solo números, máximo 5 caracteres
+    tfCodigoPostal.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*") || newValue.length() > 5) {
+            tfCodigoPostal.setText(oldValue);
+        }
+    });
+    tfCodigoPostal.setPromptText("Ingrese un código postal válido (5 dígitos)");
+
+    // Validar tfNumeroDestino: Cualquier carácter, máximo 5 caracteres
+    tfNumeroDestino.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue.length() > 5) {
+            tfNumeroDestino.setText(oldValue);
+        }
+    });
+    tfNumeroDestino.setPromptText("Máximo 5 caracteres");
+}
+
 
 
     
