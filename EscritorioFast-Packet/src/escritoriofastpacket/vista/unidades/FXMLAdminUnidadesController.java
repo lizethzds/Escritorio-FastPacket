@@ -156,6 +156,7 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
     @Override
     public void notificarOperacionExitosa(String tipo, String nombre) {
         cargarInformacionTabla();
+        configurarFiltroBusqueda();
     }
 
     @FXML
