@@ -8,85 +8,83 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="663.0" prefWidth="673.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.envios.FXMLDetallesEnvioController">
+<AnchorPane id="AnchorPane" prefHeight="717.0" prefWidth="527.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.envios.FXMLDetallesEnvioController">
    <children>
-      <Text layoutX="65.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos de Cliente" wrappingWidth="199.861328125">
+      <Text layoutX="161.0" layoutY="85.0" stroke="#030303" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos de Cliente" textAlignment="CENTER" wrappingWidth="199.861328125">
          <font>
-            <Font name="Arial Bold" size="15.0" />
+            <Font name="Ebrima Bold" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="tfCalleDestino" layoutX="66.0" layoutY="353.0" />
-      <Label layoutX="66.0" layoutY="336.0" text="Calle" />
-      <Label layoutX="228.0" layoutY="336.0" text="Colonia" />
-      <TextField fx:id="tfColoniaDestino" layoutX="228.0" layoutY="353.0" />
-      <TextField fx:id="tfNumeroDestino" layoutX="386.0" layoutY="353.0" prefHeight="25.0" prefWidth="67.0" />
-      <Label layoutX="389.0" layoutY="336.0" text="Numero" />
-      <TextField fx:id="tfCPDestino" layoutX="469.0" layoutY="353.0" prefHeight="25.0" prefWidth="111.0" />
-      <Label layoutX="469.0" layoutY="336.0" text="Codigo Postal" />
-      <Label layoutX="66.0" layoutY="394.0" text="Estado" />
-      <Label layoutX="236.0" layoutY="403.0" text="Municipio" />
-      <ComboBox fx:id="cbEstado" layoutX="66.0" layoutY="418.0" prefHeight="25.0" prefWidth="142.0" />
-      <ComboBox fx:id="cbMunicipio" layoutX="236.0" layoutY="418.0" prefHeight="25.0" prefWidth="142.0" />
-      <Text layoutX="66.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destino" wrappingWidth="199.861328125">
+      <Label fx:id="lbCalleDestino" layoutX="58.0" layoutY="451.0" prefHeight="17.0" prefWidth="111.0" text="Av Xalapa" />
+      <Label fx:id="lbColoniaDestino" layoutX="209.0" layoutY="451.0" prefHeight="17.0" prefWidth="119.0" text="Del Master" />
+      <Label fx:id="lbNumDestino" layoutX="375.0" layoutY="451.0" prefHeight="17.0" prefWidth="41.0" text="12B" />
+      <Label fx:id="lbCPDestino" layoutX="60.0" layoutY="489.0" text="91030" />
+      <Label fx:id="lbLugarDestino" contentDisplay="CENTER" layoutX="208.0" layoutY="489.0" prefHeight="17.0" prefWidth="154.0" text="Ciudad, Estado" />
+      <Text layoutX="152.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos de Envío" textAlignment="CENTER" wrappingWidth="199.861328125">
          <font>
-            <Font name="Arial Bold" size="15.0" />
+            <Font name="Ebrima Bold" size="20.0" />
          </font>
       </Text>
-      <Button layoutX="274.0" layoutY="570.0" mnemonicParsing="false" onAction="#btnCerrarVentana" prefHeight="44.0" prefWidth="111.0" style="-fx-background-color: E32121;" text="Cerrar " textFill="WHITE">
+      <Button layoutX="206.0" layoutY="626.0" mnemonicParsing="false" onAction="#btnCerrarVentana" prefHeight="44.0" prefWidth="111.0" style="-fx-background-color: E32121;" text="Cerrar " textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="15.0" />
          </font></Button>
-      <Text layoutX="65.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conductor" wrappingWidth="199.861328125">
+      <Text layoutX="70.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conductor" wrappingWidth="98.0">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ba0a4" height="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="680.0" />
-      <Text layoutX="188.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos de envío" textAlignment="CENTER" wrappingWidth="308.376953125">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ba0a4" height="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="527.0" />
+      <Text layoutX="65.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detalles del envío" textAlignment="CENTER" wrappingWidth="406.376953125">
          <font>
             <Font name="Ebrima Bold" size="29.0" />
          </font>
       </Text>
-      <Label layoutX="64.0" layoutY="110.0" prefHeight="20.0" prefWidth="131.0" text="Nombre de cliente:">
+      <Label layoutX="64.0" layoutY="110.0" prefHeight="25.0" prefWidth="175.0" text="Nombre de cliente:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbNombreCliente" layoutX="229.0" layoutY="113.0" prefHeight="20.0" prefWidth="266.0" text="Nombres de cliente">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="64.0" layoutY="147.0" prefHeight="20.0" prefWidth="131.0" text="Dirección ">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lbNombreCliente" layoutX="216.0" layoutY="110.0" prefHeight="20.0" prefWidth="266.0">
+      <Label fx:id="lbCalle" layoutX="58.0" layoutY="176.0" prefHeight="17.0" prefWidth="131.0" text="Calle de Cliente" />
+      <Label fx:id="lbColonia" layoutX="197.0" layoutY="177.0" prefHeight="17.0" prefWidth="131.0" text="Colonia Cliente" />
+      <Label fx:id="lbNumero" layoutX="379.0" layoutY="176.0" prefHeight="17.0" prefWidth="41.0" text="123B" />
+      <Label fx:id="lbConductor" layoutX="194.0" layoutY="289.0" prefHeight="20.0" prefWidth="218.0" text="Nombre de conductor aqui">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="65.0" layoutY="139.0" prefHeight="20.0" prefWidth="90.0" text="Dirección ">
+      <Label layoutX="68.0" layoutY="554.0" prefHeight="20.0" prefWidth="111.0" text="Costo de envío">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lbCalle" layoutX="69.0" layoutY="168.0" prefHeight="17.0" prefWidth="131.0" />
-      <Label fx:id="lbColonia" layoutX="226.0" layoutY="168.0" prefHeight="17.0" prefWidth="100.0" />
-      <Label fx:id="lbNumero" layoutX="358.0" layoutY="168.0" prefHeight="17.0" prefWidth="41.0" />
-      <Label fx:id="lbConductor" layoutX="64.0" layoutY="245.0" prefHeight="20.0" prefWidth="249.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tfCostoEnvio" layoutX="60.0" layoutY="477.0" prefHeight="25.0" prefWidth="100.0" />
-      <Label layoutX="40.0" layoutY="477.0" prefHeight="25.0" prefWidth="20.0" text="\$" />
-      <Label layoutX="60.0" layoutY="457.0" prefHeight="20.0" prefWidth="111.0" text="Costo de envío">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbLugarOrigen" layoutX="439.0" layoutY="168.0" prefHeight="17.0" prefWidth="190.0" />
-      <Label fx:id="lbEstatus" layoutX="329.0" layoutY="245.0" prefHeight="20.0" prefWidth="249.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Text layoutX="324.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus" wrappingWidth="199.861328125">
+      <Label fx:id="lbLugarOrigen" layoutX="205.0" layoutY="214.0" prefHeight="17.0" prefWidth="161.0" text="Ciudad, Estado" />
+      <Text layoutX="76.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus" wrappingWidth="86.0">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Text>
+      <Label fx:id="lbEstatus" layoutX="190.0" layoutY="340.0" prefHeight="20.0" prefWidth="142.0" text="Pendiente">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbCP" layoutX="67.0" layoutY="214.0" prefHeight="17.0" prefWidth="52.0" text="91030" />
+      <Label fx:id="lbCostoEnvio" layoutX="223.0" layoutY="556.0" prefHeight="17.0" prefWidth="58.0" text="\$1029" />
+      <Label layoutX="58.0" layoutY="416.0" prefHeight="20.0" prefWidth="161.0" text="Dirección de destino">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

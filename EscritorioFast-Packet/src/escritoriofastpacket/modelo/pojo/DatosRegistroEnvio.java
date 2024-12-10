@@ -7,28 +7,38 @@ package escritoriofastpacket.modelo.pojo;
  */
 public class DatosRegistroEnvio {
     
-    private Envio envio;
+     private Envio envio;
     private Direccion direccion;
     private String conductor;
     private String cliente;
     private Direccion direccionCliente;
     private String estadoEnvio;
+    private String lugarOrigen;
+    private String lugarDestino;
+    private String correoCliente;
+    private String telefonoCliente;
     private Integer filasAfectadas;
     private String mensaje;
 
     public DatosRegistroEnvio() {
     }
 
-    public DatosRegistroEnvio(Envio envio, Direccion direccion, String conductor, String cliente, Direccion direccionCliente, String estadoEnvio, Integer filasAfectadas, String mensaje) {
+    public DatosRegistroEnvio(Envio envio, Direccion direccion, String conductor, String cliente, Direccion direccionCliente, String estadoEnvio, String lugarOrigen, String lugarDestino, String correoCliente, String telefonoCliente, Integer filasAfectadas, String mensaje) {
         this.envio = envio;
         this.direccion = direccion;
         this.conductor = conductor;
         this.cliente = cliente;
         this.direccionCliente = direccionCliente;
         this.estadoEnvio = estadoEnvio;
+        this.lugarOrigen = lugarOrigen;
+        this.lugarDestino = lugarDestino;
+        this.correoCliente = correoCliente;
+        this.telefonoCliente = telefonoCliente;
         this.filasAfectadas = filasAfectadas;
         this.mensaje = mensaje;
     }
+
+  
 
  
 
@@ -94,6 +104,38 @@ public class DatosRegistroEnvio {
 
     public void setEstadoEnvio(String estadoEnvio) {
         this.estadoEnvio = estadoEnvio;
+    }
+
+    public String getLugarOrigen() {
+        return lugarOrigen;
+    }
+
+    public void setLugarOrigen(String lugarOrigen) {
+        this.lugarOrigen = lugarOrigen;
+    }
+
+    public String getLugarDestino() {
+        return lugarDestino;
+    }
+
+    public void setLugarDestino(String lugarDestino) {
+        this.lugarDestino = lugarDestino;
+    }
+
+    public String getCorreoCliente() {
+        return correoCliente;
+    }
+
+    public void setCorreoCliente(String correoCliente) {
+        this.correoCliente = correoCliente;
+    }
+
+    public String getTelefonoCliente() {
+        return telefonoCliente;
+    }
+
+    public void setTelefonoCliente(String telefonoCliente) {
+        this.telefonoCliente = telefonoCliente;
     }
     
     

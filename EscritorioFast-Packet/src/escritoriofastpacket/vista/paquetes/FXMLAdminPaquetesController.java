@@ -93,7 +93,7 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
             notificarOperacionExitosa("Eliminado", "Paquete");
            }
         }else{
-            Utilidades.mostrarAlertaSimple("Seleccionar colaborador", "Primero selecciona un colaborador para elimninar", Alert.AlertType.INFORMATION);
+            Utilidades.mostrarAlertaSimple("Seleccionar colaborador", "Primero selecciona un paquete para elimninar", Alert.AlertType.INFORMATION);
         }
         
     }

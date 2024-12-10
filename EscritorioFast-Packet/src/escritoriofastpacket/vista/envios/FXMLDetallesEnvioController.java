@@ -15,6 +15,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -32,21 +33,8 @@ public class FXMLDetallesEnvioController implements Initializable {
     private DatosRegistroEnvio datosEnvio;
     private Envio envioEdicion;
     
-    private ObservableList<Estado> estados;
-    private ObservableList<Municipio> municipios;
-
-    @FXML
-    private TextField tfCalleDestino;
-    @FXML
-    private TextField tfColoniaDestino;
-    @FXML
-    private TextField tfNumeroDestino;
-    @FXML
-    private TextField tfCPDestino;
-    @FXML
-    private ComboBox<Estado> cbEstado;
-    @FXML
-    private ComboBox<Municipio> cbMunicipio;
+  
+   
     @FXML
     private Label lbNombreCliente;
     @FXML
@@ -58,19 +46,30 @@ public class FXMLDetallesEnvioController implements Initializable {
     @FXML
     private Label lbConductor;
     @FXML
-    private TextField tfCostoEnvio;
-    @FXML
     private Label lbLugarOrigen;
     @FXML
+    private Label lbCalleDestino;
+    @FXML
+    private Label lbColoniaDestino;
+    @FXML
+    private Label lbNumDestino;
+    @FXML
+    private Label lbCPDestino;
+    @FXML
+    private Label lbLugarDestino;
+    @FXML
     private Label lbEstatus;
+    @FXML
+    private Label lbCP;
+    @FXML
+    private Label lbCostoEnvio;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cargarEstados();
-        configuracionSeleccionEstado();
+      
     }    
 
     void inicializarValores(INotificarOperacion observador, Envio envioEdicion) {
@@ -86,53 +85,35 @@ public class FXMLDetallesEnvioController implements Initializable {
 
     private void cargarDetallesEnvio(Integer idEnvio) {
         datosEnvio = EnvioDAO.obtenerDetallesEnvio(idEnvio);
-        tfCostoEnvio.setText(Float.toString(datosEnvio.getEnvio().getCostoEnvio()));
-        lbNombreCliente.setText(datosEnvio.getCliente());
+        lbCalle.setText(datosEnvio.getDireccionCliente().getCalle());
+        lbColonia.setText(datosEnvio.getDireccionCliente().getColonia());
+        lbLugarOrigen.setText(datosEnvio.getLugarOrigen());
+        lbLugarDestino.setText(datosEnvio.getLugarDestino());
         lbConductor.setText(datosEnvio.getConductor());
-        tfNumeroDestino.setText(datosEnvio.getDireccion().getNumero());
+        lbCP.setText(datosEnvio.getDireccionCliente().getCodigoPostal());
+        lbCalleDestino.setText(datosEnvio.getDireccion().getCalle());
+        lbColoniaDestino.setText(datosEnvio.getDireccion().getColonia());
+        lbCPDestino.setText(datosEnvio.getDireccion().getCodigoPostal());
+        lbNombreCliente.setText(datosEnvio.getCliente());
+        lbNumero.setText(datosEnvio.getDireccionCliente().getNumero());
+        lbNumDestino.setText(datosEnvio.getDireccion().getNumero());
+        lbCostoEnvio.setText(String.valueOf(datosEnvio.getEnvio().getCostoEnvio()));
+        
+
+        
+        
     }
     
-     private void cargarEstados() {
-      estados = FXCollections.observableArrayList();
-      List<Estado> listaWS = CatalogoDAO.obtenerEstados();
-      if(listaWS != null){
-          estados.addAll(listaWS);
-          cbEstado.setItems(estados);
-      }
-    }
+    
      
-      private void cargarMunicipios(Integer idEstado) {
-        municipios = FXCollections.observableArrayList();
-        List<Municipio> inf = CatalogoDAO.obtenerMunicipios(idEstado);
-        municipios.addAll(inf);
-        cbMunicipio.setItems(municipios);
-    }
+    
     
       
-        private void configuracionSeleccionEstado() {
-        cbEstado.valueProperty().addListener(new ChangeListener<Estado>() {
-            @Override
-            public void changed(ObservableValue<? extends Estado> observable, Estado oldValue, Estado newValue) {
-                cargarMunicipios(newValue.getIdEstado());
-            }
-        });
-    }
+        
 
-   private int buscarIdEstado(Integer idEstado){
-        for(int i = 0; i<estados.size(); i++){
-            if(estados.get(i).getIdEstado() == idEstado){
-                return i;
-            }
-        }
-        return 0;
-    }
-    
-    private int buscarIdMunicipio(Integer idMunicipio){
-        for(int i = 0; i<municipios.size(); i++){
-            if(municipios.get(i).getIdMunicipio() == idMunicipio){
-                return i;
-            }
-        }
-        return 0;
+
+
+    @FXML
+    private void btnCerrarVentana(ActionEvent event) {
     }
 }

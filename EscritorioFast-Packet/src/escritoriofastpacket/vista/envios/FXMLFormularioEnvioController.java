@@ -298,7 +298,7 @@ public class FXMLFormularioEnvioController implements Initializable {
     
     
     private boolean validarCamposLlenos() {
-    // Validar TextFields
+    
     if (tfCalleDestino.getText() == null || tfCalleDestino.getText().trim().isEmpty()) {
         Utilidades.mostrarAlertaSimple("Campo vacío", "Por favor, ingresa la calle de destino.", Alert.AlertType.WARNING);
         return false;
@@ -320,7 +320,7 @@ public class FXMLFormularioEnvioController implements Initializable {
         return false;
     }
 
-    // Validar ComboBoxes
+   
     if (cbEstado.getSelectionModel().isEmpty()) {
         Utilidades.mostrarAlertaSimple("Campo vacío", "Por favor, selecciona un estado.", Alert.AlertType.WARNING);
         return false;
