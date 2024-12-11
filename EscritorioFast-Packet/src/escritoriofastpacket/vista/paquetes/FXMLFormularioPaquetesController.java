@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -39,6 +40,12 @@ public class FXMLFormularioPaquetesController implements Initializable {
     private TextField tfProfundidad;
     @FXML
     private TextField tfPeso;
+    @FXML
+    private Label lbErrorDimensiones;
+    @FXML
+    private Label lbErrorPeso;
+    @FXML
+    private Label lbErrorDescripcion;
 
     /**
      * Initializes the controller class.
@@ -50,6 +57,10 @@ public class FXMLFormularioPaquetesController implements Initializable {
 
     @FXML
     private void btnGuardarDatos(ActionEvent event) {
+        
+        if (!validarCampos()) {
+        return; // Detener si hay errores de validación
+    }
        
         String altura = tfAlto.getText();
         String ancho = tfAncho.getText();
@@ -134,6 +145,37 @@ public class FXMLFormularioPaquetesController implements Initializable {
        }
     
     }
-            
+    
+    
+  private boolean validarCampos() {
+    boolean camposValidos = true;
+
+    if (tfAlto.getText() == null || tfAlto.getText().trim().isEmpty() ||
+        tfAncho.getText() == null || tfAncho.getText().trim().isEmpty() ||
+        tfProfundidad.getText() == null || tfProfundidad.getText().trim().isEmpty()) {
+        lbErrorDimensiones.setText("Por favor, complete Altura, Ancho y Profundidad.");
+        camposValidos = false;
+    } else {
+        lbErrorDimensiones.setText(""); 
+    }
+
+    
+    if (tfPeso.getText() == null || tfPeso.getText().trim().isEmpty()) {
+        lbErrorPeso.setText("Por favor, ingrese el peso.");
+        camposValidos = false;
+    } else {
+        lbErrorPeso.setText("");
+    }
+
+    if (taDescripcionPaquete.getText() == null || taDescripcionPaquete.getText().trim().isEmpty()) {
+        lbErrorDescripcion.setText("Por favor, ingrese una descripción.");
+        camposValidos = false;
+    } else {
+        lbErrorDescripcion.setText(""); // Limpiar error si es válido
+    }
+
+    return camposValidos;
+}
+     
             
 }

@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package escritoriofastpacket.vista.envios;
 
 import escritoriofastpacket.interfaz.INotificarOperacion;
 import escritoriofastpacket.modelo.dao.EnvioDAO;
-import escritoriofastpacket.modelo.pojo.Cliente;
 import escritoriofastpacket.modelo.pojo.Envio;
 import escritoriofastpacket.utils.Utilidades;
-import escritoriofastpacket.vista.clientes.FXMLFormularioClienteController;
 import escritoriofastpacket.vista.paquetes.FXMLAdminPaquetesController;
 import java.net.URL;
 import java.util.List;
@@ -42,6 +36,7 @@ public class FXMLAdminEnviosController implements Initializable , INotificarOper
     
     private ObservableList<Envio> envios;
     private FilteredList<Envio> listaEnvios;
+    private Integer idColaborador;
 
     @FXML
     private TableView<Envio> tvEnvios;
@@ -70,14 +65,16 @@ public class FXMLAdminEnviosController implements Initializable , INotificarOper
 
     @FXML
     private void btnAgregarEnvio(ActionEvent event) {
-         irPantallaFormulario(this,null);
+         irPantallaFormulario(this,null, null);
     }
 
     @FXML
     private void btnEditarEnvio(ActionEvent event) {
         Envio envio = tvEnvios.getSelectionModel().getSelectedItem();
                 if(envio != null){
-                    irPantallaFormulario(this, envio);
+                    System.out.println("ID de colaborador formulario: "+idColaborador);
+                    irPantallaFormulario(this, envio, this.idColaborador);
+                    
                 }else{
                     Utilidades.mostrarAlertaSimple("Seleccione un envio", "Para ver "
                             + "sus detalles, seleccione un envio", Alert.AlertType.WARNING);
@@ -172,13 +169,13 @@ public class FXMLAdminEnviosController implements Initializable , INotificarOper
   }
     
     
-    private void irPantallaFormulario(INotificarOperacion observador, Envio envio) {
+    private void irPantallaFormulario(INotificarOperacion observador, Envio envio, Integer idColaborador) {
         try{
             Stage escenario = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLFormularioEnvio.fxml"));
             Parent vista = loader.load();
             FXMLFormularioEnvioController controller = loader.getController();
-           controller.inicializarValores(observador, envio);
+           controller.inicializarValores(observador, envio, idColaborador );
             
             Scene escena = new Scene(vista);
             escenario.setScene(escena);
@@ -242,6 +239,13 @@ public class FXMLAdminEnviosController implements Initializable , INotificarOper
         System.out.print("Nombre:" + nombre);
         cargarInformacionTabla(); 
         configurarFiltroBusqueda();
+    }
+    
+    
+    public void cargarColaboradorSesion(Integer idColaborador){
+        this.idColaborador = idColaborador;
+        System.out.println("ID Colaborador recibido: " + idColaborador);
+    
     }
 
     
