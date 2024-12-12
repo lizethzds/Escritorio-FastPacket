@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="539.0" prefWidth="934.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.unidades.FXMLHistorialUnidadesController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="934.0" style="-fx-background-color: #D9D9D9;">
+         <children>
+            <Text fill="#2c3e50" strokeType="OUTSIDE" strokeWidth="0.0" text="Historial de Unidades" textAlignment="CENTER" wrappingWidth="298.9931640625">
+               <font>
+                  <Font name="Ebrima Bold" size="26.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <TableView fx:id="tv_historial" layoutX="11.0" layoutY="82.0" prefHeight="399.0" prefWidth="909.0">
+        <columns>
+          <TableColumn fx:id="col_vin" prefWidth="148.0" text="VIN" />
+          <TableColumn fx:id="col_marca" minWidth="0.0" prefWidth="94.0" text="Marca" />
+            <TableColumn fx:id="col_modelo" minWidth="0.0" prefWidth="88.0" text="Modelo" />
+            <TableColumn fx:id="col_tipo" minWidth="6.0" prefWidth="87.0" text="Tipo" />
+            <TableColumn fx:id="col_anio" prefWidth="74.0" text="Año" />
+            <TableColumn fx:id="col_interno" prefWidth="106.0" text="No. Interno" />
+            <TableColumn fx:id="col_motivo" prefWidth="311.0" text="Motivo de Baja" />
+        </columns>
+      </TableView>
+      <Button layoutX="817.0" layoutY="494.0" mnemonicParsing="false" onAction="#btnCerrar" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #FF6500;" text="Cerrar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
