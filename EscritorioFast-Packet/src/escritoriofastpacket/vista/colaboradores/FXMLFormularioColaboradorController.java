@@ -12,35 +12,44 @@ import escritoriofastpacket.modelo.pojo.Rol;
 import escritoriofastpacket.observer.INotificacionOperacion;
 import escritoriofastpacket.utils.Utilidades;
 import escritoriofastpacket.validators.ColaboradorValidator;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.net.URL;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
-/**
- * FXML Controller class
- *
- * @author lizet
- */
 public class FXMLFormularioColaboradorController implements Initializable {
-    
+
     private boolean modoEdicion = false;
-    INotificacionOperacion observador;
-    Colaborador colaboradorEdicion;
+    private boolean vboxExtendido = false;
+    private Image imagenSeleccionada = null;
     private ObservableList<Rol> roles;
-    HashMap<String,Label> hashlbl = new LinkedHashMap<>();
+    INotificacionOperacion observador;
+    Colaborador colaboradorEdicion = null;
+    HashMap<String, Label> hashlbl = new LinkedHashMap<>();
     @FXML
     private TextField tfNombre;
     @FXML
@@ -81,8 +90,12 @@ public class FXMLFormularioColaboradorController implements Initializable {
     private Label lblErrorRol;
     @FXML
     private Label lblErrorlicencia;
-    
-    public void inicializarHashErrores(){
+    @FXML
+    private ImageView imgPerfil;
+    @FXML
+    private VBox VboxPrincipal;
+
+    public void inicializarHashErrores() {
         hashlbl.put("nombre", lblErrorNombre);
         hashlbl.put("apellidoPaterno", lblErrorApellidoPaterno);
         hashlbl.put("apellidoMaterno", lblErrorApellidoMaterno);
@@ -93,15 +106,17 @@ public class FXMLFormularioColaboradorController implements Initializable {
         hashlbl.put("rol", lblErrorRol);
         hashlbl.put("licencia", lblErrorlicencia);
     }
-    public void inicializarValores(INotificacionOperacion observador, Colaborador colaboradorEdicion){
+
+    public void inicializarValores(INotificacionOperacion observador, Colaborador colaboradorEdicion) {
         this.observador = observador;
         this.colaboradorEdicion = colaboradorEdicion;
-        if(colaboradorEdicion != null){
+        if (colaboradorEdicion != null) {
             modoEdicion = true;
             cargarDatosEdicion();
         }
     }
-    public void cargarDatosEdicion(){
+
+    public void cargarDatosEdicion() {
         tfNombre.setText(colaboradorEdicion.getNombre());
         tfApellidoMaterno.setText(colaboradorEdicion.getApellidoMaterno());
         tfApellidoPaterno.setText(colaboradorEdicion.getApellidoPaterno());
@@ -113,24 +128,41 @@ public class FXMLFormularioColaboradorController implements Initializable {
         int pocisionRol = obtenerPosicionRol(colaboradorEdicion.getIdRol());
         cbTipoColaborador.getSelectionModel().select(pocisionRol);
         cbTipoColaborador.setDisable(true);
-        if(pocisionRol != 3){
+        if (cbTipoColaborador.getSelectionModel().getSelectedItem().getRol().equals("Conductor")) {
+            tfLicencia.setVisible(true);
+            lbLicencia.setVisible(true);
             tfLicencia.setText(colaboradorEdicion.getNoLicencia());
         }
     }
-    private void cargarRoles(){
+
+    private void cargarRoles() {
         roles = FXCollections.observableArrayList();
         List<Rol> listaWS = ColaboradorDAO.obtentenerRolesColaborador();
-        if(listaWS != null){
+        if (listaWS != null) {
             roles.addAll(listaWS);
             cbTipoColaborador.setItems(roles);
         }
+    }
+
+    private int obtenerPosicionRol(int idRol) {
+        for (int i = 0; i < roles.size(); i++) {
+            if (idRol == roles.get(i).getIdRol()) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicializarHashErrores();
         cargarRoles();
-    }    
+        Platform.runLater(() -> {
+            if (modoEdicion) {
+                obtenerImagenColaboradorEdicion(colaboradorEdicion.getIdColaborador());
+            }
+        });
+    }
 
     @FXML
     private void accionCancelar(ActionEvent event) {
@@ -146,10 +178,13 @@ public class FXMLFormularioColaboradorController implements Initializable {
         String correo = tfCorreo.getText();
         String CURP = tfCURP.getText();
         String contraseña = tfPassword.getText();
-        
-        int idRol = (cbTipoColaborador.getSelectionModel().getSelectedItem() != null) 
+
+        int idRol = (cbTipoColaborador.getSelectionModel().getSelectedItem() != null)
                 ? cbTipoColaborador.getSelectionModel().getSelectedItem().getIdRol() : 0;
-        
+       
+        String rol = (cbTipoColaborador.getSelectionModel().getSelectedItem() != null)
+                ? cbTipoColaborador.getSelectionModel().getSelectedItem().getRol() : "";
+
         Colaborador colaborador = new Colaborador();
         colaborador.setNoPersonal(noPersonal);
         colaborador.setApellidoPaterno(apellidoPaterno);
@@ -159,78 +194,145 @@ public class FXMLFormularioColaboradorController implements Initializable {
         colaborador.setPassword(contraseña);
         colaborador.setCurp(CURP);
         colaborador.setIdRol(idRol);
-        if(idRol==3){
+        colaborador.setRol(rol);
+        if (idRol == 3) {
             colaborador.setNoLicencia(tfLicencia.getText());
         }
-        if(sonCamposValidos(colaborador)){ 
-            if(!modoEdicion){            
+        Mensaje mensaje = sonCamposValidos(colaborador);
+        System.out.println("respuesta"+mensaje.getContenido()+"\nerror"+mensaje.isError());
+        if (!mensaje.isError()) {
+            if (!modoEdicion) { 
+                colaborador.setFotografia(imagenSeleccionada != null ? imageToBase64(imagenSeleccionada) : null);
                 enviarDatosColaborador(colaborador);
-            }else{
+            } else {
+                colaborador.setFotografia(imagenSeleccionada != null ? imageToBase64(imagenSeleccionada) : colaboradorEdicion.getFotografia());
                 colaborador.setIdColaborador(colaboradorEdicion.getIdColaborador());
                 editarDatosColaborador(colaborador);
             }
-        }else{
-            Utilidades.mostrarAlertaSimple("Error uno o varios de los campos no son valídos", correo, Alert.AlertType.ERROR);
+        } else {
+            Utilidades.mostrarAlertaSimple("Error", mensaje.getContenido(), Alert.AlertType.ERROR);
         }
     }
-    
-    private void enviarDatosColaborador(Colaborador colaborador){
+
+
+    private void enviarDatosColaborador(Colaborador colaborador) {
         Mensaje respuesta = ColaboradorDAO.registrarColaborador(colaborador);
-        if(!respuesta.isError()){
-            Utilidades.mostrarAlertaSimple("Colaborador registrado", "La información del colaborador "+
-                    colaborador.getNombre()+", se registro correctamente", Alert.AlertType.INFORMATION);
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Colaborador registrado", "La información del colaborador "
+                    + colaborador.getNombre() + ", se registro correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
             observador.notificarOperacionExitosa("Guardar", colaborador.getNombre());
-        }else{
+        } else {
             Utilidades.mostrarAlertaSimple("Error al registrar colaborador", respuesta.getContenido(), Alert.AlertType.ERROR);
         }
     }
-    
-    private void editarDatosColaborador(Colaborador colaborador){
+
+    private void editarDatosColaborador(Colaborador colaborador) {
         Mensaje respuesta = ColaboradorDAO.modificar(colaborador);
-        if(!respuesta.isError()){
-            Utilidades.mostrarAlertaSimple("Colaborador modificado", "La información del colaborador "+
-                    colaborador.getNombre()+", se modificó correctamente", Alert.AlertType.INFORMATION);
+        if (!respuesta.isError()) {
+            Utilidades.mostrarAlertaSimple("Colaborador modificado", "La información del colaborador "
+                    + colaborador.getNombre() + ", se modificó correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
             observador.notificarOperacionExitosa("Actualización", colaborador.getNombre());
-        }else{
+        } else {
             Utilidades.mostrarAlertaSimple("Error al modificar colaborador", respuesta.getContenido(), Alert.AlertType.ERROR);
         }
     }
 
     @FXML
     private void agregarFoto(ActionEvent event) {
-    }
-    
-    private int obtenerPosicionRol(int idRol){
-        for (int i = 0; i < roles.size(); i++) {
-            if(idRol == roles.get(i).getIdRol()){
-                return i;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar Imagen");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+        if (selectedFile != null) {
+            long fileSizeInBytes = selectedFile.length();
+            long fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+
+            if (fileSizeInMB < 1) {
+                Image image = new Image(selectedFile.toURI().toString());
+                imagenSeleccionada = image;
+                imgPerfil.setImage(image);
+                ajustarTamañoVboxImagen();
+            } else {
+                Utilidades.mostrarAlertaSimple("Archivo demasiado grande",
+                        "Archivo demasiado grande. Seleccione una imagen menor a 1MB.",
+                        Alert.AlertType.WARNING);
             }
+
         }
-        return 0;
     }
-    
-    private void cerrarVentana(){
+
+    private void ajustarTamañoVboxImagen() {
+        btnImagen.setText("Cambiar imagen");
+        imgPerfil.setFitWidth(200);
+        imgPerfil.setFitHeight(200);
+        imgPerfil.setPreserveRatio(true);
+        imgPerfil.setSmooth(true);
+        imgPerfil.setCache(true);
+        if (!vboxExtendido) {
+            VboxPrincipal.setMinHeight(VboxPrincipal.getHeight() + 200);
+            vboxExtendido = true;
+        }
+    }
+
+    private void obtenerImagenColaboradorEdicion(Integer idColaborador) {
+        Mensaje respuesta = ColaboradorDAO.obtenerImagen(idColaborador);
+        if (!respuesta.isError()) {
+            colaboradorEdicion.setFotografia(respuesta.getContenido());
+            imgPerfil.setImage(base64ToImage(respuesta.getContenido()));
+            ajustarTamañoVboxImagen();
+        }
+    }
+
+    public String imageToBase64(Image image) {
+        try {
+            java.awt.image.BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "jpg", outputStream);
+            byte[] imageBytes = outputStream.toByteArray();
+            return Base64.getEncoder().encodeToString(imageBytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Image base64ToImage(String base64String) {
+        try {
+            byte[] imageBytes = Base64.getDecoder().decode(base64String);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(imageBytes);
+            return new Image(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void cerrarVentana() {
         ((Stage) tfApellidoMaterno.getScene().getWindow()).close();
     }
-    private boolean sonCamposValidos(Colaborador colaborador){
-        return !ColaboradorValidator.validarColaborador(colaborador, hashlbl);
+
+    private Mensaje sonCamposValidos(Colaborador colaborador) {
+        return ColaboradorValidator.validarColaborador(colaborador, colaboradorEdicion , hashlbl);
     }
 
     @FXML
     private void accionBomprobarConductor(ActionEvent event) {
-        int idRol = (cbTipoColaborador.getSelectionModel().getSelectedItem() != null) 
+        int idRol = (cbTipoColaborador.getSelectionModel().getSelectedItem() != null)
                 ? cbTipoColaborador.getSelectionModel().getSelectedItem().getIdRol() : 0;
-        if(idRol == 3 ){
+        if (idRol == 3) {
             lbLicencia.setVisible(true);
             tfLicencia.setVisible(true);
         } else {
-            if(lbLicencia.isVisible() && tfLicencia.isVisible()){
+            if (lbLicencia.isVisible() && tfLicencia.isVisible()) {
                 lbLicencia.setVisible(false);
                 tfLicencia.setVisible(false);
             }
         }
-        
+
     }
 }
