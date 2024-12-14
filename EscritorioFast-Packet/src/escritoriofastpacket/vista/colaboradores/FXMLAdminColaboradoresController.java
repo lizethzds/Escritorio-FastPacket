@@ -214,5 +214,40 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
         sortedData.comparatorProperty().bind(tvColaboradores.comparatorProperty());
         tvColaboradores.setItems(sortedData);
     }
+    
+    
+    private void BotonasignarUnidad(){
+        Colaborador colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
+        if(colaborador != null){
+            irPantallaFormulario(this, colaborador,"Editar colaborador");
+        }else{
+            Utilidades.mostrarAlertaSimple("seleccione un colaborador", 
+                    "Tiene que seleccionar un colaborador para poder asignarle una unidad",
+                    Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void asignarUnidad(){
+        
+    }
+    
+    private void irPantallaASignarUnidad(INotificacionOperacion observador, Colaborador colaborador, String tituloPantalla){
+        Stage nuevoEcenario = new Stage();
+        try {
 
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLAsignacionUnidad.fxml"));
+            Parent nuevoParent = cargador.load();
+            FXMLAsignacionUnidadController controlador = cargador.getController();
+            controlador.inicializarValores(colaborador);
+            Scene ecenaAdmin = new Scene(nuevoParent);
+            nuevoEcenario.setScene(ecenaAdmin);
+            nuevoEcenario.setTitle(tituloPantalla);
+            nuevoEcenario.initModality(Modality.APPLICATION_MODAL);
+            nuevoEcenario.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Utilidades.mostrarAlertaSimple("Error", "Por el momento no se puede mostrar la vetana de asignación",
+                   Alert.AlertType.ERROR);
+        }  
+    }
 }
