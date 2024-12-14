@@ -140,4 +140,22 @@ public class ColaboradorDAO {
         }
         return respuesta;
     }
+    
+    public static Mensaje comprobarEnvios(Integer idColaborador){
+        Mensaje respuesta = new Mensaje();
+            respuesta.setError(true);
+        String url = Constantes.URL_WS+"/colaboradores/comprobarEnvios/"+idColaborador;
+        try {
+            Gson gson = new Gson();
+            RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+            if(respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            }else{
+                respuesta.setContenido(respuestaWS.getContenido());
+            }
+        } catch (Exception e) {
+            respuesta.setContenido(e.getMessage());
+        }
+        return respuesta;
+    }
 }

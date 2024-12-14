@@ -2,6 +2,7 @@
 package escritoriofastpacket;
 
 import escritoriofastpacket.modelo.pojo.Colaborador;
+import escritoriofastpacket.vista.colaboradores.FXMLAdminColaboradoresController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,14 +39,15 @@ public class FXMLMenuPrincipalController implements Initializable {
     }    
 
     @FXML
-    private void btnIrColaboradores(ActionEvent event) throws IOException {
-        URL fxml = getClass().getResource("/escritoriofastpacket/vista/colaboradores/FXMLAdminColaboradores.fxml");
-
-    Parent loadMain = FXMLLoader.load(fxml);
+private void btnIrColaboradores(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/escritoriofastpacket/vista/colaboradores/FXMLAdminColaboradores.fxml"));
+    Parent loadMain = loader.load();
+    FXMLAdminColaboradoresController controller = loader.getController();
+    controller.inicializarDatos(colaboradorSesion);
     stackPane.getChildren().clear();
     stackPane.getChildren().add(loadMain);
-       
-    }
+}
+
 
     @FXML
     private void btnIrEnvios(ActionEvent event) throws IOException {

@@ -33,6 +33,7 @@ import javafx.collections.transformation.SortedList;
 
 public class FXMLAdminColaboradoresController implements Initializable, INotificacionOperacion {
     private ObservableList<Colaborador> colaboradores;
+    private Colaborador colaboradorSesion;
     FilteredList<Colaborador> listaColaboradores;
     @FXML
     private TableView<Colaborador> tvColaboradores;
@@ -53,6 +54,10 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
     @FXML
     private TextField tfBuscarColaborador;
     
+     public void inicializarDatos(Colaborador colaboradorSesion) {
+        this.colaboradorSesion = colaboradorSesion;
+        cargarInformacionTabla();
+    }
      private void configurarTabla(){
         colNoPersonal.setCellValueFactory(new PropertyValueFactory<>("noPersonal"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -63,58 +68,77 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
     }
     
-     private void cargarInformacionTabla(){
+     private void cargarInformacionTabla() {
         colaboradores.clear();
         List<Colaborador> listaWs = ColaboradorDAO.obtenerColaboradores();
-        if(listaWs != null){
-            if(!listaWs.isEmpty()){
+        if (listaWs != null && !listaWs.isEmpty()) {
+                listaWs.removeIf(colaborador -> 
+                    colaboradorSesion != null && 
+                    colaborador.getNoPersonal().equals(colaboradorSesion.getNoPersonal())
+                );
                 colaboradores.addAll(listaWs);
                 tvColaboradores.setItems(colaboradores);
-            }else{
-                Utilidades.mostrarAlertaSimple("Datos no disponibles", 
-                    "Por el momento no se encuentra ningún colaborador registrado",
-                    Alert.AlertType.ERROR);
-            }
-        }else{
+        } else {
             Utilidades.mostrarAlertaSimple("Datos no disponibles", 
                     "Por el momento no se puede cargar la informacion de los colaboradores",
                     Alert.AlertType.ERROR);
         }
         configurarFiltroBusqueda();
     }
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colaboradores = FXCollections.observableArrayList();
         configurarTabla();
-        cargarInformacionTabla(); 
+         
     }    
-
-
     
-    private void eliminarColaboradorConfirmacion(int idColaborador){
-        Mensaje respuesta = ColaboradorDAO.eliminar(idColaborador);
-        if(!respuesta.isError()){
-            cargarInformacionTabla();
-             Utilidades.mostrarAlertaSimple("Colaborador eliminado", 
-                     "Colaborador eliminado con exíto", 
-                     Alert.AlertType.INFORMATION);
+    private boolean comprobarEliminacion(Colaborador colaborador){
+        Mensaje respuestaEnvios = ColaboradorDAO.comprobarEnvios(colaborador.getIdColaborador());
+        if(!respuestaEnvios.isError()){
+            boolean aceptado;
+            if(!respuestaEnvios.getContenido().contains("no cuenta")){
+                aceptado = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", 
+                    "Estas seguro de eliminar el colaborador "+colaborador.getNombre()+"?\n"+
+                     respuestaEnvios.getContenido() + "\n");               
+            }else{
+                aceptado = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", 
+                    "Estas seguro de eliminar el colaborador "+colaborador.getNombre()+"?");
+            }
+            if(aceptado){
+                    return true;
+             }
         }else{
             Utilidades.mostrarAlertaSimple("Error al eliminar colaborador",
-                    "Se ha producido un error al eliminar el colaborador por favor intentelo mas tarde", 
-                    Alert.AlertType.WARNING);
+                      "Se ha producido un error al eliminar el colaborador por favor intentelo mas tarde", 
+                       Alert.AlertType.WARNING);
         }
-    
+        return false;
     }
+
+    private void eliminarColaboradorConfirmacion(int idColaborador){
+        
+            Mensaje respuesta = ColaboradorDAO.eliminar(idColaborador);
+            if(!respuesta.isError()){
+                cargarInformacionTabla();
+                 Utilidades.mostrarAlertaSimple("Colaborador eliminado", 
+                         "Colaborador eliminado con exíto", 
+                         Alert.AlertType.INFORMATION);
+            }else{
+                Utilidades.mostrarAlertaSimple("Error al eliminar colaborador",
+                        "Se ha producido un error al eliminar el colaborador por favor intentelo mas tarde", 
+                        Alert.AlertType.WARNING);
+            } 
+    }
+    
     @FXML
     private void eliminarColaborador(ActionEvent event) {
         Colaborador colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
         if(colaborador != null){
-            boolean elimina = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", 
-                    "Estas seguro de eliminar el colaborador "+colaborador.getNombre()+"?");
-            if(elimina == true){
+            if(comprobarEliminacion(colaborador)){
                 eliminarColaboradorConfirmacion(colaborador.getIdColaborador());
-            }
+            }  
         }else{
             Utilidades.mostrarAlertaSimple("seleccione un colaborador", 
                     "Tiene que seleccionar un colaborador para poder eliminarlo",
