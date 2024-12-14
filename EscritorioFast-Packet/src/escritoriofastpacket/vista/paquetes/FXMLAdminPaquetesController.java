@@ -3,8 +3,10 @@ package escritoriofastpacket.vista.paquetes;
 
 import escritoriofastpacket.interfaz.INotificarOperacion;
 import escritoriofastpacket.modelo.dao.PaqueteDAO;
+import escritoriofastpacket.modelo.pojo.Envio;
 import escritoriofastpacket.modelo.pojo.Paquete;
 import escritoriofastpacket.utils.Utilidades;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,11 +14,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -27,6 +34,8 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
     
     
     private ObservableList<Paquete> paquetes;
+    private INotificarOperacion observador;
+    private Envio envioPaquete;
     
 
     @FXML
@@ -51,25 +60,60 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
-        cargarInfoTabla();
+       // cargarInfoTabla();
     }    
 
     @FXML
     private void btnAgregarPaquete(ActionEvent event) {
-        
+        irPantallaFormulario(this, null, envioPaquete.getIdEnvio());
+       
     }
 
     @FXML
     private void btnEditarPaquete(ActionEvent event) {
+        Paquete paquete = tvPaquetes.getSelectionModel().getSelectedItem();
+        if(paquete !=null){
+            irPantallaFormulario(this, paquete, envioPaquete.getIdEnvio());
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccione un paquete", "Para editar, primero seleccione un paquete en la tabla.",
+                    Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void btnEliminarPaquete(ActionEvent event) {
+        Paquete paquete = tvPaquetes.getSelectionModel().getSelectedItem();
+        if(paquete != null){
+        
+        boolean seElimina = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador",
+                "¿Estás seguro de eliminar el paquete del sistema?");
+        if(seElimina){
+  
+           PaqueteDAO.eliminarPaquete(paquete.getIdPaquete());
+            notificarOperacionExitosa("Eliminado", "Paquete");
+           }
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccionar colaborador", "Primero selecciona un paquete para elimninar", Alert.AlertType.INFORMATION);
+        }
+        
     }
+    
+    
+      public void inicializarValores(INotificarOperacion observador, Envio envioPaquete) {
+        this.observador = observador;
+        this.envioPaquete = envioPaquete;
+        if(envioPaquete != null){
+            cargarInfoTabla();
+        }
+         
+    }
+    
 
     @Override
     public void notificarOperacionExitosa(String tipo, String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Operacion:" + tipo);
+         System.out.print("Nombre:" + nombre);
+         cargarInfoTabla();
     }
 
     private void configurarTabla() {
@@ -81,7 +125,9 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
     
     private void cargarInfoTabla(){
         paquetes = FXCollections.observableArrayList();
-        List<Paquete> listaWS = PaqueteDAO.obtenerPaquetesEnvio(17);
+        //Aqui la peticion debe jalar el id del envio seleccionado en el FXML admin envios, pero por cuestiones de práctica, se le pasa uno por defecto.
+        List<Paquete> listaWS = PaqueteDAO.obtenerPaquetesEnvio(envioPaquete.getIdEnvio());
+      // List<Paquete> listaWS = PaqueteDAO.obtenerPaquetesEnvio(1);
         if(listaWS != null){
             paquetes.addAll(listaWS);
             tvPaquetes.setItems(paquetes);
@@ -90,5 +136,30 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
         }
         
     }
+    
+    
+    
+    private void irPantallaFormulario(INotificarOperacion observador, Paquete paquete, Integer idEnvio){
+        try{
+        Stage escenario = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLFormularioPaquetes.fxml"));
+ 
+            Parent vista = loader.load();
+            FXMLFormularioPaquetesController controlador = loader.getController();
+            controlador.inicializarValores(observador,paquete , envioPaquete.getIdEnvio() );
+            Scene escena = new Scene(vista);
+            escenario.setScene(escena);
+            escenario.setTitle("Datos de paquete");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+            escenario.setResizable(false);
+            
+        }catch(IOException ex){
+            Utilidades.mostrarAlertaSimple("Error al cargar", "No se pudo cargar la pantalla deseada.", Alert.AlertType.ERROR);
+        }
+    }
+
+
+  
     
 }

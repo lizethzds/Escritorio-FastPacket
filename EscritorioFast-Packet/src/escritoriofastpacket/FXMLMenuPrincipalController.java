@@ -3,6 +3,7 @@ package escritoriofastpacket;
 
 import escritoriofastpacket.modelo.pojo.Colaborador;
 import escritoriofastpacket.vista.colaboradores.FXMLAdminColaboradoresController;
+import escritoriofastpacket.vista.envios.FXMLAdminEnviosController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,8 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -50,14 +53,20 @@ private void btnIrColaboradores(ActionEvent event) throws IOException {
 
 
     @FXML
-    private void btnIrEnvios(ActionEvent event) throws IOException {
+private void btnIrEnvios(ActionEvent event) throws IOException {
     URL fxml = getClass().getResource("/escritoriofastpacket/vista/envios/FXMLAdminEnvios.fxml");
 
-    Parent loadMain = FXMLLoader.load(fxml);
+    FXMLLoader loader = new FXMLLoader(fxml);
+    Parent loadMain = loader.load();
+    FXMLAdminEnviosController controller = loader.getController();
+
+    if (colaboradorSesion != null) {
+        controller.cargarColaboradorSesion(colaboradorSesion.getIdColaborador());
+    }
     stackPane.getChildren().clear();
     stackPane.getChildren().add(loadMain);
-        
-    }
+}
+
 
    @FXML
     private void btnIrClientes(ActionEvent event) throws IOException {
@@ -81,6 +90,20 @@ private void btnIrColaboradores(ActionEvent event) throws IOException {
 
     @FXML
     private void btnCerrarSesion(ActionEvent event) {
+        
+        try{
+            Stage escenario = (Stage)lbNombreColaborador.getScene().getWindow();
+            FXMLLoader loadVista = new FXMLLoader(getClass().getResource("FXMLInicioSesion.fxml"));
+            Parent vista = loadVista.load();
+            FXMLInicioSesionController controlador = loadVista.getController();
+            
+            Scene escena = new Scene(vista);
+            escenario.setScene(escena);
+            escenario.show();
+            
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
     }
 
     void inicializarMenuGeneral(Colaborador colaboradorSesion) {

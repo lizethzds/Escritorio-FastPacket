@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package escritoriofastpacket.vista.clientes;
 
 import escritoriofastpacket.interfaz.INotificarOperacion;
 import escritoriofastpacket.modelo.dao.ClienteDAO;
 import escritoriofastpacket.modelo.pojo.Cliente;
+import escritoriofastpacket.modelo.pojo.Mensaje;
 import escritoriofastpacket.utils.Utilidades;
 import java.net.URL;
 import java.util.List;
@@ -99,8 +96,14 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
                     + "del cliente" + cliente.getNombre()+" del sistema? Esta acción es irreversible.");
             
             if(seElimina){
-                ClienteDAO.eliminarCliente(cliente.getIdCliente());
-                notificarOperacionExitosa("Eliminado", cliente.getNombre());
+                Mensaje msj = ClienteDAO.eliminarCliente(cliente.getIdCliente());
+                if(msj.isError()){
+                    Utilidades.mostrarAlertaSimple("Error en eliminación", msj.getContenido(), Alert.AlertType.ERROR);
+                }else{
+                    Utilidades.mostrarAlertaSimple("Eliminación exitosa", msj.getContenido(), Alert.AlertType.INFORMATION);
+                    notificarOperacionExitosa("Eliminado", cliente.getNombre());
+                }
+                
             }
         }else{
             Utilidades.mostrarAlertaSimple("Seleccione un cliente", "Para borrar un cliente, debe seleccionarlo primero", Alert.AlertType.INFORMATION);
@@ -145,6 +148,7 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
         System.out.println("Operacion:" + tipo);
         System.out.print("Nombre:" + nombre);
         cargarInformacionTabla(); 
+        configurarFiltroBusqueda();
     
     }
 
@@ -154,24 +158,24 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
     tfBusqueda.textProperty().addListener((observable, oldValue, newValue) -> {
         listaClientes.setPredicate(cliente -> {
             if (newValue == null || newValue.trim().isEmpty()) {
-                return true; // Mostrar todos los clientes si no hay filtro
+                return true; 
             }
             
             String lowerCaseFilter = newValue.toLowerCase();
 
             if (cliente.getCorreo() != null && cliente.getCorreo().toLowerCase().contains(lowerCaseFilter)) {
-                return true; // Coincide con el correo
+                return true;
             }
             
             if (cliente.getNombre() != null && cliente.getNombre().toLowerCase().contains(lowerCaseFilter)) {
-                return true; // Coincide con el nombre
+                return true;
             }
             
             if (cliente.getTelefono() != null && cliente.getTelefono().toLowerCase().contains(lowerCaseFilter)) {
-                return true; // Coincide con el teléfono
+                return true; 
             }
 
-            return false; // No coincide con ningún criterio
+            return false; 
         });
     });
 

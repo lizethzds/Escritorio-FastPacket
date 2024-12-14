@@ -1,11 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.envios.FXMLFormularioEnvioController">
-    
+<AnchorPane id="AnchorPane" prefHeight="732.0" prefWidth="680.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.envios.FXMLFormularioEnvioController">
+   <children>
+      <Text layoutX="70.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Origen" wrappingWidth="199.861328125">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Text>
+      <Label layoutX="70.0" layoutY="103.0" text="Seleccione un cliente" />
+      <ComboBox fx:id="cbClientes" layoutX="65.0" layoutY="128.0" prefHeight="25.0" prefWidth="272.0" />
+      <Label layoutX="66.0" layoutY="182.0" text="Nota: La dirección de destino está asociada al cliente seleccionado para realizar el servicio de envíos">
+         <font>
+            <Font name="Candara Bold" size="11.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfCalleDestino" layoutX="70.0" layoutY="379.0" promptText="Av Americas" />
+      <Label layoutX="70.0" layoutY="362.0" text="Calle" />
+      <Label layoutX="232.0" layoutY="362.0" text="Colonia" />
+      <TextField fx:id="tfColoniaDestino" layoutX="232.0" layoutY="379.0" promptText="Colonia Juarez" />
+      <TextField fx:id="tfNumeroDestino" layoutX="400.0" layoutY="379.0" prefHeight="25.0" prefWidth="74.0" promptText="113B" />
+      <Label layoutX="402.0" layoutY="362.0" text="Numero" />
+      <TextField fx:id="tfCodigoPostal" layoutX="503.0" layoutY="379.0" prefHeight="25.0" prefWidth="111.0" promptText="91030" />
+      <Label layoutX="503.0" layoutY="362.0" text="Codigo Postal" />
+      <Label layoutX="70.0" layoutY="436.0" text="Estado" />
+      <Label layoutX="238.0" layoutY="436.0" text="Municipio" />
+      <ComboBox fx:id="cbEstado" layoutX="70.0" layoutY="460.0" prefHeight="25.0" prefWidth="142.0" />
+      <ComboBox fx:id="cbMunicipio" layoutX="236.0" layoutY="460.0" prefHeight="25.0" prefWidth="142.0" />
+      <Text layoutX="70.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destino" wrappingWidth="199.861328125">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Text>
+      <Button layoutX="170.0" layoutY="637.0" mnemonicParsing="false" onAction="#btnGuardarEnvio" prefHeight="44.0" prefWidth="130.0" style="-fx-background-color: #E39E21;" text="Guardar ">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font></Button>
+      <Button layoutX="362.0" layoutY="637.0" mnemonicParsing="false" onAction="#btnCancelar" prefHeight="44.0" prefWidth="111.0" style="-fx-background-color: E32121;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font></Button>
+      <ComboBox fx:id="cbConductores" layoutX="65.0" layoutY="268.0" prefHeight="25.0" prefWidth="272.0" />
+      <Text layoutX="65.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conductor" wrappingWidth="199.861328125">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ba0a4" height="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="680.0" />
+      <Text layoutX="188.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos de envío" textAlignment="CENTER" wrappingWidth="308.376953125">
+         <font>
+            <Font name="Ebrima Bold" size="29.0" />
+         </font>
+      </Text>
+      <Label layoutX="65.0" layoutY="240.0" text="Seleccione un conductor" />
+      <Text layoutX="70.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Costo de envío" wrappingWidth="199.861328125">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfCostoEnvio" layoutX="78.0" layoutY="541.0" prefHeight="25.0" prefWidth="105.0" promptText="MXN" />
+      <Label layoutX="65.0" layoutY="541.0" prefHeight="25.0" prefWidth="11.0" text="\$">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbEstatus" layoutX="408.0" layoutY="268.0" prefHeight="25.0" prefWidth="124.0" />
+      <Label layoutX="408.0" layoutY="240.0" text="Estatus del envío">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorCliente" layoutX="66.0" layoutY="153.0" prefHeight="17.0" prefWidth="261.0" textFill="RED">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorConductor" layoutX="66.0" layoutY="294.0" prefHeight="17.0" prefWidth="261.0" textFill="RED">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorCalle" layoutX="71.0" layoutY="404.0" prefHeight="17.0" prefWidth="149.0" textFill="RED">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorColonia" layoutX="232.0" layoutY="404.0" prefHeight="17.0" prefWidth="149.0" textFill="RED">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorEstado" layoutX="71.0" layoutY="485.0" prefHeight="17.0" prefWidth="149.0" textFill="RED">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorMunicipio" layoutX="238.0" layoutY="485.0" prefHeight="17.0" prefWidth="149.0" textFill="RED">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorCosto" layoutX="70.0" layoutY="566.0" prefHeight="17.0" prefWidth="149.0" textFill="RED">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorEstatus" layoutX="409.0" layoutY="294.0" prefHeight="17.0" prefWidth="174.0" textFill="RED">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorNumero" layoutX="398.0" layoutY="404.0" prefHeight="17.0" prefWidth="96.0" textFill="RED">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErrorCodigoPostal" layoutX="503.0" layoutY="404.0" prefHeight="17.0" prefWidth="149.0" textFill="RED">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

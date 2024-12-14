@@ -217,21 +217,11 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
     
     
     private void BotonasignarUnidad(){
-        Colaborador colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
-        if(colaborador != null){
-            irPantallaFormulario(this, colaborador,"Editar colaborador");
-        }else{
-            Utilidades.mostrarAlertaSimple("seleccione un colaborador", 
-                    "Tiene que seleccionar un colaborador para poder asignarle una unidad",
-                    Alert.AlertType.ERROR);
-        }
-    }
-    
-    private void asignarUnidad(){
         
     }
     
-    private void irPantallaASignarUnidad(INotificacionOperacion observador, Colaborador colaborador, String tituloPantalla){
+    
+    private void irPantallaASignarUnidad(Colaborador colaborador, String tituloPantalla){
         Stage nuevoEcenario = new Stage();
         try {
 
@@ -249,5 +239,23 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
             Utilidades.mostrarAlertaSimple("Error", "Por el momento no se puede mostrar la vetana de asignación",
                    Alert.AlertType.ERROR);
         }  
+    }
+
+    @FXML
+    private void asignarColaboradorAction(ActionEvent event) {
+        Colaborador colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
+        if(colaborador != null){
+            if("Conductor".equals(colaborador.getRol())){
+                irPantallaASignarUnidad(colaborador,"Editar colaborador");
+            }else{
+                Utilidades.mostrarAlertaSimple("Error en el rol del colaborador", 
+                    "Tiene que seleccionar un colaborador que tenga el rol de conductor",
+                    Alert.AlertType.ERROR);
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("seleccione un colaborador", 
+                    "Tiene que seleccionar un colaborador para poder asignarle una unidad",
+                    Alert.AlertType.ERROR);
+        }
     }
 }

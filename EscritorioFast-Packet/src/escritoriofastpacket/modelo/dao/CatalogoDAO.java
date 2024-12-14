@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import escritoriofastpacket.modelo.ConexionWS;
 import escritoriofastpacket.modelo.pojo.Estado;
+import escritoriofastpacket.modelo.pojo.EstadoEnvio;
 import escritoriofastpacket.modelo.pojo.Municipio;
 import escritoriofastpacket.modelo.pojo.RespuestaHTTP;
 import escritoriofastpacket.utils.Constantes;
@@ -68,6 +69,26 @@ public class CatalogoDAO {
          
          return estado;
          
+     }
+     
+     
+     public static List<EstadoEnvio> obtenerEstatusEnvio(){
+         List<EstadoEnvio> estadosEnvio = new ArrayList<>();
+         String url = Constantes.URL_WS+"catalogo/obtenerEstatus";
+         RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+         try{
+          if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+            Gson gson = new Gson();
+            Type tipoLista = new TypeToken<ArrayList<EstadoEnvio>>(){}.getType();
+            estadosEnvio = gson.fromJson(respuesta.getContenido(), tipoLista);
+         }
+         
+        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+         
+         return estadosEnvio;
      }
     
     

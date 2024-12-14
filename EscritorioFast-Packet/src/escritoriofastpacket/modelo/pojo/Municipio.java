@@ -11,15 +11,15 @@ package escritoriofastpacket.modelo.pojo;
  */
 public class Municipio {
     private Integer idMunicipio;
-    private String nombreMunicipio;
+    private String nombre;
     private Integer idEstado;
 
     public Municipio() {
     }
 
-    public Municipio(Integer idMunicipio, String nombreMunicipio, Integer idEstado) {
+    public Municipio(Integer idMunicipio, String nombre, Integer idEstado) {
         this.idMunicipio = idMunicipio;
-        this.nombreMunicipio = nombreMunicipio;
+        this.nombre = nombre;
         this.idEstado = idEstado;
     }
 
@@ -32,11 +32,11 @@ public class Municipio {
     }
 
     public String getNombreMunicipio() {
-        return nombreMunicipio;
+        return nombre;
     }
 
-    public void setNombreMunicipio(String nombreMunicipio) {
-        this.nombreMunicipio = nombreMunicipio;
+    public void setNombreMunicipio(String nombre) {
+        this.nombre = nombre;
     }
 
     public Integer getIdEstado() {
@@ -49,7 +49,7 @@ public class Municipio {
 
     @Override
     public String toString() {
-        return "-" + nombreMunicipio;
+        return "-" + nombre;
     }
     
     
