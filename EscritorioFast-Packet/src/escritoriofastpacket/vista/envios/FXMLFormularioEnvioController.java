@@ -145,24 +145,22 @@ public class FXMLFormularioEnvioController implements Initializable {
             datosRegistroEnvio.setEnvio(envio);
             datosRegistroEnvio.setDireccion(direccion);
             
-            
             if(modoEdicion == false){
-                guardarDatosEnvio(datosRegistroEnvio);
+             guardarDatosEnvio(datosRegistroEnvio);
+             
             }else{
-              HistorialEnvio historial = new HistorialEnvio();
+              
               datosRegistroEnvio.getEnvio().setIdEnvio(envioEdicion.getIdEnvio());
               Integer idEstadoEnvio = (cbEstatus.getSelectionModel().getSelectedItem() != null)
                         ? cbEstatus.getSelectionModel().getSelectedItem().getIdEstadoEnvio()
                         :0;
-             datosRegistroEnvio.getEnvio().setIdEstadoEnvio(idEstadoEnvio);
-
-              editarRegistroEnvio(datosRegistroEnvio);
+              datosRegistroEnvio.getEnvio().setIdEstadoEnvio(idEstadoEnvio);
+              HistorialEnvio historial = new HistorialEnvio();
               historial.setIdColaborador(this.idColaborador);
-              //Pasar el id del colaborador  logeado
               historial.setIdEnvio(datosRegistroEnvio.getEnvio().getIdEnvio());
               historial.setIdEstadoEnvio(idEstadoEnvio);
+              editarRegistroEnvio(datosRegistroEnvio);
               guardarCambioHistorial(historial);
-
 
             }
         }

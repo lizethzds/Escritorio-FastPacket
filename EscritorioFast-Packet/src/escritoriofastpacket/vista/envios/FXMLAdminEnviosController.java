@@ -87,7 +87,7 @@ public class FXMLAdminEnviosController implements Initializable , INotificarOper
         Envio envio = tvEnvios.getSelectionModel().getSelectedItem();
         if(envio != null){
              boolean seElimina = Utilidades.mostrarAlertaConfirmacion("Eliminar envio", "¿Está seguro de elimninar la información "
-                    + " del envio del sistema? Esta acción es irreversible.");
+                    + " del envio del sistema? Esta acción es irreversible y borrará todo registro relacionado con este envio.");
              
              if(seElimina){
                 Mensaje msj =  EnvioDAO.eliminarEnvio(envio.getIdEnvio());

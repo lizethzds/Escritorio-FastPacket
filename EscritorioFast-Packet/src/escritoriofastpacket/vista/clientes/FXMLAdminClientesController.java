@@ -72,16 +72,20 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
         
     }
     
-    private void cargarInformacionTabla(){
-        clientes = FXCollections.observableArrayList();
-        List<Cliente> listaWS = ClienteDAO.obtenerClientes();
-        if(listaWS != null){
-            clientes.addAll(listaWS);
-            tvClientes.setItems(clientes);
-        }else{
-            Utilidades.mostrarAlertaSimple("Datos no disponibles", "No se pudieron cargar los datos en la tabla", Alert.AlertType.ERROR);
-        }
+    private void cargarInformacionTabla() {
+    clientes = FXCollections.observableArrayList();
+    List<Cliente> listaWS = ClienteDAO.obtenerClientes();
+
+    if (listaWS != null) {
+        // Filtra los clientes antes de agregarlos a la ObservableList
+        listaWS.removeIf(cliente -> "fastpacket.email.com".equals(cliente.getCorreo()));
+        clientes.addAll(listaWS);
+        tvClientes.setItems(clientes);
+    } else {
+        Utilidades.mostrarAlertaSimple("Datos no disponibles", "No se pudieron cargar los datos en la tabla", Alert.AlertType.ERROR);
     }
+}
+
 
     @FXML
     private void btnAgregarCliente(ActionEvent event) {

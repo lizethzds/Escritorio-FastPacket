@@ -10,15 +10,19 @@ public class HistorialEnvio {
    private Integer idEnvio;
    private Integer idColaborador;
    private Integer idEstadoEnvio;
+   private String comentario;
 
     public HistorialEnvio() {
     }
 
-    public HistorialEnvio(Integer idEnvio, Integer idColaborador, Integer idEstadoEnvio) {
+    public HistorialEnvio(Integer idEnvio, Integer idColaborador, Integer idEstadoEnvio, String comentario) {
         this.idEnvio = idEnvio;
         this.idColaborador = idColaborador;
         this.idEstadoEnvio = idEstadoEnvio;
+        this.comentario = comentario;
     }
+
+   
 
     public Integer getIdEnvio() {
         return idEnvio;
@@ -43,7 +47,16 @@ public class HistorialEnvio {
     public void setIdEstadoEnvio(Integer idEstadoEnvio) {
         this.idEstadoEnvio = idEstadoEnvio;
     }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
    
+    
    
     
 }

@@ -48,6 +48,8 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
     private TableColumn tcProfundidad;
     @FXML
     private TableColumn tcPeso;
+    @FXML
+    private TableColumn tcDescripcion;
 
     /**
      * Initializes the controller class.
@@ -121,6 +123,7 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
          tcAnchura.setCellValueFactory(new PropertyValueFactory("ancho"));
          tcProfundidad.setCellValueFactory(new PropertyValueFactory("profundidad"));
          tcPeso.setCellValueFactory(new PropertyValueFactory("peso"));
+         tcDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
     }
     
     private void cargarInfoTabla(){
