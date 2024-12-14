@@ -52,14 +52,14 @@ public class FXMLFormularioPaquetesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        configurarDatosEntrada();
     }    
 
     @FXML
     private void btnGuardarDatos(ActionEvent event) {
         
         if (!validarCampos()) {
-        return; // Detener si hay errores de validación
+        return;
     }
        
         String altura = tfAlto.getText();
@@ -91,6 +91,11 @@ public class FXMLFormularioPaquetesController implements Initializable {
 
     @FXML
     private void btnCancelar(ActionEvent event) {
+        cerrarPantalla();
+    }
+    
+    private void cerrarPantalla() {
+        ((Stage) tfProfundidad.getScene().getWindow()).close();
     }
     
     
@@ -171,11 +176,54 @@ public class FXMLFormularioPaquetesController implements Initializable {
         lbErrorDescripcion.setText("Por favor, ingrese una descripción.");
         camposValidos = false;
     } else {
-        lbErrorDescripcion.setText(""); // Limpiar error si es válido
+        lbErrorDescripcion.setText(""); 
     }
 
     return camposValidos;
 }
+
+   private void configurarDatosEntrada() {
+    // Validar tfAlto: Solo números, máximo 4 caracteres
+    tfAlto.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*") || newValue.length() > 4) {
+            tfAlto.setText(oldValue);
+        }
+    });
+    tfAlto.setPromptText("Máximo 4 dígitos");
+
+    // Validar tfAncho: Solo números, máximo 4 caracteres
+    tfAncho.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*") || newValue.length() > 4) {
+            tfAncho.setText(oldValue);
+        }
+    });
+    tfAncho.setPromptText("Máximo 4 dígitos");
+
+    // Validar tfProfundidad: Solo números, máximo 4 caracteres
+    tfProfundidad.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*") || newValue.length() > 4) {
+            tfProfundidad.setText(oldValue);
+        }
+    });
+    tfProfundidad.setPromptText("Máximo 4 dígitos");
+
+    // Validar tfPeso: Solo números, máximo 4 caracteres
+      tfPeso.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*(\\.\\d*)?") || newValue.length() > 7) {
+            tfPeso.setText(oldValue);
+        }
+    });
+    tfPeso.setPromptText("Formato válido: 123.45");
+
+    // Validar taDescripcionPaquete: Máximo 250 caracteres
+    taDescripcionPaquete.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue.length() > 250) {
+            taDescripcionPaquete.setText(oldValue);
+        }
+    });
+    taDescripcionPaquete.setPromptText("Máximo 250 caracteres");
+}
+
      
             
 }

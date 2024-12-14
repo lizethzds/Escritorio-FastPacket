@@ -98,9 +98,10 @@ public class FXMLDetallesEnvioController implements Initializable {
         lbNumero.setText(datosEnvio.getDireccionCliente().getNumero());
         lbNumDestino.setText(datosEnvio.getDireccion().getNumero());
         lbCostoEnvio.setText(String.valueOf(datosEnvio.getEnvio().getCostoEnvio()));
+        lbEstatus.setText(datosEnvio.getEstadoEnvio());
         
 
-        
+ 
         
     }
     

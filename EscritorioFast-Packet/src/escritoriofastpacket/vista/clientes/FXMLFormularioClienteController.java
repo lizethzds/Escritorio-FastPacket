@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -63,6 +64,26 @@ public class FXMLFormularioClienteController implements Initializable {
     private ComboBox<Estado> cbEstado;
     @FXML
     private TextField tfCodigoPostal;
+    @FXML
+    private Label lbErrorNombre;
+    @FXML
+    private Label lbErrorApellidos;
+    @FXML
+    private Label lbErrorCorreo;
+    @FXML
+    private Label lbErrorTelefono;
+    @FXML
+    private Label lbErrorCalle;
+    @FXML
+    private Label lbErrorNum;
+    @FXML
+    private Label lbErrorColonia;
+    @FXML
+    private Label lbErrorEstado;
+    @FXML
+    private Label lbErrorMunicipio;
+    @FXML
+    private Label lbErrorCP;
 
     /**
      * Initializes the controller class.
@@ -89,8 +110,8 @@ public class FXMLFormularioClienteController implements Initializable {
 
     @FXML
     private void btnGuardar(ActionEvent event) {
-        // Verificar que los campos no estén vacíos
-    if (camposLlenos()) {
+   
+    if (validarCamposLlenos()) {
     
         DatosRegistroCliente datosRegistroCliente = new DatosRegistroCliente();
         
@@ -150,22 +171,19 @@ public class FXMLFormularioClienteController implements Initializable {
        tfColonia.setText(clienteDatos.getDireccion().getColonia());
        tfCodigoPostal.setText(clienteDatos.getDireccion().getCodigoPostal());
        
-        // Obtener idEstado a partir del idMunicipio
+
         Integer idMunicipio = clienteDatos.getDireccion().getIdMunicipio();
         Estado estadoDireccion;
         estadoDireccion = CatalogoDAO.obtenerEstadoMunicipio(idMunicipio);
         Integer idEstado = estadoDireccion.getIdEstado();
 
-        // Seleccionar el estado en el comboBox
         int posicionEstado = buscarIdEstado(idEstado);
         cbEstado.getSelectionModel().select(posicionEstado);
 
-        // Cargar municipios del estado seleccionado y seleccionar el municipio correspondiente
         cargarMunicipios(idEstado);
         int posicionMunicipio = buscarIdMunicipio(idMunicipio);
         cbMunicipio.getSelectionModel().select(posicionMunicipio);
         
-        tfCorreo.setEditable(false);
 
     }
     
@@ -228,18 +246,78 @@ public class FXMLFormularioClienteController implements Initializable {
            (tfCodigoPostal.getText() != null && !tfCodigoPostal.getText().isEmpty()) &&
            cbMunicipio.getValue() != null;
 }
+    
+    
+    private boolean validarCamposLlenos(){
+        boolean camposValidos = true;
+        
+        if(tfNombre.getText() == null || tfNombre.getText().trim().isEmpty()){
+            lbErrorNombre.setText("Ingresa el nombre");
+            camposValidos = false;
+        }
+        
+        if(tfApellidoPat.getText() == null || tfApellidoPat.getText().trim().isEmpty() ||
+                tfApellidoMat.getText() == null || tfApellidoMat.getText().trim().isEmpty()){
+            lbErrorApellidos.setText("Ingresa los apellidos");
+            camposValidos = false;
+        }
+        if(tfCorreo.getText() == null || tfCorreo.getText().trim().isEmpty()){
+            lbErrorCorreo.setText("Ingresa el correo electrónico");
+            camposValidos = false;
+        }
+        if(tfTelefono.getText() == null || tfTelefono.getText().trim().isEmpty()){
+            lbErrorTelefono.setText("Ingresa el numero telefónico");
+            camposValidos = false;
+        }
+        if(tfCalle.getText() == null || tfCalle.getText().trim().isEmpty()){
+            lbErrorCalle.setText("Ingresa la calle");
+            camposValidos = false;
+        }
+        
+        if(tfNumero.getText() == null || tfNumero.getText().trim().isEmpty()){
+            lbErrorNum.setText("Ingresa el número");
+            camposValidos = false;
+        }
+        
+        if(tfColonia.getText() == null || tfColonia.getText().trim().isEmpty()){
+            lbErrorColonia.setText("Ingresa la colonia");
+            camposValidos = false;
+        }
+        
+        if(tfCodigoPostal.getText() == null || tfCodigoPostal.getText().trim().isEmpty()){
+            lbErrorCP.setText("Ingresa el C.P");
+            camposValidos = false;
+        }
+        
+        if (cbEstado.getSelectionModel().isEmpty()) {
+            lbErrorEstado.setText("Seleccione un estado");
+            camposValidos = false;
+        } else {
+            lbErrorEstado.setText("");
+        }
+
+        if (cbMunicipio.getSelectionModel().isEmpty()) {
+            lbErrorMunicipio.setText("Seleccione un municipio");
+            camposValidos = false;
+        } else {
+            lbErrorMunicipio.setText("");
+        }
+     
+        return camposValidos;
+        
+    }
 
 
     private void guardarDatosCliente(DatosRegistroCliente datosRegistroCliente) {
         
            Mensaje msj = ClienteDAO.registrarCliente(datosRegistroCliente);
-           cerrarPantalla();
            observador.notificarOperacionExitosa("Registro", datosRegistroCliente.getCliente().getNombre());
            
            if(msj.isError()){
-               Utilidades.mostrarAlertaSimple("Hubo un error al intenetar registrar el cliente", msj.getContenido(), Alert.AlertType.ERROR);
+               Utilidades.mostrarAlertaSimple("Hubo un error al intentar registrar el cliente", msj.getContenido(), Alert.AlertType.ERROR);
            }else{
            Utilidades.mostrarAlertaSimple("Registro realizado.", msj.getContenido(), Alert.AlertType.INFORMATION);
+           cerrarPantalla();
            }
         
         
@@ -247,12 +325,13 @@ public class FXMLFormularioClienteController implements Initializable {
     
      private void editarRegistroCliente(DatosRegistroCliente datosEdicionCliente){
          Mensaje msj = ClienteDAO.editarCliente(datosEdicionCliente);
-         cerrarPantalla();
+        
          observador.notificarOperacionExitosa("Edicion", datosEdicionCliente.getCliente().getNombre());
          if(msj.isError()){
                Utilidades.mostrarAlertaSimple("Hubo un error al intentar actualizar el cliente", msj.getContenido(), Alert.AlertType.ERROR);
            }else{
            Utilidades.mostrarAlertaSimple("Actualización realizada.", msj.getContenido(), Alert.AlertType.INFORMATION);
+            cerrarPantalla();
            }
         
     }
@@ -274,23 +353,20 @@ public class FXMLFormularioClienteController implements Initializable {
         tfTelefono.setPromptText("Ingrese un número de 10 digitos");
         
         tfCodigoPostal.textProperty().addListener((observable, oldValue, newValue) -> {
-    // Permitir solo números y un máximo de 5 caracteres
     if (!newValue.matches("\\d*") || newValue.length() > 5) {
         tfCodigoPostal.setText(oldValue);
     }   
         });
+        
+        
+       tfNumero.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.length() > 7) {
+            tfNumero.setText(oldValue);
+      }
+        });
+          tfNumero.setPromptText("Máximo 7 caracteres");
 
     }
     
-    
-    
-   
-     
-     
-    
-
- 
-
-   
     
 }

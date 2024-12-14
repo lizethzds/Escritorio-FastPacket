@@ -209,9 +209,15 @@ public class FXMLFormularioEnvioController implements Initializable {
       cargarMunicipios(idEstado);
       int posicionMunicipio = buscarIdMunicipio(idMunicipio);
       cbMunicipio.getSelectionModel().select(posicionMunicipio);
-        
+      
+      if(idColaborador != null){
       int posicionConductor = buscarIdColaborador(idColaborador);
       cbConductores.getSelectionModel().select(posicionConductor);
+      }else{
+      lbErrorConductor.setText("Por el momento, no hay un conductor asignado a este envío");
+      }  
+      
+      
         
       int posicionCliente = buscarIdCliente(idCliente);
       cbClientes.getSelectionModel().select(posicionCliente);
@@ -335,15 +341,13 @@ public class FXMLFormularioEnvioController implements Initializable {
 private boolean validarCamposLlenos() {
     boolean camposValidos = true;
 
-    // Validación de Calle
     if (tfCalleDestino.getText() == null || tfCalleDestino.getText().trim().isEmpty()) {
         lbErrorCalle.setText("Ingrese la calle");
         camposValidos = false;
     } else {
-        lbErrorCalle.setText(""); // Limpiar mensaje de error si es válido
+        lbErrorCalle.setText("");
     }
 
-    // Validación de Código Postal
     if (tfCodigoPostal.getText() == null || tfCodigoPostal.getText().trim().isEmpty()) {
         lbErrorCodigoPostal.setText("Ingrese el código postal");
         camposValidos = false;
@@ -351,7 +355,6 @@ private boolean validarCamposLlenos() {
         lbErrorCodigoPostal.setText("");
     }
 
-    // Validación de Costo de Envío
     if (tfCostoEnvio.getText() == null || tfCostoEnvio.getText().trim().isEmpty()) {
         lbErrorCosto.setText("Ingrese el costo del envío");
         camposValidos = false;
@@ -391,14 +394,7 @@ private boolean validarCamposLlenos() {
         lbErrorMunicipio.setText("");
     }
 
-    // Validación de Conductor
-    if (cbConductores.getSelectionModel().isEmpty()) {
-        lbErrorConductor.setText("Seleccione un conductor");
-        camposValidos = false;
-    } else {
-        lbErrorConductor.setText("");
-    }
-
+   
     // Validación de Cliente
     if (cbClientes.getSelectionModel().isEmpty()) {
         lbErrorCliente.setText("Seleccione un cliente");
@@ -407,7 +403,7 @@ private boolean validarCamposLlenos() {
         lbErrorCliente.setText("");
     }
 
-    // Validación de Estatus (solo si está en modo edición)
+    
     if (modoEdicion && cbEstatus.getSelectionModel().isEmpty()) {
         lbErrorEstatus.setText("Seleccione un estatus");
         camposValidos = false;
@@ -464,6 +460,20 @@ private boolean validarCamposLlenos() {
         }
     });
     tfNumeroDestino.setPromptText("Máximo 5 caracteres");
+    
+  // Validar tfCostoEnvio: Solo números y un punto decimal, máximo 10 caracteres
+tfCostoEnvio.textProperty().addListener((observable, oldValue, newValue) -> {
+    // Expresión regular para validar números decimales con un punto y hasta 10 caracteres
+    if (!newValue.matches("\\d{0,9}(\\.\\d{0,1})?") || newValue.length() > 10) {
+        tfCostoEnvio.setText(oldValue);
+    }
+});
+
+
+
+
+    
+    
 }
 
     private void guardarCambioHistorial(HistorialEnvio historial) {

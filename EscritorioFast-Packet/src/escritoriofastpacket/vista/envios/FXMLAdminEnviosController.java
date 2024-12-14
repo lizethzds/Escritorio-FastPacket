@@ -4,6 +4,7 @@ package escritoriofastpacket.vista.envios;
 import escritoriofastpacket.interfaz.INotificarOperacion;
 import escritoriofastpacket.modelo.dao.EnvioDAO;
 import escritoriofastpacket.modelo.pojo.Envio;
+import escritoriofastpacket.modelo.pojo.Mensaje;
 import escritoriofastpacket.utils.Utilidades;
 import escritoriofastpacket.vista.paquetes.FXMLAdminPaquetesController;
 import java.net.URL;
@@ -89,8 +90,14 @@ public class FXMLAdminEnviosController implements Initializable , INotificarOper
                     + " del envio del sistema? Esta acción es irreversible.");
              
              if(seElimina){
-                 EnvioDAO.eliminarEnvio(envio.getIdEnvio());
-                 notificarOperacionExitosa("Eliminado: ", envio.getNoGuia());
+                Mensaje msj =  EnvioDAO.eliminarEnvio(envio.getIdEnvio());
+                if(!msj.isError()){
+                Utilidades.mostrarAlertaSimple("Eliminación exitosa", msj.getContenido(), Alert.AlertType.INFORMATION);
+                notificarOperacionExitosa("Eliminado: ", envio.getNoGuia());
+                }else{
+                Utilidades.mostrarAlertaSimple("Error", msj.getContenido(), Alert.AlertType.ERROR);
+                }
+                 
              }
         }else{
             Utilidades.mostrarAlertaSimple("Seleccione un envío", "Para borrar un envio, debe seleccionarlo primero", Alert.AlertType.INFORMATION);

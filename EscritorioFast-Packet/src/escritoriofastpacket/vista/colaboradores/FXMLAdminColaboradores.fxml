@@ -9,27 +9,36 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="573.0" prefWidth="752.0" style="-fx-background-color: #9fa8be;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.colaboradores.FXMLAdminColaboradoresController">
+<AnchorPane id="AnchorPane" prefHeight="624.0" prefWidth="989.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.colaboradores.FXMLAdminColaboradoresController">
     <children>
-      <TableView fx:id="tvColaboradores" layoutX="34.0" layoutY="139.0" prefHeight="360.0" prefWidth="673.0">
+      <TableView fx:id="tvColaboradores" layoutX="30.0" layoutY="160.0" prefHeight="360.0" prefWidth="849.0">
         <columns>
-          <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
-          <TableColumn fx:id="colApellidoPaterno" prefWidth="79.0" text="Apellido Paterno" />
-            <TableColumn fx:id="colApellidoMaterno" minWidth="9.0" prefWidth="78.0" text="Apellido Materno" />
-            <TableColumn fx:id="colCURP" minWidth="4.0" prefWidth="81.0" text="CURP" />
-            <TableColumn fx:id="colCorreo" prefWidth="117.0" text="Correo eléctronico" />
-            <TableColumn fx:id="colNoPersonal" prefWidth="110.0" text="No. Personal" />
-            <TableColumn fx:id="colRol" prefWidth="132.0" text="Rol" />
+          <TableColumn fx:id="colNombre" prefWidth="105.0" text="Nombre" />
+          <TableColumn fx:id="colApellidoPaterno" prefWidth="134.0" text="Apellido Paterno" />
+            <TableColumn fx:id="colApellidoMaterno" minWidth="9.0" prefWidth="137.0" text="Apellido Materno" />
+            <TableColumn fx:id="colCURP" minWidth="4.0" prefWidth="125.0" text="CURP" />
+            <TableColumn fx:id="colCorreo" prefWidth="145.0" text="Correo eléctronico" />
+            <TableColumn fx:id="colNoPersonal" prefWidth="87.0" text="No. Personal" />
+            <TableColumn fx:id="colRol" prefWidth="115.0" text="Rol" />
         </columns>
       </TableView>
-      <Button layoutX="597.0" layoutY="80.0" mnemonicParsing="false" onAction="#formularioRegistrarColaborador" prefHeight="46.0" prefWidth="115.0" style="-fx-background-color: #dda600; -fx-background-radius: 7px; -fx-border-radius: 7px;" text="Registrar" textFill="WHITE" />
-      <Button layoutX="273.0" layoutY="520.0" mnemonicParsing="false" onAction="#eliminarColaborador" prefHeight="39.0" prefWidth="91.0" style="-fx-background-color: #e40000; -fx-background-radius: 7px; -fx-border-radius: 7px;" text="Eliminar" textFill="WHITE" />
-      <Button layoutX="444.0" layoutY="520.0" mnemonicParsing="false" onAction="#formularioEditarColaborador" prefHeight="39.0" prefWidth="91.0" style="-fx-background-color: #5e29d2; -fx-background-radius: 7px; -fx-border-radius: 7px;" text="Editar" textFill="WHITE" />
-      <Pane layoutX="-1.0" layoutY="1.0" prefHeight="61.0" prefWidth="799.0" style="-fx-background-color: #d7d7d7;">
+      <Button layoutX="737.0" layoutY="107.0" mnemonicParsing="false" onAction="#formularioRegistrarColaborador" prefHeight="39.0" prefWidth="142.0" style="-fx-background-color: #dda600; -fx-background-radius: 7px; -fx-border-radius: 7px;" text="Registrar" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font></Button>
+      <Button layoutX="344.0" layoutY="540.0" mnemonicParsing="false" onAction="#eliminarColaborador" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #e40000; -fx-background-radius: 7px; -fx-border-radius: 7px;" text="Eliminar" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font></Button>
+      <Button layoutX="535.0" layoutY="540.0" mnemonicParsing="false" onAction="#formularioEditarColaborador" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #4163C9; -fx-background-radius: 7px; -fx-border-radius: 7px;" text="Editar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Pane prefHeight="60.0" prefWidth="989.0" style="-fx-background-color: #d7d7d7;">
          <children>
-            <Label layoutX="23.0" layoutY="8.0" text="Colaboradores">
+            <Label layoutX="38.0" layoutY="14.0" text="Colaboradores">
                <font>
-                  <Font size="31.0" />
+                  <Font name="Ebrima Bold" size="26.0" />
                </font>
             </Label>
          </children>
