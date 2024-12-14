@@ -199,7 +199,6 @@ public class FXMLFormularioColaboradorController implements Initializable {
             colaborador.setNoLicencia(tfLicencia.getText());
         }
         Mensaje mensaje = sonCamposValidos(colaborador);
-        System.out.println("respuesta"+mensaje.getContenido()+"\nerror"+mensaje.isError());
         if (!mensaje.isError()) {
             if (!modoEdicion) { 
                 colaborador.setFotografia(imagenSeleccionada != null ? imageToBase64(imagenSeleccionada) : null);

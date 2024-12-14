@@ -140,4 +140,76 @@ public class ColaboradorDAO {
         }
         return respuesta;
     }
+    
+    public static Mensaje comprobarEnvios(Integer idColaborador){
+        Mensaje respuesta = new Mensaje();
+            respuesta.setError(true);
+        String url = Constantes.URL_WS+"/colaboradores/comprobarEnvios/"+idColaborador;
+        try {
+            Gson gson = new Gson();
+            RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+            if(respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            }else{
+                respuesta.setContenido(respuestaWS.getContenido());
+            }
+        } catch (Exception e) {
+            respuesta.setContenido(e.getMessage());
+        }
+        return respuesta;
+    }
+    
+    public static Mensaje asignarUnidad(Integer idColaborador, Integer idUnidad){
+        Mensaje respuesta = new Mensaje();
+        respuesta.setError(true);
+        String url = Constantes.URL_WS+"/colaboradores/asignarUnidad/"+idColaborador+"/"+idUnidad;
+        try {
+            Gson gson = new Gson();
+            RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+            if(respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            }else{
+                respuesta.setContenido(respuestaWS.getContenido());
+            }
+        } catch (Exception e) {
+            respuesta.setContenido(e.getMessage());
+        }
+        return respuesta;
+    }
+    
+    public static Mensaje comprobarColaboradorUnidad(Integer idColaborador){
+        Mensaje respuesta = new Mensaje();
+        respuesta.setError(true);
+        String url = Constantes.URL_WS+"/colaboradores/comprobarColaboradorUnidad/"+idColaborador;
+        try {
+            Gson gson = new Gson();
+            RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+            if(respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            }else{
+                respuesta.setContenido(respuestaWS.getContenido());
+            }
+        } catch (Exception e) {
+            respuesta.setContenido(e.getMessage());
+        }
+        return respuesta;
+    }
+    
+    public static Mensaje quitarAsignacionUnidad(Integer idColaborador){
+        Mensaje respuesta = new Mensaje();
+        respuesta.setError(true);
+        String url = Constantes.URL_WS+"/colaboradores/quitarAsignacionUnidad/"+idColaborador;
+        try {
+            Gson gson = new Gson();
+            RespuestaHTTP respuestaWS = ConexionWS.peticionDELETEJson(url,"");
+            if(respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
+            }else{
+                respuesta.setContenido(respuestaWS.getContenido());
+            }
+        } catch (Exception e) {
+            respuesta.setContenido(e.getMessage());
+        }
+        return respuesta;
+    }
 }
