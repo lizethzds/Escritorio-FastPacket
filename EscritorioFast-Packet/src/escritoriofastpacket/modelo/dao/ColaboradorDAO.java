@@ -12,6 +12,7 @@ import escritoriofastpacket.modelo.pojo.Rol;
 import escritoriofastpacket.utils.Constantes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import escritoriofastpacket.modelo.pojo.Unidad;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection; 
 import java.util.List; 
@@ -211,5 +212,22 @@ public class ColaboradorDAO {
             respuesta.setContenido(e.getMessage());
         }
         return respuesta;
+    }
+    
+    public static Unidad obtenerUnidad(Integer idColaborador){
+        Unidad unidad = null;
+        System.out.println("idColaborador: "+ idColaborador);
+        String url = Constantes.URL_WS+"/colaboradores/obtenerUnidad/"+idColaborador;
+        try {
+            Gson gson = new Gson();
+            RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+            if(respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                unidad = gson.fromJson(respuestaWS.getContenido(), Unidad.class);
+            }
+            System.out.println("respuesta: " + respuestaWS.getContenido());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return unidad;
     }
 }

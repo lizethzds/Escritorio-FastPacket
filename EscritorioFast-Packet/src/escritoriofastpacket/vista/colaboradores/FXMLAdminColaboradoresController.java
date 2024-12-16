@@ -174,6 +174,7 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
             nuevoEcenario.setScene(ecenaAdmin);
             nuevoEcenario.setTitle(tituloPantalla);
             nuevoEcenario.initModality(Modality.APPLICATION_MODAL);
+            nuevoEcenario.setResizable(false);
             nuevoEcenario.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
@@ -213,13 +214,7 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
         SortedList<Colaborador> sortedData = new SortedList<>(listaColaboradores);
         sortedData.comparatorProperty().bind(tvColaboradores.comparatorProperty());
         tvColaboradores.setItems(sortedData);
-    }
-    
-    
-    private void BotonasignarUnidad(){
-        
-    }
-    
+    }    
     
     private void irPantallaASignarUnidad(Colaborador colaborador, String tituloPantalla){
         Stage nuevoEcenario = new Stage();
@@ -233,6 +228,7 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
             nuevoEcenario.setScene(ecenaAdmin);
             nuevoEcenario.setTitle(tituloPantalla);
             nuevoEcenario.initModality(Modality.APPLICATION_MODAL);
+            nuevoEcenario.setResizable(false);
             nuevoEcenario.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();

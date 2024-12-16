@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="798.0" prefWidth="468.0" style="-fx-background-color: #9fa8be;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.colaboradores.FXMLFormularioColaboradorController">
+<AnchorPane id="AnchorPane" maxHeight="798.0" maxWidth="468.0" minHeight="798.0" minWidth="468.0" prefHeight="798.0" prefWidth="468.0" style="-fx-background-color: #9fa8be;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.colaboradores.FXMLFormularioColaboradorController">
    <children>
       <Pane prefHeight="74.0" prefWidth="468.0" style="-fx-background-color: #d7d7d7;">
          <children>
