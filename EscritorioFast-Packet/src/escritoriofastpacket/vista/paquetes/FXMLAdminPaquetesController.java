@@ -154,8 +154,9 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
             escenario.setScene(escena);
             escenario.setTitle("Datos de paquete");
             escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
             escenario.setResizable(false);
+            escenario.showAndWait();
+            
             
         }catch(IOException ex){
             Utilidades.mostrarAlertaSimple("Error al cargar", "No se pudo cargar la pantalla deseada.", Alert.AlertType.ERROR);

@@ -109,6 +109,7 @@ public class FXMLInicioSesionController implements Initializable {
             escenarioBase.setTitle("Menú Principal");
             escenarioBase.setScene(escenaPrincipal);
             escenarioBase.setResizable(false);
+            escenarioBase.setMaxWidth(escenarioBase.getWidth());
             escenarioBase.show();
 
             

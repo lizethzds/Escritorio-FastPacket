@@ -139,8 +139,9 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
             escenario.setScene(escena);
             escenario.setTitle("Formulario de Clientes");
             escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
             escenario.setResizable(false);
+            escenario.showAndWait();
+
             
         }catch(Exception e){
             Utilidades.mostrarAlertaSimple("Error al cargar", "No se pudo cargar el formulario", Alert.AlertType.INFORMATION);
