@@ -125,8 +125,9 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
             escenario.setScene(escena);
             escenario.setTitle("Formulario de Unidad");
             escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
             escenario.setResizable(false);
+            escenario.showAndWait();
+            
         } catch (Exception e) {
             e.printStackTrace();
             Utilidades.mostrarAlertaSimple("Error inesperado", "Ocurrio un error al mostrar el formulario, intentelo de nuevo.", Alert.AlertType.ERROR);
@@ -145,8 +146,9 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
             escenario.setScene(escena);
             escenario.setTitle("Baja de unidad");
             escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
             escenario.setResizable(false);
+            escenario.showAndWait();
+            
         } catch (Exception e) {
             e.printStackTrace();
             Utilidades.mostrarAlertaSimple("Error inesperado", "Ocurrio un error al mostrar el formulario, intentelo de nuevo.", Alert.AlertType.ERROR);
@@ -174,8 +176,9 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
             escenario.setScene(escena);
             escenario.setTitle("Historial de Unidades");
             escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
             escenario.setResizable(false);
+            escenario.showAndWait();
+            
         } catch (Exception e) {
             e.printStackTrace();
             Utilidades.mostrarAlertaSimple("Error inesperado", "Ocurrio un error al mostrar el historial, intentelo de nuevo.", Alert.AlertType.ERROR);
@@ -194,18 +197,18 @@ public class FXMLAdminUnidadesController implements Initializable, INotificarOpe
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 if (unidad.getVin() != null && unidad.getVin().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Coincide con el correo
+                    return true; 
                 }
 
                 if (unidad.getNoIdentificacion()!= null && unidad.getNoIdentificacion().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Coincide con el nombre
+                    return true; 
                 }
 
-                if (unidad.getAnio() != null && unidad.getAnio().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Coincide con el teléfono
+                if (unidad.getMarca() != null && unidad.getMarca().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; 
                 }
 
-                return false; // No coincide con ningún criterio
+                return false; 
             });
         });
 

@@ -2,6 +2,7 @@
 package escritoriofastpacket;
 
 import escritoriofastpacket.modelo.pojo.Colaborador;
+import escritoriofastpacket.utils.Utilidades;
 import escritoriofastpacket.vista.colaboradores.FXMLAdminColaboradoresController;
 import escritoriofastpacket.vista.envios.FXMLAdminEnviosController;
 import java.io.IOException;
@@ -91,6 +92,8 @@ private void btnIrEnvios(ActionEvent event) throws IOException {
     @FXML
     private void btnCerrarSesion(ActionEvent event) {
         
+        boolean cierraSesion = Utilidades.mostrarAlertaConfirmacion("Cerrar sesión", "¿Está seguro que desea cerrar sesión?");
+        if(cierraSesion){
         try{
             Stage escenario = (Stage)lbNombreColaborador.getScene().getWindow();
             FXMLLoader loadVista = new FXMLLoader(getClass().getResource("FXMLInicioSesion.fxml"));
@@ -105,6 +108,8 @@ private void btnIrEnvios(ActionEvent event) throws IOException {
             ex.printStackTrace();
         }
     }
+        }
+        
 
     void inicializarMenuGeneral(Colaborador colaboradorSesion) {
         this.colaboradorSesion = colaboradorSesion;

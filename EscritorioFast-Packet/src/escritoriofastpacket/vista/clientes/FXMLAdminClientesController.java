@@ -102,7 +102,7 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
             if(seElimina){
                 Mensaje msj = ClienteDAO.eliminarCliente(cliente.getIdCliente());
                 if(msj.isError()){
-                    Utilidades.mostrarAlertaSimple("Error en eliminación", msj.getContenido(), Alert.AlertType.ERROR);
+                    Utilidades.mostrarAlertaSimple("Error en eliminación", "El cliente no se puede eliminar porque tiene envíos asignados.", Alert.AlertType.ERROR);
                 }else{
                     Utilidades.mostrarAlertaSimple("Eliminación exitosa", msj.getContenido(), Alert.AlertType.INFORMATION);
                     notificarOperacionExitosa("Eliminado", cliente.getNombre());

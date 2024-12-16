@@ -185,7 +185,7 @@ public class FXMLFormularioEnvioController implements Initializable {
         }
     }
 
-     
+     //TODO configurar 
     private void cargarDatosEnvio(Integer idEnvio) {
       datosEnvio = EnvioDAO.obtenerDetallesEnvio(idEnvio);
       
@@ -211,18 +211,24 @@ public class FXMLFormularioEnvioController implements Initializable {
       
       if(idColaborador != null){
       int posicionConductor = buscarIdColaborador(idColaborador);
-      cbConductores.getSelectionModel().select(posicionConductor);
-      }else{
-      lbErrorConductor.setText("Por el momento, no hay un conductor asignado a este envío");
+      
+        cbConductores.getSelectionModel().select(posicionConductor);
+      }
+         else
+      {
+        lbErrorConductor.setText("Por el momento, no hay un conductor asignado a este envío");
       }  
       
-      
-        
+     
       int posicionCliente = buscarIdCliente(idCliente);
       cbClientes.getSelectionModel().select(posicionCliente);
+      
         
       int posicionEstatus = buscarIdEstadoEnvio(idEstadoEnvio);
       cbEstatus.getSelectionModel().select(posicionEstatus);
+      if(posicionEstatus == 2 || posicionEstatus == 3){
+      cbEstatus.setDisable(true);
+      }
    
       
     }
