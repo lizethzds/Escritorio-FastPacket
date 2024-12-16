@@ -34,6 +34,7 @@ import javafx.stage.Stage;
 public class FXMLAsignacionUnidadController implements Initializable {
     
     private Colaborador colaborador;
+    private Unidad unidad;
     private ObservableList<Unidad> unidades;
     @FXML
     private Label lblNombreColaborador;
@@ -55,8 +56,21 @@ public class FXMLAsignacionUnidadController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
-        cargarInformacionTabla();
-    }    
+        cargarInformacionTabla();     
+    }
+    
+    private void obtenerUnidadAsignada(Colaborador colaborador){
+        unidad = ColaboradorDAO.obtenerUnidad(colaborador.getIdColaborador());
+        System.out.println("unidad"+colaborador.getIdColaborador());
+        if(unidad !=  null){
+            for (Unidad u : tv_unidades.getItems()) {
+            if (u.getIdUnidad() == unidad.getIdUnidad()) { 
+                tv_unidades.getSelectionModel().select(u);
+                break;
+            }
+        }
+        }
+    }
     
     private void configurarTabla() {
         col_anio.setCellValueFactory(new PropertyValueFactory("anio"));
@@ -80,6 +94,7 @@ public class FXMLAsignacionUnidadController implements Initializable {
     
     public void inicializarValores(Colaborador colaborador){
         this.colaborador = colaborador;
+        obtenerUnidadAsignada(colaborador);
     }
     
     private void cerrarVentana() {
