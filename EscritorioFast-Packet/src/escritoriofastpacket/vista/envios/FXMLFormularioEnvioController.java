@@ -182,6 +182,9 @@ public class FXMLFormularioEnvioController implements Initializable {
             modoEdicion = true;
             cargarDatosEnvio(envioEdicion.getIdEnvio());
             
+            
+        }else{
+            cbEstatus.setDisable(true);
         }
     }
 
@@ -226,7 +229,7 @@ public class FXMLFormularioEnvioController implements Initializable {
         
       int posicionEstatus = buscarIdEstadoEnvio(idEstadoEnvio);
       cbEstatus.getSelectionModel().select(posicionEstatus);
-      if(posicionEstatus == 2 || posicionEstatus == 3){
+      if(posicionEstatus == 3 || posicionEstatus == 4){
       cbEstatus.setDisable(true);
       }
    

@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="626.0" prefWidth="925.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.envios.FXMLAdminEnviosController">
+<AnchorPane id="AnchorPane" prefHeight="626.0" prefWidth="973.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.envios.FXMLAdminEnviosController">
    <children>
       <TextField fx:id="tfBusquedaNumGuia" layoutX="41.0" layoutY="94.0" prefHeight="34.0" prefWidth="234.0" promptText="Busca una guia">
          <font>
@@ -45,7 +45,7 @@
             <Image url="@../../recursos/buscar_icon.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d9d9d9" height="61.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="925.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d9d9d9" height="61.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="973.0" />
       <Text layoutX="41.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Envíos y paquetes" wrappingWidth="260.74609375">
          <font>
             <Font name="Ebrima Bold" size="26.0" />
