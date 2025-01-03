@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="495.0" prefWidth="783.0" style="-fx-background-color: TRANSPARENT;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.clientes.FXMLAdminClientesController">
    <children>
-      <Pane prefHeight="579.0" prefWidth="934.0" style="-fx-background-color: #9FADBD;">
+      <Pane prefHeight="579.0" prefWidth="976.0" style="-fx-background-color: #9FADBD;">
          <children>
             <TableView fx:id="tvClientes" layoutX="51.0" layoutY="185.0" prefHeight="290.0" prefWidth="800.0">
               <columns>
@@ -42,7 +42,7 @@
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Button>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d9d9d9" height="79.0" layoutX="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="940.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d9d9d9" height="79.0" layoutX="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="986.0" />
             <Text layoutX="45.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clientes">
                <font>
                   <Font name="Ebrima Bold" size="27.0" />
