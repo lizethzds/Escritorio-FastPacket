@@ -1,0 +1,9 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.table-row-cell:selected {
+    -fx-border-color: #000; 
+    -fx-border-width: 1.5px;
+    -fx-border-style: solid;
+}
