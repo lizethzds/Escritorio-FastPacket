@@ -13,13 +13,13 @@
    <children>
       <Pane layoutY="-3.0" prefHeight="666.0" prefWidth="283.0" style="-fx-background-color: #2C3E50;">
          <children>
-            <Button layoutX="1.0" layoutY="184.0" mnemonicParsing="false" onAction="#btnIrColaboradores" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="COLABORADORES" textAlignment="JUSTIFY" textFill="WHITE">
+            <Button alignment="CENTER_RIGHT" layoutX="-1.0" layoutY="184.0" mnemonicParsing="false" onAction="#btnIrColaboradores" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="COLABORADORES" textAlignment="RIGHT" textFill="WHITE">
                <font>
-                  <Font name="Arial Bold" size="21.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font></Button>
-            <Button contentDisplay="CENTER" layoutX="-1.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnIrEnvios" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="ENVÍOS Y PAQUETES" textFill="WHITE">
+            <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="-1.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnIrEnvios" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="ENVÍOS Y PAQUETES" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Arial Bold" size="21.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font></Button>
             <Button layoutX="-1.0" layoutY="403.0" mnemonicParsing="false" onAction="#btnIrClientes" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="CLIENTES" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
@@ -58,6 +58,26 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
+            <ImageView fitHeight="70.0" fitWidth="83.0" layoutX="8.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@recursos/icons8-users-96.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="83.0" layoutX="5.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@recursos/icons8-package-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="69.0" fitWidth="83.0" layoutX="9.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@recursos/icons8-delivery-truck-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="69.0" fitWidth="83.0" layoutX="9.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@recursos/icons8-client-96.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <StackPane fx:id="stackPane" layoutX="283.0" prefHeight="665.0" prefWidth="947.0" style="-fx-background-color: #9FADBD;" />
