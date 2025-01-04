@@ -83,6 +83,7 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
                     "Por el momento no se puede cargar la informacion de los colaboradores",
                     Alert.AlertType.ERROR);
         }
+        tfBuscarColaborador.setText("");
         configurarFiltroBusqueda();
     }
 
@@ -97,11 +98,14 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
     private boolean comprobarEliminacion(Colaborador colaborador){
         Mensaje respuestaEnvios = ColaboradorDAO.comprobarEnvios(colaborador.getIdColaborador());
         if(!respuestaEnvios.isError()){
+            System.err.println("contenido "+respuestaEnvios.getContenido());
             boolean aceptado;
             if(!respuestaEnvios.getContenido().contains("no cuenta")){
-                aceptado = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", 
+                aceptado = false;
+                Utilidades.mostrarAlertaSimple("Eliminar colaborador", 
                     "Estas seguro de eliminar el colaborador "+colaborador.getNombre()+"?\n"+
-                     respuestaEnvios.getContenido() + "\n");               
+                     respuestaEnvios.getContenido() + "\n" + 
+                     "Por favor elimine los envios antes de eliminar el colaborador",Alert.AlertType.ERROR);               
             }else{
                 aceptado = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", 
                     "Estas seguro de eliminar el colaborador "+colaborador.getNombre()+"?");
@@ -126,6 +130,7 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
                          "Colaborador eliminado con exíto", 
                          Alert.AlertType.INFORMATION);
             }else{
+                System.err.println("error: " + respuesta.getContenido());
                 Utilidades.mostrarAlertaSimple("Error al eliminar colaborador",
                         "Se ha producido un error al eliminar el colaborador por favor intentelo mas tarde", 
                         Alert.AlertType.WARNING);
