@@ -14,12 +14,12 @@ public class Colaborador {
     private String rol;
     private String fotografia;
     private String noLicencia;
-    
+    private boolean asignado;
     
     public Colaborador() {
     }
 
-    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String noPersonal, String correo, String curp, String password, Integer idRol, String rol, String fotografia, String noLicencia) {
+    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String noPersonal, String correo, String curp, String password, Integer idRol, String rol, String fotografia, String noLicencia, boolean asignado) {
         this.idColaborador = idColaborador;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -32,35 +32,17 @@ public class Colaborador {
         this.rol = rol;
         this.fotografia = fotografia;
         this.noLicencia = noLicencia;
-    }
-    
-    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String noPersonal, String correo, String curp, String password, Integer idRol, String rol) {
-        this.idColaborador = idColaborador;
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.noPersonal = noPersonal;
-        this.correo = correo;
-        this.curp = curp;
-        this.password = password;
-        this.idRol = idRol;
-        this.rol = rol;
-    }
-    
-    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String noPersonal, String correo, String curp, String password, Integer idRol, String rol, String fotografia) {
-        this.idColaborador = idColaborador;
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.noPersonal = noPersonal;
-        this.correo = correo;
-        this.curp = curp;
-        this.password = password;
-        this.idRol = idRol;
-        this.rol = rol;
-        this.fotografia = fotografia;
+        this.asignado = asignado;
     }
 
+    public boolean isAsignado() {
+        return asignado;
+    }
+
+    public void setAsignado(boolean asignado) {
+        this.asignado = asignado;
+    }
+        
     public String getNoLicencia() {
         return noLicencia;
     }
@@ -162,5 +144,16 @@ public class Colaborador {
     public String toString() {
         return " - "+noPersonal +" "+ nombre + " " + apellidoPaterno + " " + apellidoMaterno;
     }
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Colaborador colaborador = (Colaborador) obj;
+        return noPersonal != null && noPersonal.equals(colaborador.noPersonal); // Comparar por un atributo único
+    }
+
+    @Override
+    public int hashCode() {
+        return noPersonal != null ? noPersonal.hashCode() : 0;
+    }
 }

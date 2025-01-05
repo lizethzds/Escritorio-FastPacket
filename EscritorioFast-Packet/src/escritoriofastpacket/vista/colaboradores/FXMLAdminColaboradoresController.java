@@ -83,6 +83,7 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
                     "Por el momento no se puede cargar la informacion de los colaboradores",
                     Alert.AlertType.ERROR);
         }
+        tfBuscarColaborador.setText("");
         configurarFiltroBusqueda();
     }
 
@@ -97,11 +98,14 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
     private boolean comprobarEliminacion(Colaborador colaborador){
         Mensaje respuestaEnvios = ColaboradorDAO.comprobarEnvios(colaborador.getIdColaborador());
         if(!respuestaEnvios.isError()){
+            System.err.println("contenido "+respuestaEnvios.getContenido());
             boolean aceptado;
             if(!respuestaEnvios.getContenido().contains("no cuenta")){
-                aceptado = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", 
+                aceptado = false;
+                Utilidades.mostrarAlertaSimple("Eliminar colaborador", 
                     "Estas seguro de eliminar el colaborador "+colaborador.getNombre()+"?\n"+
-                     respuestaEnvios.getContenido() + "\n");               
+                     respuestaEnvios.getContenido() + "\n" + 
+                     "Por favor elimine los envios antes de eliminar el colaborador",Alert.AlertType.ERROR);               
             }else{
                 aceptado = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador", 
                     "Estas seguro de eliminar el colaborador "+colaborador.getNombre()+"?");
@@ -126,6 +130,7 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
                          "Colaborador eliminado con exíto", 
                          Alert.AlertType.INFORMATION);
             }else{
+                System.err.println("error: " + respuesta.getContenido());
                 Utilidades.mostrarAlertaSimple("Error al eliminar colaborador",
                         "Se ha producido un error al eliminar el colaborador por favor intentelo mas tarde", 
                         Alert.AlertType.WARNING);
@@ -216,14 +221,12 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
         tvColaboradores.setItems(sortedData);
     }    
     
-    private void irPantallaASignarUnidad(Colaborador colaborador, String tituloPantalla){
+    private void irPantallaASignarUnidad(String tituloPantalla){
         Stage nuevoEcenario = new Stage();
         try {
 
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLAsignacionUnidad.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLListaAsignaciones.fxml"));
             Parent nuevoParent = cargador.load();
-            FXMLAsignacionUnidadController controlador = cargador.getController();
-            controlador.inicializarValores(colaborador);
             Scene ecenaAdmin = new Scene(nuevoParent);
             nuevoEcenario.setScene(ecenaAdmin);
             nuevoEcenario.setTitle(tituloPantalla);
@@ -239,19 +242,6 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
 
     @FXML
     private void asignarColaboradorAction(ActionEvent event) {
-        Colaborador colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
-        if(colaborador != null){
-            if("Conductor".equals(colaborador.getRol())){
-                irPantallaASignarUnidad(colaborador,"Editar colaborador");
-            }else{
-                Utilidades.mostrarAlertaSimple("Error en el rol del colaborador", 
-                    "Tiene que seleccionar un colaborador que tenga el rol de conductor",
-                    Alert.AlertType.ERROR);
-            }
-        }else{
-            Utilidades.mostrarAlertaSimple("seleccione un colaborador", 
-                    "Tiene que seleccionar un colaborador para poder asignarle una unidad",
-                    Alert.AlertType.ERROR);
-        }
+      irPantallaASignarUnidad("Lista de asignaciones");
     }
 }
