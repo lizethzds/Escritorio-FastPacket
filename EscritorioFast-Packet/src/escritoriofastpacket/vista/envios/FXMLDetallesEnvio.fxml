@@ -8,80 +8,117 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="659.0" prefWidth="665.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.envios.FXMLDetallesEnvioController">
+<AnchorPane id="AnchorPane" prefHeight="712.0" prefWidth="732.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.envios.FXMLDetallesEnvioController">
    <children>
-      <Text layoutX="233.0" layoutY="83.0" stroke="#030303" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos de Cliente" textAlignment="CENTER" wrappingWidth="199.861328125">
+      <Label layoutX="93.0" layoutY="96.0" prefHeight="25.0" prefWidth="175.0" text="Nombre de cliente:">
          <font>
-            <Font name="Ebrima Bold" size="20.0" />
-         </font>
-      </Text>
-      <Text layoutX="233.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos de Envío" textAlignment="CENTER" wrappingWidth="199.861328125">
-         <font>
-            <Font name="Ebrima Bold" size="20.0" />
-         </font>
-      </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d9d9d9" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="665.0" />
-      <Label layoutX="59.0" layoutY="111.0" prefHeight="25.0" prefWidth="175.0" text="Nombre de cliente:">
-         <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="Ebrima Bold" size="17.0" />
          </font>
       </Label>
-      <Label fx:id="lbNombreCliente" layoutX="224.0" layoutY="113.0" prefHeight="21.0" prefWidth="271.0" text="Nombres de cliente">
+      <Label fx:id="lbNombreCliente" layoutX="268.0" layoutY="95.0" prefHeight="21.0" prefWidth="339.0" text="Nombres de cliente">
          <font>
-            <Font name="Ebrima" size="15.0" />
+            <Font name="Ebrima" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="256.0" layoutY="145.0" prefHeight="20.0" prefWidth="154.0" text="Dirección  de origen">
+      <Label alignment="CENTER" layoutX="245.0" layoutY="33.0" prefHeight="36.0" prefWidth="227.0" style="-fx-background-color: #2C3E50; -fx-background-radius: 10;" text="Datos de Cliente" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="264.0" layoutY="453.0" prefHeight="20.0" prefWidth="161.0" text="Dirección de destino">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <GridPane layoutX="59.0" layoutY="180.0" prefHeight="90.0" prefWidth="538.0">
+      <GridPane layoutX="56.0" layoutY="183.0" prefHeight="113.0" prefWidth="603.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="173.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="297.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="64.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="114.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="295.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="140.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="114.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="lbCalle" prefHeight="17.0" prefWidth="131.0" text="Calle de Cliente" />
-            <Label fx:id="lbColonia" prefHeight="17.0" prefWidth="131.0" text="Colonia Cliente" GridPane.columnIndex="1" />
-            <Label fx:id="lbNumero" prefHeight="17.0" prefWidth="41.0" text="123B" GridPane.columnIndex="2" />
-            <Label fx:id="lbCP" prefHeight="17.0" prefWidth="52.0" text="91030" GridPane.rowIndex="1" />
-            <Label fx:id="lbLugarOrigen" prefHeight="17.0" prefWidth="161.0" text="Ciudad, Estado" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="lbCalle" prefHeight="21.0" prefWidth="307.0" text="Calle de Cliente" GridPane.columnIndex="1" />
+            <Label fx:id="lbColonia" prefHeight="21.0" prefWidth="317.0" text="Colonia Cliente" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="lbNumero" prefHeight="17.0" prefWidth="41.0" text="123B" GridPane.columnIndex="3" />
+            <Label fx:id="lbCP" prefHeight="17.0" prefWidth="52.0" text="91030" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="lbLugarOrigen" prefHeight="21.0" prefWidth="320.0" text="Ciudad, Estado" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label prefHeight="17.0" prefWidth="61.0" text="Calle:">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="73.0" text="Colonia:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label text="Número" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label text="Codigo Postal" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="84.0" text="Ciudad:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
-      <GridPane layoutX="40.0" layoutY="504.0" prefHeight="60.0" prefWidth="527.0">
+      <GridPane layoutX="56.0" layoutY="530.0" prefHeight="107.0" prefWidth="603.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="279.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="70.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="110.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.0" minWidth="10.0" prefWidth="298.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.0" minWidth="10.0" prefWidth="124.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.0" minWidth="10.0" prefWidth="97.0" />
         </columnConstraints>
         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="lbCalleDestino" prefHeight="17.0" prefWidth="111.0" text="Av Xalapa" />
-            <Label fx:id="lbColoniaDestino" prefHeight="17.0" prefWidth="119.0" text="Del Master" GridPane.columnIndex="1" />
-            <Label fx:id="lbNumDestino" prefHeight="17.0" prefWidth="41.0" text="12B" GridPane.columnIndex="2" />
-            <Label fx:id="lbCPDestino" text="91030" GridPane.rowIndex="1" />
-            <Label fx:id="lbLugarDestino" contentDisplay="CENTER" prefHeight="17.0" prefWidth="154.0" text="Ciudad, Estado" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="lbCalleDestino" prefHeight="17.0" prefWidth="111.0" text="Av Xalapa" GridPane.columnIndex="1" />
+            <Label fx:id="lbColoniaDestino" prefHeight="21.0" prefWidth="298.0" text="Del Master" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="lbNumDestino" prefHeight="21.0" prefWidth="78.0" text="12B" GridPane.columnIndex="3" />
+            <Label fx:id="lbCPDestino" prefHeight="21.0" prefWidth="62.0" text="91030" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="lbLugarDestino" contentDisplay="CENTER" prefHeight="21.0" prefWidth="312.0" text="Ciudad, Estado" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Calle:">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label text="Colonia:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="84.0" text="Ciudad" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label text="Codigo Postal" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label text="Número" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
-      <GridPane layoutX="74.0" layoutY="342.0" prefHeight="90.0" prefWidth="479.0">
+      <GridPane layoutX="56.0" layoutY="378.0" prefHeight="90.0" prefWidth="563.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="153.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="326.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="154.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="418.0" minWidth="10.0" prefWidth="409.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -91,35 +128,50 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Conductor:" wrappingWidth="98.0">
                <font>
-                  <Font name="Arial Bold" size="15.0" />
+                  <Font name="Ebrima Bold" size="16.0" />
                </font>
             </Text>
-            <Label fx:id="lbConductor" prefHeight="20.0" prefWidth="235.0" text="Nombre de conductor aqui" GridPane.columnIndex="1">
+            <Label fx:id="lbConductor" prefHeight="20.0" prefWidth="270.0" text="Nombre de conductor aqui" GridPane.columnIndex="1">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Ebrima" size="16.0" />
                </font>
             </Label>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus:" wrappingWidth="91.0" GridPane.rowIndex="1">
                <font>
-                  <Font name="Arial Bold" size="15.0" />
+                  <Font name="Ebrima Bold" size="16.0" />
                </font>
             </Text>
-            <Label fx:id="lbEstatus" prefHeight="20.0" prefWidth="142.0" text="Pendiente" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="lbEstatus" prefHeight="20.0" prefWidth="136.0" text="Pendiente" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Ebrima" size="16.0" />
                </font>
             </Label>
-            <Label prefHeight="20.0" prefWidth="130.0" text="Costo de envío:" GridPane.rowIndex="2">
+            <Label prefHeight="20.0" prefWidth="151.0" text="Costo de envío ($):" GridPane.rowIndex="2">
                <font>
-                  <Font name="Arial Bold" size="15.0" />
+                  <Font name="Ebrima Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lbCostoEnvio" prefHeight="17.0" prefWidth="58.0" text="\$1029" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="lbCostoEnvio" prefHeight="21.0" prefWidth="101.0" text="\$1029" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Ebrima" size="16.0" />
                </font>
             </Label>
          </children>
       </GridPane>
+      <Label alignment="CENTER" layoutX="239.0" layoutY="325.0" prefHeight="36.0" prefWidth="227.0" style="-fx-background-color: #2C3E50; -fx-background-radius: 10;" text="Datos de Envío" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="246.0" layoutY="489.0" prefHeight="25.0" prefWidth="213.0" style="-fx-background-radius: 10;" text="Dirección de destino">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="252.0" layoutY="145.0" prefHeight="25.0" prefWidth="213.0" style="-fx-background-radius: 10;" text="Dirección de origen">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
