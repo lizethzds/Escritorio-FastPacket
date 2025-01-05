@@ -17,15 +17,15 @@
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font></Button>
-            <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="-1.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnIrEnvios" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="ENVÍOS Y PAQUETES" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="CENTER_RIGHT" layoutX="-1.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnIrEnvios" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="ENVÍOS Y PAQUETES" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font></Button>
-            <Button layoutX="-1.0" layoutY="403.0" mnemonicParsing="false" onAction="#btnIrClientes" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="CLIENTES" textAlignment="JUSTIFY" textFill="WHITE">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="403.0" mnemonicParsing="false" onAction="#btnIrClientes" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="CLIENTES" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="21.0" />
                </font></Button>
-            <Button layoutX="-1.0" layoutY="330.0" mnemonicParsing="false" onAction="#btnIrUnidades" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="UNIDADES" textAlignment="JUSTIFY" textFill="WHITE">
+            <Button alignment="CENTER" layoutX="-1.0" layoutY="330.0" mnemonicParsing="false" onAction="#btnIrUnidades" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="UNIDADES" textAlignment="RIGHT" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="21.0" />
                </font></Button>
