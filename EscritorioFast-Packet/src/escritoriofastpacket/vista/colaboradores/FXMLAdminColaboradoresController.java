@@ -5,6 +5,7 @@
  */
 package escritoriofastpacket.vista.colaboradores;
 
+import escritoriofastpacket.FXMLMenuPrincipalController;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -28,12 +29,14 @@ import escritoriofastpacket.modelo.pojo.Mensaje;
 import escritoriofastpacket.observer.INotificacionOperacion;
 import escritoriofastpacket.utils.Utilidades;
 import escritoriofastpacket.modelo.dao.ColaboradorDAO;
+import escritoriofastpacket.observer.INotificacionCambio;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 
 public class FXMLAdminColaboradoresController implements Initializable, INotificacionOperacion {
     private ObservableList<Colaborador> colaboradores;
     private Colaborador colaboradorSesion;
+    private INotificacionCambio instaciaMenu;
     FilteredList<Colaborador> listaColaboradores;
     @FXML
     private TableView<Colaborador> tvColaboradores;
@@ -54,8 +57,9 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
     @FXML
     private TextField tfBuscarColaborador;
     
-     public void inicializarDatos(Colaborador colaboradorSesion) {
+     public void inicializarDatos(Colaborador colaboradorSesion, INotificacionCambio instacianMenu) {
         this.colaboradorSesion = colaboradorSesion;
+        this.instaciaMenu = instacianMenu;
         cargarInformacionTabla();
     }
      private void configurarTabla(){
@@ -72,10 +76,6 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
         colaboradores.clear();
         List<Colaborador> listaWs = ColaboradorDAO.obtenerColaboradores();
         if (listaWs != null && !listaWs.isEmpty()) {
-                listaWs.removeIf(colaborador -> 
-                    colaboradorSesion != null && 
-                    colaborador.getNoPersonal().equals(colaboradorSesion.getNoPersonal())
-                );
                 colaboradores.addAll(listaWs);
                 tvColaboradores.setItems(colaboradores);
         } else {
@@ -98,7 +98,6 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
     private boolean comprobarEliminacion(Colaborador colaborador){
         Mensaje respuestaEnvios = ColaboradorDAO.comprobarEnvios(colaborador.getIdColaborador());
         if(!respuestaEnvios.isError()){
-            System.err.println("contenido "+respuestaEnvios.getContenido());
             boolean aceptado;
             if(!respuestaEnvios.getContenido().contains("no cuenta")){
                 aceptado = false;
@@ -140,15 +139,27 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
     @FXML
     private void eliminarColaborador(ActionEvent event) {
         Colaborador colaborador = tvColaboradores.getSelectionModel().getSelectedItem();
-        if(colaborador != null){
+        Mensaje validacion = comprobarColaboradorEliminacion(colaborador);
+        if(!validacion.isError()){
             if(comprobarEliminacion(colaborador)){
                 eliminarColaboradorConfirmacion(colaborador.getIdColaborador());
             }  
         }else{
             Utilidades.mostrarAlertaSimple("seleccione un colaborador", 
-                    "Tiene que seleccionar un colaborador para poder eliminarlo",
+                    validacion.getContenido(),
                     Alert.AlertType.ERROR);
         }
+    }
+    
+    private Mensaje comprobarColaboradorEliminacion(Colaborador colaborador){
+        if(colaborador == null)
+            return new Mensaje(true,"Tiene que seleccionar un colaborador para poder eliminarlo");
+
+        if(colaborador.equals(colaboradorSesion))
+            return new Mensaje(true,"No puede eliminar al colaborador con la sesión activa, "
+                    + "por favor inicie sesión en otra cuenta para eliminar al colaborador");
+        
+        return new Mensaje(false,"sin problemas");
     }
     
     @FXML
@@ -174,7 +185,7 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioColaborador.fxml"));
             Parent nuevoParent = cargador.load();
             FXMLFormularioColaboradorController controlador = cargador.getController();
-            controlador.inicializarValores(observador, colaborador);
+            controlador.inicializarValores(observador, colaborador,this.instaciaMenu);
             Scene ecenaAdmin = new Scene(nuevoParent);
             nuevoEcenario.setScene(ecenaAdmin);
             nuevoEcenario.setTitle(tituloPantalla);

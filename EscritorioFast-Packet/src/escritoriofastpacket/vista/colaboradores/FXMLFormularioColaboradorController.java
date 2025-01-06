@@ -5,10 +5,12 @@
  */
 package escritoriofastpacket.vista.colaboradores;
 
+import escritoriofastpacket.FXMLMenuPrincipalController;
 import escritoriofastpacket.modelo.dao.ColaboradorDAO;
 import escritoriofastpacket.modelo.pojo.Colaborador;
 import escritoriofastpacket.modelo.pojo.Mensaje;
 import escritoriofastpacket.modelo.pojo.Rol;
+import escritoriofastpacket.observer.INotificacionCambio;
 import escritoriofastpacket.observer.INotificacionOperacion;
 import escritoriofastpacket.utils.Utilidades;
 import escritoriofastpacket.validators.ColaboradorValidator;
@@ -48,6 +50,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
     private Image imagenSeleccionada = null;
     private ObservableList<Rol> roles;
     INotificacionOperacion observador;
+    INotificacionCambio observadorCambio;
     Colaborador colaboradorEdicion = null;
     HashMap<String, Label> hashlbl = new LinkedHashMap<>();
     @FXML
@@ -107,11 +110,12 @@ public class FXMLFormularioColaboradorController implements Initializable {
         hashlbl.put("licencia", lblErrorlicencia);
     }
     
-    public void inicializarValores(INotificacionOperacion observador, Colaborador colaboradorEdicion) {
+    public void inicializarValores(INotificacionOperacion observador, Colaborador colaboradorEdicion, INotificacionCambio instaciaMenu) {
         this.observador = observador;
         this.colaboradorEdicion = colaboradorEdicion;
         if (colaboradorEdicion != null) {
             modoEdicion = true;
+            this.observadorCambio = instaciaMenu;
             cargarDatosEdicion();
         }
     }
@@ -259,6 +263,8 @@ public class FXMLFormularioColaboradorController implements Initializable {
                     + colaborador.getNombre() + ", se modificó correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
             observador.notificarOperacionExitosa("Actualización", colaborador.getNombre());
+            colaborador.setFotografia(null);
+            observadorCambio.notificarCambioColaboradorSesion(colaborador);
         } else {
             Utilidades.mostrarAlertaSimple("Error al modificar colaborador", respuesta.getContenido(), Alert.AlertType.ERROR);
         }
