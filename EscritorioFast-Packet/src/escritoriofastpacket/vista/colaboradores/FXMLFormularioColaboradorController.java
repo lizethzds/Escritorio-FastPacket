@@ -106,7 +106,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
         hashlbl.put("rol", lblErrorRol);
         hashlbl.put("licencia", lblErrorlicencia);
     }
-
+    
     public void inicializarValores(INotificacionOperacion observador, Colaborador colaboradorEdicion) {
         this.observador = observador;
         this.colaboradorEdicion = colaboradorEdicion;
@@ -152,7 +152,32 @@ public class FXMLFormularioColaboradorController implements Initializable {
         }
         return 0;
     }
-
+    private void configurarDatosEntrada() {
+        tfLicencia.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfLicencia.setText(oldValue);
+            }
+        });
+        tfNombre.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+                tfNombre.setText(oldValue);
+            }
+        });
+        
+        tfApellidoMaterno.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+                tfApellidoMaterno.setText(oldValue);
+            }
+        });
+        
+        tfApellidoPaterno.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+                tfApellidoPaterno.setText(oldValue);
+            }
+        });
+        
+        
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicializarHashErrores();
@@ -162,6 +187,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
                 obtenerImagenColaboradorEdicion(colaboradorEdicion.getIdColaborador());
             }
         });
+        configurarDatosEntrada();
     }
 
     @FXML
