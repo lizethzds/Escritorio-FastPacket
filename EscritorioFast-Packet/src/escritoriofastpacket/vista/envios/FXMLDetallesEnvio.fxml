@@ -40,8 +40,8 @@
          <children>
             <Label fx:id="lbCalle" prefHeight="21.0" prefWidth="307.0" text="Calle de Cliente" GridPane.columnIndex="1" />
             <Label fx:id="lbColonia" prefHeight="21.0" prefWidth="317.0" text="Colonia Cliente" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="lbNumero" prefHeight="17.0" prefWidth="41.0" text="123B" GridPane.columnIndex="3" />
-            <Label fx:id="lbCP" prefHeight="17.0" prefWidth="52.0" text="91030" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="lbNumero" prefHeight="19.0" prefWidth="76.0" text="123B" GridPane.columnIndex="3" />
+            <Label fx:id="lbCP" prefHeight="19.0" prefWidth="71.0" text="91030" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Label fx:id="lbLugarOrigen" prefHeight="21.0" prefWidth="320.0" text="Ciudad, Estado" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label prefHeight="17.0" prefWidth="61.0" text="Calle:">
                <font>
@@ -83,7 +83,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="lbCalleDestino" prefHeight="17.0" prefWidth="111.0" text="Av Xalapa" GridPane.columnIndex="1" />
+            <Label fx:id="lbCalleDestino" prefHeight="19.0" prefWidth="286.0" text="Av Xalapa" GridPane.columnIndex="1" />
             <Label fx:id="lbColoniaDestino" prefHeight="21.0" prefWidth="298.0" text="Del Master" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="lbNumDestino" prefHeight="21.0" prefWidth="78.0" text="12B" GridPane.columnIndex="3" />
             <Label fx:id="lbCPDestino" prefHeight="21.0" prefWidth="62.0" text="91030" GridPane.columnIndex="3" GridPane.rowIndex="1" />

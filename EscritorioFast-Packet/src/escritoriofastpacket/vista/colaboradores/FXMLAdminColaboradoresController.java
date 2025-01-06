@@ -68,24 +68,27 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
     }
     
-     private void cargarInformacionTabla() {
-        colaboradores.clear();
-        List<Colaborador> listaWs = ColaboradorDAO.obtenerColaboradores();
-        if (listaWs != null && !listaWs.isEmpty()) {
-                listaWs.removeIf(colaborador -> 
-                    colaboradorSesion != null && 
-                    colaborador.getNoPersonal().equals(colaboradorSesion.getNoPersonal())
-                );
-                colaboradores.addAll(listaWs);
-                tvColaboradores.setItems(colaboradores);
-        } else {
-            Utilidades.mostrarAlertaSimple("Datos no disponibles", 
-                    "Por el momento no se puede cargar la informacion de los colaboradores",
-                    Alert.AlertType.ERROR);
-        }
-        tfBuscarColaborador.setText("");
-        configurarFiltroBusqueda();
+    private void cargarInformacionTabla() {
+    colaboradores.clear();
+    List<Colaborador> listaWs = ColaboradorDAO.obtenerColaboradores();
+    if (listaWs != null && !listaWs.isEmpty()) {
+        // Se excluye al colaborador comodín
+        listaWs.removeIf(colaborador -> 
+            (colaboradorSesion != null && 
+             colaborador.getNoPersonal().equals(colaboradorSesion.getNoPersonal())) || 
+             colaborador.getIdColaborador() == 1
+        );
+        colaboradores.addAll(listaWs);
+        tvColaboradores.setItems(colaboradores);
+    } else {
+        Utilidades.mostrarAlertaSimple("Datos no disponibles", 
+                "Por el momento no se puede cargar la informacion de los colaboradores",
+                Alert.AlertType.ERROR);
     }
+    tfBuscarColaborador.setText("");
+    configurarFiltroBusqueda();
+}
+
 
     
     @Override
