@@ -2,7 +2,7 @@
 package escritoriofastpacket;
 
 import escritoriofastpacket.modelo.pojo.Colaborador;
-import escritoriofastpacket.utils.Utilidades;
+import escritoriofastpacket.observer.INotificacionCambio;
 import escritoriofastpacket.vista.colaboradores.FXMLAdminColaboradoresController;
 import escritoriofastpacket.vista.envios.FXMLAdminEnviosController;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  *
  * @author lizet
  */
-public class FXMLMenuPrincipalController implements Initializable {
+public class FXMLMenuPrincipalController implements Initializable, INotificacionCambio {
     
     Colaborador colaboradorSesion;
 
@@ -47,7 +47,7 @@ private void btnIrColaboradores(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/escritoriofastpacket/vista/colaboradores/FXMLAdminColaboradores.fxml"));
     Parent loadMain = loader.load();
     FXMLAdminColaboradoresController controller = loader.getController();
-    controller.inicializarDatos(colaboradorSesion);
+    controller.inicializarDatos(colaboradorSesion,this);
     stackPane.getChildren().clear();
     stackPane.getChildren().add(loadMain);
 }
@@ -92,8 +92,6 @@ private void btnIrEnvios(ActionEvent event) throws IOException {
     @FXML
     private void btnCerrarSesion(ActionEvent event) {
         
-        boolean cierraSesion = Utilidades.mostrarAlertaConfirmacion("Cerrar sesión", "¿Está seguro que desea cerrar sesión?");
-        if(cierraSesion){
         try{
             Stage escenario = (Stage)lbNombreColaborador.getScene().getWindow();
             FXMLLoader loadVista = new FXMLLoader(getClass().getResource("FXMLInicioSesion.fxml"));
@@ -108,13 +106,22 @@ private void btnIrEnvios(ActionEvent event) throws IOException {
             ex.printStackTrace();
         }
     }
-        }
-        
 
     void inicializarMenuGeneral(Colaborador colaboradorSesion) {
         this.colaboradorSesion = colaboradorSesion;
         lbNombreColaborador.setText(colaboradorSesion.getNombre() +" "+ colaboradorSesion.getApellidoPaterno() + " "+colaboradorSesion.getApellidoMaterno());
         lbNumPColaborador.setText(colaboradorSesion.getNoPersonal());
     }
+
     
+    @Override
+    public void notificarCambioColaboradorSesion(Colaborador cambio){
+        System.err.println("Notifico");
+        if(cambio.getIdColaborador().equals(this.colaboradorSesion.getIdColaborador())){  
+            System.out.println("entro al if");
+            this.colaboradorSesion = cambio;
+            lbNombreColaborador.setText(colaboradorSesion.getNombre() +" "+ colaboradorSesion.getApellidoPaterno() + " "+colaboradorSesion.getApellidoMaterno());
+            lbNumPColaborador.setText(colaboradorSesion.getNoPersonal());
+        }
+    }
 }
