@@ -102,7 +102,7 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
             if(seElimina){
                 Mensaje msj = ClienteDAO.eliminarCliente(cliente.getIdCliente());
                 if(msj.isError()){
-                    Utilidades.mostrarAlertaSimple("Error en eliminación", msj.getContenido(), Alert.AlertType.ERROR);
+                    Utilidades.mostrarAlertaSimple("Error en eliminación", "El cliente no se puede eliminar porque tiene envíos asignados.", Alert.AlertType.ERROR);
                 }else{
                     Utilidades.mostrarAlertaSimple("Eliminación exitosa", msj.getContenido(), Alert.AlertType.INFORMATION);
                     notificarOperacionExitosa("Eliminado", cliente.getNombre());
@@ -139,8 +139,9 @@ public class FXMLAdminClientesController implements Initializable , INotificarOp
             escenario.setScene(escena);
             escenario.setTitle("Formulario de Clientes");
             escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
             escenario.setResizable(false);
+            escenario.showAndWait();
+
             
         }catch(Exception e){
             Utilidades.mostrarAlertaSimple("Error al cargar", "No se pudo cargar el formulario", Alert.AlertType.INFORMATION);

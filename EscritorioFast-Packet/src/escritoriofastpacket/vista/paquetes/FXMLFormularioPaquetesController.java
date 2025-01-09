@@ -189,7 +189,7 @@ public class FXMLFormularioPaquetesController implements Initializable {
             tfAlto.setText(oldValue);
         }
     });
-    tfAlto.setPromptText("Máximo 4 dígitos");
+    
 
     // Validar tfAncho: Solo números, máximo 4 caracteres
     tfAncho.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -197,7 +197,7 @@ public class FXMLFormularioPaquetesController implements Initializable {
             tfAncho.setText(oldValue);
         }
     });
-    tfAncho.setPromptText("Máximo 4 dígitos");
+    
 
     // Validar tfProfundidad: Solo números, máximo 4 caracteres
     tfProfundidad.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -205,7 +205,7 @@ public class FXMLFormularioPaquetesController implements Initializable {
             tfProfundidad.setText(oldValue);
         }
     });
-    tfProfundidad.setPromptText("Máximo 4 dígitos");
+    
 
     // Validar tfPeso: Solo números, máximo 4 caracteres
       tfPeso.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -213,7 +213,7 @@ public class FXMLFormularioPaquetesController implements Initializable {
             tfPeso.setText(oldValue);
         }
     });
-    tfPeso.setPromptText("Formato válido: 123.45");
+    
 
     // Validar taDescripcionPaquete: Máximo 250 caracteres
     taDescripcionPaquete.textProperty().addListener((observable, oldValue, newValue) -> {

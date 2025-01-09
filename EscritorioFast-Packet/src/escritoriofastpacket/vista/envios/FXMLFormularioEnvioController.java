@@ -155,6 +155,7 @@ public class FXMLFormularioEnvioController implements Initializable {
                         ? cbEstatus.getSelectionModel().getSelectedItem().getIdEstadoEnvio()
                         :0;
               datosRegistroEnvio.getEnvio().setIdEstadoEnvio(idEstadoEnvio);
+              
               HistorialEnvio historial = new HistorialEnvio();
               historial.setIdColaborador(this.idColaborador);
               historial.setIdEnvio(datosRegistroEnvio.getEnvio().getIdEnvio());
@@ -181,10 +182,13 @@ public class FXMLFormularioEnvioController implements Initializable {
             modoEdicion = true;
             cargarDatosEnvio(envioEdicion.getIdEnvio());
             
+            
+        }else{
+            cbEstatus.setDisable(true);
         }
     }
 
-     
+     //TODO configurar 
     private void cargarDatosEnvio(Integer idEnvio) {
       datosEnvio = EnvioDAO.obtenerDetallesEnvio(idEnvio);
       
@@ -210,18 +214,24 @@ public class FXMLFormularioEnvioController implements Initializable {
       
       if(idColaborador != null){
       int posicionConductor = buscarIdColaborador(idColaborador);
-      cbConductores.getSelectionModel().select(posicionConductor);
-      }else{
-      lbErrorConductor.setText("Por el momento, no hay un conductor asignado a este envío");
+      
+        cbConductores.getSelectionModel().select(posicionConductor);
+      }
+         else
+      {
+        lbErrorConductor.setText("Por el momento, no hay un conductor asignado a este envío");
       }  
       
-      
-        
+     
       int posicionCliente = buscarIdCliente(idCliente);
       cbClientes.getSelectionModel().select(posicionCliente);
+      
         
       int posicionEstatus = buscarIdEstadoEnvio(idEstadoEnvio);
       cbEstatus.getSelectionModel().select(posicionEstatus);
+      if(posicionEstatus == 3 || posicionEstatus == 4){
+      cbEstatus.setDisable(true);
+      }
    
       
     }
@@ -443,25 +453,23 @@ private boolean validarCamposLlenos() {
     
     private void configurarDatosEntrada() {
    
-    // Validar tfCodigoPostal: Solo números, máximo 5 caracteres
+    //Solo números, máximo 5 caracteres
     tfCodigoPostal.textProperty().addListener((observable, oldValue, newValue) -> {
         if (!newValue.matches("\\d*") || newValue.length() > 5) {
             tfCodigoPostal.setText(oldValue);
         }
     });
-    tfCodigoPostal.setPromptText("Ingrese un código postal válido (5 dígitos)");
+    tfCodigoPostal.setPromptText("Ingrese un código postal válido");
 
-    // Validar tfNumeroDestino: Cualquier carácter, máximo 5 caracteres
+    //Cualquier carácter, máximo 5 caracteres
     tfNumeroDestino.textProperty().addListener((observable, oldValue, newValue) -> {
         if (newValue.length() > 5) {
             tfNumeroDestino.setText(oldValue);
         }
     });
-    tfNumeroDestino.setPromptText("Máximo 5 caracteres");
     
-  // Validar tfCostoEnvio: Solo números y un punto decimal, máximo 10 caracteres
+    
 tfCostoEnvio.textProperty().addListener((observable, oldValue, newValue) -> {
-    // Expresión regular para validar números decimales con un punto y hasta 10 caracteres
     if (!newValue.matches("\\d{0,9}(\\.\\d{0,1})?") || newValue.length() > 10) {
         tfCostoEnvio.setText(oldValue);
     }

@@ -8,24 +8,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="435.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.paquetes.FXMLFormularioPaquetesController">
+<AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="455.0" style="-fx-background-color: #9FADBD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.vista.paquetes.FXMLFormularioPaquetesController">
    <children>
       <TextArea fx:id="taDescripcionPaquete" layoutX="71.0" layoutY="273.0" prefHeight="72.0" prefWidth="280.0" />
       <TextField fx:id="tfAlto" layoutX="75.0" layoutY="106.0" prefHeight="25.0" prefWidth="77.0" promptText="Alto" />
-      <Label layoutX="133.0" layoutY="67.0" text="Dimensiones(cm)">
+      <Label layoutX="142.0" layoutY="60.0" text="Dimensiones(cm)">
          <font>
             <Font name="Ebrima Bold" size="20.0" />
          </font>
       </Label>
       <TextField fx:id="tfAncho" layoutX="186.0" layoutY="106.0" prefHeight="25.0" prefWidth="84.0" promptText="Ancho" />
-      <TextField fx:id="tfProfundidad" layoutX="298.0" layoutY="106.0" prefHeight="25.0" prefWidth="84.0" promptText="Profundidad" />
+      <TextField fx:id="tfProfundidad" layoutX="298.0" layoutY="106.0" prefHeight="31.0" prefWidth="91.0" promptText="Profundidad" />
       <TextField fx:id="tfPeso" layoutX="71.0" layoutY="194.0" prefHeight="25.0" prefWidth="77.0" />
       <Label layoutX="71.0" layoutY="177.0" text="Peso (kg)" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="81.0" layoutY="256.0" prefHeight="17.0" prefWidth="167.0" text="Descripción del paquete">
+      <Label layoutX="69.0" layoutY="256.0" prefHeight="17.0" prefWidth="167.0" text="Descripción del paquete">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -38,7 +38,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d9d9d9" height="49.0" layoutX="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="434.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d9d9d9" height="49.0" layoutX="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="455.0" />
       <Text layoutX="139.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos de paquete">
          <font>
             <Font name="Ebrima" size="20.0" />
@@ -57,6 +57,21 @@
       <Label fx:id="lbErrorDescripcion" layoutX="65.0" layoutY="345.0" prefHeight="17.0" prefWidth="339.0" textFill="RED">
          <font>
             <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="93.0" text="Alto" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="186.0" layoutY="93.0" text="Ancho" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="298.0" layoutY="93.0" text="Profundidad" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
    </children>

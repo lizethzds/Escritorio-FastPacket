@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -10,32 +11,32 @@
 
 <AnchorPane id="AnchorPane" prefHeight="573.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="escritoriofastpacket.FXMLMenuPrincipalController">
    <children>
-      <Pane layoutY="-3.0" prefHeight="625.0" prefWidth="222.0" style="-fx-background-color: #2C3E50;">
+      <Pane layoutY="-3.0" prefHeight="666.0" prefWidth="283.0" style="-fx-background-color: #2C3E50;">
          <children>
-            <Button layoutX="-1.0" layoutY="184.0" mnemonicParsing="false" onAction="#btnIrColaboradores" prefHeight="73.0" prefWidth="222.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="Colaboradores" textFill="WHITE">
+            <Button alignment="CENTER_RIGHT" layoutX="-1.0" layoutY="184.0" mnemonicParsing="false" onAction="#btnIrColaboradores" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="COLABORADORES" textAlignment="RIGHT" textFill="WHITE">
                <font>
-                  <Font name="Microsoft Sans Serif" size="24.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font></Button>
-            <Button layoutX="-1.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnIrEnvios" prefHeight="73.0" prefWidth="222.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="Envíos y paquetes" textFill="WHITE">
+            <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="-1.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnIrEnvios" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="ENVÍOS Y PAQUETES" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Microsoft Sans Serif" size="22.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font></Button>
-            <Button layoutX="-1.0" layoutY="403.0" mnemonicParsing="false" onAction="#btnIrClientes" prefHeight="73.0" prefWidth="222.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="Clientes" textFill="WHITE">
+            <Button layoutX="-1.0" layoutY="403.0" mnemonicParsing="false" onAction="#btnIrClientes" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="CLIENTES" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
-                  <Font name="Microsoft Sans Serif" size="24.0" />
+                  <Font name="Arial Bold" size="21.0" />
                </font></Button>
-            <Button layoutX="-1.0" layoutY="330.0" mnemonicParsing="false" onAction="#btnIrUnidades" prefHeight="73.0" prefWidth="222.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="Unidades" textFill="WHITE">
+            <Button layoutX="-1.0" layoutY="330.0" mnemonicParsing="false" onAction="#btnIrUnidades" prefHeight="73.0" prefWidth="283.0" style="-fx-background-color: #2C3E50; -fx-border-color: WHITE;" text="UNIDADES" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
-                  <Font name="Microsoft Sans Serif" size="24.0" />
+                  <Font name="Arial Bold" size="21.0" />
                </font></Button>
-            <VBox alignment="CENTER" layoutX="3.0" layoutY="33.0" prefHeight="129.0" prefWidth="215.0">
+            <VBox alignment="CENTER" layoutX="-1.0" layoutY="32.0" prefHeight="129.0" prefWidth="283.0">
                <children>
                   <Label text="Colaborador:" textFill="WHITE">
                      <font>
                         <Font name="Ebrima Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbNombreColaborador" prefHeight="21.0" prefWidth="190.0" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="lbNombreColaborador" alignment="CENTER" prefHeight="21.0" prefWidth="256.0" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Ebrima" size="15.0" />
                      </font>
@@ -52,14 +53,34 @@
                   </Label>
                </children>
             </VBox>
+            <Button layoutX="73.0" layoutY="557.0" mnemonicParsing="false" onAction="#btnCerrarSesion" prefHeight="45.0" prefWidth="135.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: RED;" text="Cerrar sesión" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="70.0" fitWidth="83.0" layoutX="8.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@recursos/icons8-users-96.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="83.0" layoutX="5.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@recursos/icons8-package-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="69.0" fitWidth="83.0" layoutX="9.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@recursos/icons8-delivery-truck-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="69.0" fitWidth="83.0" layoutX="9.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@recursos/icons8-client-96.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
-      <StackPane fx:id="stackPane" layoutX="220.0" prefHeight="665.0" prefWidth="937.0" style="-fx-background-color: #9FADBD;" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2c3e50" height="65.0" layoutX="-2.0" layoutY="601.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="222.0" />
-      <Button layoutX="44.0" layoutY="584.0" mnemonicParsing="false" onAction="#btnCerrarSesion" prefHeight="34.0" prefWidth="135.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: RED;" text="Cerrar sesión" textFill="WHITE">
-         <font>
-            <Font name="Calibri Bold" size="18.0" />
-         </font>
-      </Button>
+      <StackPane fx:id="stackPane" layoutX="283.0" prefHeight="665.0" prefWidth="947.0" style="-fx-background-color: #9FADBD;" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2c3e50" height="65.0" layoutX="-2.0" layoutY="601.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="283.0" />
    </children>
 </AnchorPane>

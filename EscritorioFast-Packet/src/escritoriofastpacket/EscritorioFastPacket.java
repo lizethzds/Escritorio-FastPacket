@@ -21,10 +21,9 @@ public class EscritorioFastPacket extends Application {
     public void start(Stage stage) throws Exception {
        //Parent root = FXMLLoader.load(getClass().getResource("/escritoriofastpacket/vista/paquetes/FXMLAdminPaquetes.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("FXMLInicioSesion.fxml"));
-
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

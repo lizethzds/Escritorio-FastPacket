@@ -84,6 +84,7 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
                         .filter(colaborador -> colaborador.getRol().equals("Conductor"))
                         .collect(Collectors.toList());
             }
+            listaWs.removeIf(colaborador -> colaborador.getIdColaborador() == 1);
             colaboradores.addAll(listaWs);
             tvColaboradores.setItems(colaboradores);
         } else {
@@ -94,6 +95,7 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
         tfBuscarColaborador.setText("");
         configurarFiltroBusqueda();
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -136,7 +138,6 @@ public class FXMLAdminColaboradoresController implements Initializable, INotific
                     "Colaborador eliminado con exíto",
                     Alert.AlertType.INFORMATION);
         } else {
-            System.err.println("error: " + respuesta.getContenido());
             Utilidades.mostrarAlertaSimple("Error al eliminar colaborador",
                     "Se ha producido un error al eliminar el colaborador por favor intentelo mas tarde",
                     Alert.AlertType.WARNING);
