@@ -138,7 +138,6 @@ public class FXMLFormularioColaboradorController implements Initializable {
         cbTipoColaborador.setDisable(true);
         if (cbTipoColaborador.getSelectionModel().getSelectedItem().getRol().equals("Conductor")) {
             tfLicencia.setVisible(true);
-            tfLicencia.setDisable(false);
             lbLicencia.setVisible(true);
             tfLicencia.setText(colaboradorEdicion.getNoLicencia());
         }
@@ -372,6 +371,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
         if (idRol == 3) {
             lbLicencia.setVisible(true);
             tfLicencia.setVisible(true);
+            tfLicencia.setDisable(false);
         } else {
             if (lbLicencia.isVisible() && tfLicencia.isVisible()) {
                 lbLicencia.setVisible(false);
