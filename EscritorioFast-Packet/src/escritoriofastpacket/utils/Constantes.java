@@ -13,6 +13,6 @@ public class Constantes {
     
     public static final int ERROR_URL = 404;
     public static final int ERROR_PETICION = 402;
-    public static final String URL_WS = "http://localhost:8084/API-FastPacket/api/";
+    public static final String URL_WS = "http://192.90.57:8084/API-FastPacket/api/";
     
 }

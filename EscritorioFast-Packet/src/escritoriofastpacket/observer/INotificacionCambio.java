@@ -5,11 +5,13 @@
  */
 package escritoriofastpacket.observer;
 
+import escritoriofastpacket.modelo.pojo.Colaborador;
 
 /**
  *
  * @author david
  */
-public interface INotificacionOperacion {
-    public void notificarOperacionExitosa(String tipo, String nombre);
+public interface INotificacionCambio {
+    
+    public void notificarCambioColaboradorSesion(Colaborador colaboradorCambio);
 }

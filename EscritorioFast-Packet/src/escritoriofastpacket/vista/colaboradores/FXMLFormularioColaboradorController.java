@@ -5,10 +5,12 @@
  */
 package escritoriofastpacket.vista.colaboradores;
 
+import escritoriofastpacket.FXMLMenuPrincipalController;
 import escritoriofastpacket.modelo.dao.ColaboradorDAO;
 import escritoriofastpacket.modelo.pojo.Colaborador;
 import escritoriofastpacket.modelo.pojo.Mensaje;
 import escritoriofastpacket.modelo.pojo.Rol;
+import escritoriofastpacket.observer.INotificacionCambio;
 import escritoriofastpacket.observer.INotificacionOperacion;
 import escritoriofastpacket.utils.Utilidades;
 import escritoriofastpacket.validators.ColaboradorValidator;
@@ -48,6 +50,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
     private Image imagenSeleccionada = null;
     private ObservableList<Rol> roles;
     INotificacionOperacion observador;
+    INotificacionCambio observadorCambio;
     Colaborador colaboradorEdicion = null;
     HashMap<String, Label> hashlbl = new LinkedHashMap<>();
     @FXML
@@ -106,12 +109,13 @@ public class FXMLFormularioColaboradorController implements Initializable {
         hashlbl.put("rol", lblErrorRol);
         hashlbl.put("licencia", lblErrorlicencia);
     }
-
-    public void inicializarValores(INotificacionOperacion observador, Colaborador colaboradorEdicion) {
+    
+    public void inicializarValores(INotificacionOperacion observador, Colaborador colaboradorEdicion, INotificacionCambio instaciaMenu) {
         this.observador = observador;
         this.colaboradorEdicion = colaboradorEdicion;
         if (colaboradorEdicion != null) {
             modoEdicion = true;
+            this.observadorCambio = instaciaMenu;
             cargarDatosEdicion();
         }
     }
@@ -152,7 +156,32 @@ public class FXMLFormularioColaboradorController implements Initializable {
         }
         return 0;
     }
-
+    private void configurarDatosEntrada() {
+        tfLicencia.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfLicencia.setText(oldValue);
+            }
+        });
+        tfNombre.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+                tfNombre.setText(oldValue);
+            }
+        });
+        
+        tfApellidoMaterno.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+                tfApellidoMaterno.setText(oldValue);
+            }
+        });
+        
+        tfApellidoPaterno.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*")) {
+                tfApellidoPaterno.setText(oldValue);
+            }
+        });
+        
+        
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicializarHashErrores();
@@ -162,6 +191,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
                 obtenerImagenColaboradorEdicion(colaboradorEdicion.getIdColaborador());
             }
         });
+        configurarDatosEntrada();
     }
 
     @FXML
@@ -233,6 +263,8 @@ public class FXMLFormularioColaboradorController implements Initializable {
                     + colaborador.getNombre() + ", se modificó correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
             observador.notificarOperacionExitosa("Actualización", colaborador.getNombre());
+            colaborador.setFotografia(null);
+            observadorCambio.notificarCambioColaboradorSesion(colaborador);
         } else {
             Utilidades.mostrarAlertaSimple("Error al modificar colaborador", respuesta.getContenido(), Alert.AlertType.ERROR);
         }

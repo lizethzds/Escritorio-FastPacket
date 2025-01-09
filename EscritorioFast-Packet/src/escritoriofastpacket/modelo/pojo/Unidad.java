@@ -20,7 +20,8 @@ public class Unidad {
     private Integer idTipoUnidad;
     private String tipoUnidad;
     private String motivo;
-
+    private boolean asignada;
+    
     public Unidad() {
     }
 
@@ -36,6 +37,27 @@ public class Unidad {
         this.motivo = motivo;
     }
 
+    public Unidad(Integer idUnidad, String marca, String modelo, String anio, String vin, String noIdentificacion, Integer idTipoUnidad, String tipoUnidad, String motivo, boolean asignada) {
+        this.idUnidad = idUnidad;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.anio = anio;
+        this.vin = vin;
+        this.noIdentificacion = noIdentificacion;
+        this.idTipoUnidad = idTipoUnidad;
+        this.tipoUnidad = tipoUnidad;
+        this.motivo = motivo;
+        this.asignada = asignada;
+    }
+
+    public boolean isAsignada() {
+        return asignada;
+    }
+
+    public void setAsignada(boolean asignada) {
+        this.asignada = asignada;
+    }
+    
     public Integer getIdUnidad() {
         return idUnidad;
     }
@@ -109,5 +131,16 @@ public class Unidad {
     }
 
     
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Unidad unidad = (Unidad) obj;
+        return vin != null && vin.equals(unidad.vin);
+    }
+
+    @Override
+    public int hashCode() {
+        return vin != null ? vin.hashCode() : 0;
+    }
 }

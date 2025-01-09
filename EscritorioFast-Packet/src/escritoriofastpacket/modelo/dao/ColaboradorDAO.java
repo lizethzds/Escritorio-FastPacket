@@ -12,6 +12,7 @@ import escritoriofastpacket.modelo.pojo.Rol;
 import escritoriofastpacket.utils.Constantes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import escritoriofastpacket.modelo.pojo.RegistroColaboradorUnidad;
 import escritoriofastpacket.modelo.pojo.Unidad;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection; 
@@ -166,7 +167,7 @@ public class ColaboradorDAO {
         String url = Constantes.URL_WS+"/colaboradores/asignarUnidad/"+idColaborador+"/"+idUnidad;
         try {
             Gson gson = new Gson();
-            RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+            RespuestaHTTP respuestaWS = ConexionWS.peticionPOST(url,"");
             if(respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
                 respuesta = gson.fromJson(respuestaWS.getContenido(), Mensaje.class);
             }else{
@@ -178,10 +179,10 @@ public class ColaboradorDAO {
         return respuesta;
     }
     
-    public static Mensaje comprobarColaboradorUnidad(Integer idColaborador){
+    public static Mensaje comprobarColaboradorUnidad(Integer idColaborador, Integer idUnidad){
         Mensaje respuesta = new Mensaje();
         respuesta.setError(true);
-        String url = Constantes.URL_WS+"/colaboradores/comprobarColaboradorUnidad/"+idColaborador;
+        String url = Constantes.URL_WS+"/colaboradores/comprobarColaboradorUnidad/"+idColaborador+"/"+idUnidad;
         try {
             Gson gson = new Gson();
             RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
@@ -196,10 +197,10 @@ public class ColaboradorDAO {
         return respuesta;
     }
     
-    public static Mensaje quitarAsignacionUnidad(Integer idColaborador){
+    public static Mensaje quitarAsignacionUnidad(Integer idColaborador, Integer idUnidad){
         Mensaje respuesta = new Mensaje();
         respuesta.setError(true);
-        String url = Constantes.URL_WS+"/colaboradores/quitarAsignacionUnidad/"+idColaborador;
+        String url = Constantes.URL_WS+"/colaboradores/quitarAsignacionUnidad/"+idColaborador+"/"+idUnidad;
         try {
             Gson gson = new Gson();
             RespuestaHTTP respuestaWS = ConexionWS.peticionDELETEJson(url,"");
@@ -216,7 +217,6 @@ public class ColaboradorDAO {
     
     public static Unidad obtenerUnidad(Integer idColaborador){
         Unidad unidad = null;
-        System.out.println("idColaborador: "+ idColaborador);
         String url = Constantes.URL_WS+"/colaboradores/obtenerUnidad/"+idColaborador;
         try {
             Gson gson = new Gson();
@@ -229,5 +229,56 @@ public class ColaboradorDAO {
             e.printStackTrace();
         }
         return unidad;
+    }
+    
+    public static List<RegistroColaboradorUnidad> obtenerRegistrosColaboradorUnidad(){
+        List<RegistroColaboradorUnidad> registros = null;
+        String url =Constantes.URL_WS+"/colaboradores/obtenerRegistrosColaboradorUnidad";
+        RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+        try {
+             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) { 
+                Gson gson = new Gson();
+                Type tipoLista = new TypeToken<List<RegistroColaboradorUnidad>>(){}.getType();
+                registros = gson.fromJson(respuestaWS.getContenido(), tipoLista);
+                 for (RegistroColaboradorUnidad registro : registros) {
+                     System.out.println("colaborador "+registro.getColaborador());
+                 }
+             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return registros;
+    }
+    
+    public static List<Colaborador> obtenerConductores(){
+        List<Colaborador> lista = null;
+        String url = Constantes.URL_WS+"/colaboradores/obtenerAsignacionesColaboradores";
+        RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+        try {
+             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) { 
+                Gson gson = new Gson();
+                Type tipoLista = new TypeToken<List<Colaborador>>(){}.getType();
+                lista = gson.fromJson(respuestaWS.getContenido(), tipoLista);
+             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    
+    public static List<Unidad> obtenerAsignacionesUnidades(){
+        List<Unidad> lista = null;
+        String url = Constantes.URL_WS+"/colaboradores/obtenerAsignacionesUnidades";
+        RespuestaHTTP respuestaWS = ConexionWS.peticionGET(url);
+        try {
+             if (respuestaWS.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) { 
+                Gson gson = new Gson();
+                Type tipoLista = new TypeToken<List<Unidad>>(){}.getType();
+                lista = gson.fromJson(respuestaWS.getContenido(), tipoLista);
+             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 }
