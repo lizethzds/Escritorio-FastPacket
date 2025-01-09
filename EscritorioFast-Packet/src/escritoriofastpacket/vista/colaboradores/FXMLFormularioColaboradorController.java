@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -49,6 +50,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
     private boolean vboxExtendido = false;
     private Image imagenSeleccionada = null;
     private ObservableList<Rol> roles;
+    private Colaborador colaboradorSesion;
     INotificacionOperacion observador;
     INotificacionCambio observadorCambio;
     Colaborador colaboradorEdicion = null;
@@ -110,9 +112,11 @@ public class FXMLFormularioColaboradorController implements Initializable {
         hashlbl.put("licencia", lblErrorlicencia);
     }
     
-    public void inicializarValores(INotificacionOperacion observador, Colaborador colaboradorEdicion, INotificacionCambio instaciaMenu) {
+    public void inicializarValores(INotificacionOperacion observador, Colaborador colaboradorEdicion, INotificacionCambio instaciaMenu, Colaborador colaboradorSesion) {
         this.observador = observador;
         this.colaboradorEdicion = colaboradorEdicion;
+        this.colaboradorSesion = colaboradorSesion;
+        cargarRoles();
         if (colaboradorEdicion != null) {
             modoEdicion = true;
             this.observadorCambio = instaciaMenu;
@@ -141,11 +145,20 @@ public class FXMLFormularioColaboradorController implements Initializable {
 
     private void cargarRoles() {
         roles = FXCollections.observableArrayList();
-        List<Rol> listaWS = ColaboradorDAO.obtentenerRolesColaborador();
-        if (listaWS != null) {
-            roles.addAll(listaWS);
+        List<Rol> listaWS;
+        if(colaboradorSesion != null && "Ejecutivo de tienda".equals(colaboradorSesion.getRol())){
+            listaWS = new LinkedList();
+            listaWS.add(new Rol(3,"Conductor"));
+            roles.addAll(listaWS);            
             cbTipoColaborador.setItems(roles);
+        }else{
+            listaWS = ColaboradorDAO.obtentenerRolesColaborador();
+            if (listaWS != null) {
+                roles.addAll(listaWS);            
+                cbTipoColaborador.setItems(roles);
+            }
         }
+        
     }
 
     private int obtenerPosicionRol(int idRol) {
@@ -185,7 +198,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicializarHashErrores();
-        cargarRoles();
+        
         Platform.runLater(() -> {
             if (modoEdicion) {
                 obtenerImagenColaboradorEdicion(colaboradorEdicion.getIdColaborador());
@@ -358,6 +371,7 @@ public class FXMLFormularioColaboradorController implements Initializable {
         if (idRol == 3) {
             lbLicencia.setVisible(true);
             tfLicencia.setVisible(true);
+            tfLicencia.setDisable(false);
         } else {
             if (lbLicencia.isVisible() && tfLicencia.isVisible()) {
                 lbLicencia.setVisible(false);
