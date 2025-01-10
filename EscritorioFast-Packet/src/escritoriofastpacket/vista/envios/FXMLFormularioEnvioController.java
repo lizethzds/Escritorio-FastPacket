@@ -370,7 +370,7 @@ private boolean validarCamposLlenos() {
         lbErrorCosto.setText("");
     }
 
-    // Validación de Colonia Destino
+    
     if (tfColoniaDestino.getText() == null || tfColoniaDestino.getText().trim().isEmpty()) {
         lbErrorColonia.setText("Ingrese la colonia de destino");
         camposValidos = false;
@@ -378,7 +378,7 @@ private boolean validarCamposLlenos() {
         lbErrorColonia.setText("");
     }
 
-    // Validación de Número de Destino
+   
     if (tfNumeroDestino.getText() == null || tfNumeroDestino.getText().trim().isEmpty()) {
         lbErrorNumero.setText("Ingrese el número de destino");
         camposValidos = false;
@@ -386,7 +386,7 @@ private boolean validarCamposLlenos() {
         lbErrorNumero.setText("");
     }
 
-    // Validación de Estado
+ 
     if (cbEstado.getSelectionModel().isEmpty()) {
         lbErrorEstado.setText("Seleccione un estado");
         camposValidos = false;
@@ -394,7 +394,7 @@ private boolean validarCamposLlenos() {
         lbErrorEstado.setText("");
     }
 
-    // Validación de Municipio
+
     if (cbMunicipio.getSelectionModel().isEmpty()) {
         lbErrorMunicipio.setText("Seleccione un municipio");
         camposValidos = false;
@@ -403,7 +403,6 @@ private boolean validarCamposLlenos() {
     }
 
    
-    // Validación de Cliente
     if (cbClientes.getSelectionModel().isEmpty()) {
         lbErrorCliente.setText("Seleccione un cliente");
         camposValidos = false;
@@ -417,6 +416,14 @@ private boolean validarCamposLlenos() {
         camposValidos = false;
     } else {
         lbErrorEstatus.setText("");
+    }
+    
+    if(cbConductores.getSelectionModel().isEmpty()){
+        lbErrorConductor.setText("Seleccione un conductor");
+        camposValidos = false;
+        
+    }else{
+        lbErrorConductor.setText("");
     }
 
     return camposValidos;
@@ -474,10 +481,6 @@ tfCostoEnvio.textProperty().addListener((observable, oldValue, newValue) -> {
         tfCostoEnvio.setText(oldValue);
     }
 });
-
-
-
-
     
     
 }
