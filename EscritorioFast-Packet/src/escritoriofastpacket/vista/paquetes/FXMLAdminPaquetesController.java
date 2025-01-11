@@ -87,7 +87,7 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
         Paquete paquete = tvPaquetes.getSelectionModel().getSelectedItem();
         if(paquete != null){
         
-        boolean seElimina = Utilidades.mostrarAlertaConfirmacion("Eliminar colaborador",
+        boolean seElimina = Utilidades.mostrarAlertaConfirmacion("Eliminar paquete",
                 "¿Estás seguro de eliminar el paquete del sistema?");
         if(seElimina){
   
@@ -95,7 +95,7 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
             notificarOperacionExitosa("Eliminado", "Paquete");
            }
         }else{
-            Utilidades.mostrarAlertaSimple("Seleccionar colaborador", "Primero selecciona un paquete para elimninar", Alert.AlertType.INFORMATION);
+            Utilidades.mostrarAlertaSimple("Seleccionar paquete", "Primero selecciona un paquete para elimninar", Alert.AlertType.INFORMATION);
         }
         
     }
@@ -128,9 +128,8 @@ public class FXMLAdminPaquetesController implements Initializable , INotificarOp
     
     private void cargarInfoTabla(){
         paquetes = FXCollections.observableArrayList();
-        //Aqui la peticion debe jalar el id del envio seleccionado en el FXML admin envios, pero por cuestiones de práctica, se le pasa uno por defecto.
+   
         List<Paquete> listaWS = PaqueteDAO.obtenerPaquetesEnvio(envioPaquete.getIdEnvio());
-      // List<Paquete> listaWS = PaqueteDAO.obtenerPaquetesEnvio(1);
         if(listaWS != null){
             paquetes.addAll(listaWS);
             tvPaquetes.setItems(paquetes);

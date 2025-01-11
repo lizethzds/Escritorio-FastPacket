@@ -370,7 +370,7 @@ private boolean validarCamposLlenos() {
         lbErrorCosto.setText("");
     }
 
-   
+    
     if (tfColoniaDestino.getText() == null || tfColoniaDestino.getText().trim().isEmpty()) {
         lbErrorColonia.setText("Ingrese la colonia de destino");
         camposValidos = false;
@@ -386,13 +386,14 @@ private boolean validarCamposLlenos() {
         lbErrorNumero.setText("");
     }
 
-
+ 
     if (cbEstado.getSelectionModel().isEmpty()) {
         lbErrorEstado.setText("Seleccione un estado");
         camposValidos = false;
     } else {
         lbErrorEstado.setText("");
     }
+
 
     if (cbMunicipio.getSelectionModel().isEmpty()) {
         lbErrorMunicipio.setText("Seleccione un municipio");
@@ -401,19 +402,12 @@ private boolean validarCamposLlenos() {
         lbErrorMunicipio.setText("");
     }
 
-
+   
     if (cbClientes.getSelectionModel().isEmpty()) {
         lbErrorCliente.setText("Seleccione un cliente");
         camposValidos = false;
     } else {
         lbErrorCliente.setText("");
-    }
-    
-    if(cbConductores.getSelectionModel().isEmpty()){
-        lbErrorConductor.setText("Seleccione un conductor");
-        camposValidos = false;
-    }else{
-       lbErrorConductor.setText("");
     }
 
     
@@ -422,6 +416,14 @@ private boolean validarCamposLlenos() {
         camposValidos = false;
     } else {
         lbErrorEstatus.setText("");
+    }
+    
+    if(cbConductores.getSelectionModel().isEmpty()){
+        lbErrorConductor.setText("Seleccione un conductor");
+        camposValidos = false;
+        
+    }else{
+        lbErrorConductor.setText("");
     }
 
     return camposValidos;
@@ -458,6 +460,7 @@ private boolean validarCamposLlenos() {
     
     private void configurarDatosEntrada() {
    
+    //Solo números, máximo 5 caracteres
     tfCodigoPostal.textProperty().addListener((observable, oldValue, newValue) -> {
         if (!newValue.matches("\\d*") || newValue.length() > 5) {
             tfCodigoPostal.setText(oldValue);
@@ -465,6 +468,7 @@ private boolean validarCamposLlenos() {
     });
     tfCodigoPostal.setPromptText("Ingrese un código postal válido");
 
+    //Cualquier carácter, máximo 5 caracteres
     tfNumeroDestino.textProperty().addListener((observable, oldValue, newValue) -> {
         if (newValue.length() > 5) {
             tfNumeroDestino.setText(oldValue);
@@ -477,10 +481,6 @@ tfCostoEnvio.textProperty().addListener((observable, oldValue, newValue) -> {
         tfCostoEnvio.setText(oldValue);
     }
 });
-
-
-
-
     
     
 }

@@ -183,15 +183,12 @@ public class FXMLFormularioPaquetesController implements Initializable {
 }
 
    private void configurarDatosEntrada() {
-    // Validar tfAlto: Solo números, máximo 4 caracteres
     tfAlto.textProperty().addListener((observable, oldValue, newValue) -> {
         if (!newValue.matches("\\d*") || newValue.length() > 4) {
             tfAlto.setText(oldValue);
         }
     });
     
-
-    // Validar tfAncho: Solo números, máximo 4 caracteres
     tfAncho.textProperty().addListener((observable, oldValue, newValue) -> {
         if (!newValue.matches("\\d*") || newValue.length() > 4) {
             tfAncho.setText(oldValue);
@@ -199,7 +196,6 @@ public class FXMLFormularioPaquetesController implements Initializable {
     });
     
 
-    // Validar tfProfundidad: Solo números, máximo 4 caracteres
     tfProfundidad.textProperty().addListener((observable, oldValue, newValue) -> {
         if (!newValue.matches("\\d*") || newValue.length() > 4) {
             tfProfundidad.setText(oldValue);
@@ -207,21 +203,19 @@ public class FXMLFormularioPaquetesController implements Initializable {
     });
     
 
-    // Validar tfPeso: Solo números, máximo 4 caracteres
       tfPeso.textProperty().addListener((observable, oldValue, newValue) -> {
         if (!newValue.matches("\\d*(\\.\\d*)?") || newValue.length() > 7) {
             tfPeso.setText(oldValue);
         }
     });
     
-
-    // Validar taDescripcionPaquete: Máximo 250 caracteres
     taDescripcionPaquete.textProperty().addListener((observable, oldValue, newValue) -> {
         if (newValue.length() > 250) {
             taDescripcionPaquete.setText(oldValue);
         }
     });
     taDescripcionPaquete.setPromptText("Máximo 250 caracteres");
+   
 }
 
      
